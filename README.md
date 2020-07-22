@@ -34,6 +34,17 @@ multiple times the amount of clothes and accessories that I own. I can only imag
 build the self-motivation. This app is for all the people who procrastinate on folding clothes but can also
 be used by anyone who simply wants to look good without the stress!
 
+---
+
+### User Stories
+* As a user, I want to be able to add an item of clothing to my digital closet
+* As a user, I want to be able to classify clothing with tags 
+* As a user, I want to be able to view and sort clothing according to their tags
+* As a user, I want to be able to create sets of clothing to design outfits
+* As a user, I want to be able to track my daily outfits
+* As a user, I want to be able to sort outfits by sets with all clean clothes, and sets with clothes that need washing
+* As a user, I want to be able to login and logout to save and protect my information
+
 
 
 
