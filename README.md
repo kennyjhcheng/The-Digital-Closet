@@ -38,9 +38,10 @@ be used by anyone who simply wants to look good without the stress!
 
 ### User Stories
 * As a user, I want to be able to add an item of clothing to my digital closet
-* As a user, I want to be able to classify clothing with tags 
+* As a user, I want to be able to classify clothing by Type 
 * As a user, I want to be able to view and sort clothing according to their tags
 * As a user, I want to be able to create sets of clothing to design outfits
+* As a user, I want to be able to favorite outfits and view only my favorites
 * As a user, I want to be able to track my daily outfits
 * As a user, I want to be able to sort outfits by sets with all clean clothes, and sets with clothes that need washing
 * As a user, I want to be able to login and logout to save and protect my information
