@@ -18,12 +18,21 @@ public class Closet extends ClothingCollection {
     // MODIFIES: this
     // EFFECTS: adds a Clothing to the ClothingCollection
     @Override
-    protected void addClothing(Clothing clothing) {
+    public void addClothing(Clothing clothing) {
         this.clothes.add(clothing);
     }
 
 
-//    public int numberSameClothing();
+    public Closet getClosetByType(String type) {
+        Closet filteredCloset = new Closet();
+
+        for (Clothing c: this.getClothes()) {
+            if (c.getType().equals(type)) {
+                filteredCloset.addClothing(c);
+            }
+        }
+        return  filteredCloset;
+    }
 
 
 }

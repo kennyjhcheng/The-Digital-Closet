@@ -11,28 +11,28 @@ public abstract class ClothingCollection {
 
     // MODIFIES: this
     // EFFECTS: adds a Clothing to the ClothingCollection
-    protected void addClothing(Clothing clothing) {
+    public void addClothing(Clothing clothing) {
         this.clothes.add(clothing);
     }
 
     // MODIFIES: this
     // EFFECTS: removes a Clothing from the ClothingCollection
-    protected void removeClothing(Clothing clothing) {
+    public void removeClothing(Clothing clothing) {
         this.clothes.remove(clothing);
     }
 
     // EFFECTS: returns the number of Clothing objects in the closet
-    protected int getNumberOfClothing() {
+    public int getNumberOfClothing() {
         return this.clothes.size();
     }
 
     // REQUIRES: clothingName is a valid name of a clothing in closet
     // todo: make an exception for ^ requires
     // EFFECTS: returns the Clothing given the clothing's name
-    protected Clothing getClothing(String clothingName) {
+    public Clothing getClothingByName(String clothingName) {
         Clothing foundClothing = new Clothing("", "", "", 0);
         for (Clothing c: this.clothes) {
-            if (c.getName() == clothingName) {
+            if (c.getName().equals(clothingName)) {
                 foundClothing = c;
             }
         }
@@ -40,7 +40,7 @@ public abstract class ClothingCollection {
     }
 
     // EFFECTS: returns true if name matches the name of a clothing in closet
-    protected boolean containsClothing(String name) {
+    public boolean containsClothing(String name) {
         boolean isFound = false;
         for (Clothing c: clothes) {
             if (c.getName() == name) {
@@ -50,5 +50,7 @@ public abstract class ClothingCollection {
         return isFound;
     }
 
-
+    public HashSet<Clothing> getClothes() {
+        return clothes;
+    }
 }

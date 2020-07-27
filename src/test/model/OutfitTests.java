@@ -61,4 +61,25 @@ public class OutfitTests {
         assertFalse(outfit1.equalOutfit(outfit2));
     }
 
+    @Test
+    public void testAddClothing() {
+        outfit1.addClothing(clothing1);
+
+        assertEquals(outfit1.getNumberOfClothing(), 1);
+        assertTrue(outfit1.containsClothing(clothing1.getName()));
+
+        outfit1.addClothing(clothing2);
+
+        assertEquals(outfit1.getNumberOfClothing(), 2);
+        assertTrue(outfit1.containsClothing(clothing1.getName()));
+        assertTrue(outfit1.containsClothing(clothing2.getName()));
+
+        outfit1.addClothing(clothing3);
+
+        assertEquals(outfit1.getNumberOfClothing(), 3);
+        assertTrue(outfit1.containsClothing(clothing1.getName()));
+        assertTrue(outfit1.containsClothing(clothing2.getName()));
+        assertTrue(outfit1.containsClothing(clothing3.getName()));
+    }
+
 }
