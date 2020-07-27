@@ -149,6 +149,9 @@ public class StyleBoardTest {
         } catch (InvalidOutfitException e) {
             System.out.println("Exception thrown");
         }
+
+        assertEquals(testOutfit.getName(), "");
+        assertFalse(testOutfit.isFavorite());
     }
 
     @Test

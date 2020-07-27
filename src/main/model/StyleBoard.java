@@ -35,7 +35,6 @@ public class StyleBoard {
             for (Outfit o: styleBoard) {
                 if (o.getName().equals(outfitName)) {
                     theOutfit = o;
-                    break;
                 }
             }
         } else {
