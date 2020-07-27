@@ -110,6 +110,17 @@ public class StyleBoardTest {
     }
 
     @Test
+    public void testGetOutfitEmptyStyleBoardExpectException() {
+        try {
+            testStyleBoard.getOutfit("Outfit 1");
+            fail("Exception expected but method ran");
+        } catch (InvalidOutfitException e) {
+            System.out.println("Exception thrown");
+        }
+
+    }
+
+    @Test
     public void testGetOutfitNothingThrown() {
         testStyleBoard.addOutfit(outfit1);
         testStyleBoard.addOutfit(outfit2);
