@@ -32,7 +32,7 @@ public abstract class ClothingCollection {
     // EFFECTS: returns the Clothing given the clothing's name
     public Clothing getClothingByName(String clothingName) {
         Clothing foundClothing = new Clothing("", "", "", 0);
-        for (Clothing c: this.clothes) {
+        for (Clothing c : this.clothes) {
             if (c.getName().equals(clothingName)) {
                 foundClothing = c;
             }
@@ -43,8 +43,8 @@ public abstract class ClothingCollection {
     // EFFECTS: returns true if name matches the name of a clothing in closet
     public boolean containsClothing(String name) {
         boolean isFound = false;
-        for (Clothing c: clothes) {
-            if (c.getName() == name) {
+        for (Clothing c : clothes) {
+            if (c.getName().equals(name)) {
                 isFound = true;
                 break;
             }
