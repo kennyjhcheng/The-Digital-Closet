@@ -1,5 +1,6 @@
 package ui;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import exceptions.InvalidOutfitException;
 import model.Closet;
 import model.Clothing;
@@ -57,17 +58,26 @@ public class ClosetApp {
 
     private void doStyleBoard() {
         String styleBoardChoice;
+        boolean keepGoing = true;
 
-        displayStyleBoardOptions();
+        while (keepGoing) {
+            displayStyleBoardOptions();
+            styleBoardChoice = input.nextLine();
+            styleBoardChoice = styleBoardChoice.toLowerCase();
 
-        styleBoardChoice = input.nextLine();
-        styleBoardChoice = styleBoardChoice.toLowerCase();
-
-        try {
-            processStyleBoardChoice(styleBoardChoice);
-        } catch (InvalidOutfitException e) {
-            System.out.println("Please input a valid Outfit name from your StyleBoard");
+            if (styleBoardChoice.equals("b")) {
+                keepGoing = false;
+            } else {
+                try {
+                    processStyleBoardChoice(styleBoardChoice);
+                } catch (InvalidOutfitException e) {
+                    System.out.println("Please input a valid Outfit name from your StyleBoard");
+                }
+            }
         }
+
+
+
     }
 
     private void processStyleBoardChoice(String styleBoardChoice) throws InvalidOutfitException {
@@ -276,6 +286,7 @@ public class ClosetApp {
         System.out.println("\tr -> remove an outfit");
         System.out.println("\te -> edit an outfit");
         System.out.println("\tv -> view your StyleBoard");
+        System.out.println("\tb -> go back to the main menu");
     }
 
     private void displayMenu() {
@@ -290,13 +301,22 @@ public class ClosetApp {
 
     private void doCloset() {
         String closetChoice;
+        boolean keepGoing = true;
 
-        displayClosetOptions();
+        while (keepGoing) {
+            displayClosetOptions();
+            closetChoice = input.nextLine();
+            closetChoice = closetChoice.toLowerCase();
 
-        closetChoice = input.nextLine();
-        closetChoice = closetChoice.toLowerCase();
+            if (closetChoice.equals("b")) {
+                keepGoing = false;
+            } else {
+                processClosetChoice(closetChoice);
+            }
+        }
 
-        processClosetChoice(closetChoice);
+
+
 
     }
 
@@ -314,7 +334,6 @@ public class ClosetApp {
             case "e":
                 doEditClothing();
                 break;
-
         }
     }
 
@@ -439,6 +458,7 @@ public class ClosetApp {
         System.out.println("\tr -> remove clothing");
         System.out.println("\tv -> view clothing");
         System.out.println("\te -> edit clothing");
+        System.out.println("\tb -> go back to main menu");
     }
 
     private void doViewClothing() {
