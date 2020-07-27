@@ -67,6 +67,9 @@ class ClothingTests {
         Clothing other = new Clothing("H&M Shirt", "Shirt", "Black", 2.0);
 
         assertTrue(testClothing.equalClothing(other));
-        assertFalse(testClothing.equalClothing(new Clothing("Test", "Shirt", "Red", 3.0)));
+        assertFalse(testClothing.equalClothing(new Clothing("Test", "Shirt", "Black", 3.0)));
+        assertFalse(testClothing.equalClothing(new Clothing("H&M Shirt", "Pants", "Black", 3.0)));
+        assertFalse(testClothing.equalClothing(new Clothing("H&M Shirt", "Shirt", "Red", 3.0)));
+        assertFalse(testClothing.equalClothing(new Clothing("H&M Shirt", "Shirt", "Black", 3.0)));
     }
 }

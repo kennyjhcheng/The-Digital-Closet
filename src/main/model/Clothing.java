@@ -1,6 +1,6 @@
 package model;
 
-// TODO: complete this class description and check all class descriptions
+
 //Represents a piece of clothing with a name, a type, a color, and size
 public class Clothing {
     private String name;

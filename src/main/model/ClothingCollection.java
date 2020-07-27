@@ -2,6 +2,7 @@ package model;
 
 import java.util.HashSet;
 
+// An abstract class for collections of clothing
 public abstract class ClothingCollection {
     protected HashSet<Clothing> clothes;
 
@@ -45,6 +46,7 @@ public abstract class ClothingCollection {
         for (Clothing c: clothes) {
             if (c.getName() == name) {
                 isFound = true;
+                break;
             }
         }
         return isFound;

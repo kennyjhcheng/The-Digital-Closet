@@ -41,10 +41,7 @@ be used by anyone who simply wants to look good without the stress!
 * As a user, I want to be able to classify clothing by Type 
 * As a user, I want to be able to view and sort clothing according to their tags
 * As a user, I want to be able to create sets of clothing to design outfits
-* As a user, I want to be able to favorite outfits and view only my favorites
-* As a user, I want to be able to track my daily outfits
-* As a user, I want to be able to sort outfits by sets with all clean clothes, and sets with clothes that need washing
-* As a user, I want to be able to login and logout to save and protect my information (implemented in phase 2)
+* As a user, I want to be able to edit my outfits and clothes
 
 # Setup
 >Import everything in the External Libraries folder to your classpath

@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.InvalidOutfitException;
+
 import java.util.ArrayList;
 
 // Represents a collection of Outfits
@@ -27,14 +29,19 @@ public class StyleBoard {
 
     // REQUIRES: outfit name is a valid name of an outfit in styleBoard
     // EFFECTS: returns the outfit with the inputted name
-    public Outfit getOutfit(String outfitName) {
+    public Outfit getOutfit(String outfitName) throws InvalidOutfitException {
         Outfit theOutfit = new Outfit("");
-        for (Outfit o: styleBoard) {
-            if (o.getName().equals(outfitName)) {
-                theOutfit = o;
-                break;
+        if (this.containsOutfit(outfitName)) {
+            for (Outfit o: styleBoard) {
+                if (o.getName().equals(outfitName)) {
+                    theOutfit = o;
+                    break;
+                }
             }
+        } else {
+            throw new InvalidOutfitException();
         }
+
 
         return theOutfit; //stub
     }
@@ -55,5 +62,9 @@ public class StyleBoard {
     // EFFECTS: returns the number of outfits in styleBoard
     public int getNumberOfOutfits() {
         return styleBoard.size(); //stub
+    }
+
+    public ArrayList<Outfit> getStyleBoard() {
+        return styleBoard;
     }
 }

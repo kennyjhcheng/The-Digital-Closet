@@ -1,7 +1,10 @@
 package model;
 
+import exceptions.InvalidOutfitException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,7 +44,7 @@ public class StyleBoardTest {
     }
 
     @Test
-    public void testAddOutfitMultiple() {
+    public void testAddOutfitMultiple() throws InvalidOutfitException {
         testStyleBoard.addOutfit(outfit1);
 
         assertEquals(testStyleBoard.getOutfit("Outfit 1"), outfit1);
@@ -69,7 +72,7 @@ public class StyleBoardTest {
     }
 
     @Test
-    public void testRemoveOutfitMultiple() {
+    public void testRemoveOutfitMultiple() throws InvalidOutfitException {
         testStyleBoard.addOutfit(outfit1);
         testStyleBoard.addOutfit(outfit2);
         testStyleBoard.addOutfit(outfit3);
@@ -95,7 +98,7 @@ public class StyleBoardTest {
     }
 
     @Test
-    public void testGetOutfit() {
+    public void testGetOutfit() throws InvalidOutfitException {
         testStyleBoard.addOutfit(outfit1);
         testStyleBoard.addOutfit(outfit2);
         testStyleBoard.addOutfit(outfit3);
@@ -104,6 +107,37 @@ public class StyleBoardTest {
         assertTrue(testStyleBoard.getOutfit("Outfit 2").equalOutfit(outfit2));
         assertTrue(testStyleBoard.getOutfit("Outfit 3").equalOutfit(outfit3));
 
+    }
+
+    @Test
+    public void testGetOutfitNothingThrown() {
+        testStyleBoard.addOutfit(outfit1);
+        testStyleBoard.addOutfit(outfit2);
+        testStyleBoard.addOutfit(outfit3);
+        Outfit testOutfit = new Outfit("");
+
+        try {
+            testOutfit = testStyleBoard.getOutfit("Outfit 1");
+        } catch (InvalidOutfitException e) {
+            fail("Exception should not have been thrown");
+        }
+
+        assertTrue(testOutfit.equalOutfit(outfit1));
+    }
+
+    @Test
+    public void testGetOutfitExpectInvalidOutfitException() {
+        testStyleBoard.addOutfit(outfit1);
+        testStyleBoard.addOutfit(outfit2);
+        testStyleBoard.addOutfit(outfit3);
+        Outfit testOutfit = new Outfit("");
+
+        try {
+            testOutfit = testStyleBoard.getOutfit(" Outfit 4");
+            fail("Method should not have ran");
+        } catch (InvalidOutfitException e) {
+            System.out.println("Exception thrown");
+        }
     }
 
     @Test
@@ -150,6 +184,22 @@ public class StyleBoardTest {
         testStyleBoard.addOutfit(outfit3);
 
         assertEquals(testStyleBoard.getNumberOfOutfits(), 3);
+    }
+
+    @Test
+    public void testGetStyleBoard() {
+        ArrayList<Outfit> outfits = testStyleBoard.getStyleBoard();
+        assertEquals(outfits.size(), 0);
+
+        testStyleBoard.addOutfit(outfit1);
+        testStyleBoard.addOutfit(outfit2);
+        testStyleBoard.addOutfit(outfit3);
+
+        outfits = testStyleBoard.getStyleBoard();
+        assertEquals(outfits.size(), 3);
+        assertTrue(outfit1.equalOutfit(outfits.get(0)));
+        assertTrue(outfit2.equalOutfit(outfits.get(1)));
+        assertTrue(outfit3.equalOutfit(outfits.get(2)));
     }
 
 }

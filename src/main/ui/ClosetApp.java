@@ -1,13 +1,17 @@
 package ui;
 
+import exceptions.InvalidOutfitException;
 import model.Closet;
 import model.Clothing;
+import model.Outfit;
+import model.StyleBoard;
 
 import java.util.Scanner;
 
 public class ClosetApp {
     private Scanner input;
     private Closet myCloset = new Closet();
+    private StyleBoard myStyleBoard = new StyleBoard();
 
     public ClosetApp() {
         runClosetApp();
@@ -18,8 +22,6 @@ public class ClosetApp {
         boolean keepGoing = true;
         String command = null;
         input = new Scanner(System.in);
-
-        //todo: load account
 
         while (keepGoing) {
             displayMenu();
@@ -42,8 +44,7 @@ public class ClosetApp {
                 doCloset();
                 break;
             case "s":
-                // todo: finish styleboard
-//                doStyleBoard();
+                doStyleBoard();
                 break;
 //            case "l":
 //                //
@@ -52,6 +53,228 @@ public class ClosetApp {
 //                doRegistration();
 //                break;
         }
+    }
+
+    private void doStyleBoard() {
+        String styleBoardChoice;
+
+        displayStyleBoardOptions();
+
+        styleBoardChoice = input.nextLine();
+        styleBoardChoice = styleBoardChoice.toLowerCase();
+
+        try {
+            processStyleBoardChoice(styleBoardChoice);
+        } catch (InvalidOutfitException e) {
+            System.out.println("Please input a valid Outfit name from your StyleBoard");
+        }
+    }
+
+    private void processStyleBoardChoice(String styleBoardChoice) throws InvalidOutfitException {
+        switch (styleBoardChoice) {
+            case "c":
+                doCreateOutfit();
+                break;
+            case "r":
+                doRemoveOutfit();
+                break;
+            case "e":
+                doEditOutfit();
+                break;
+            case "v":
+                doViewOutfit();
+                break;
+        }
+    }
+
+    private void doViewOutfit() {
+        System.out.println("These are all your outfits:");
+        for (Outfit o : myStyleBoard.getStyleBoard()) {
+            System.out.println("\tName: " + o.getName());
+            printAllClothingInOutfit(o);
+        }
+    }
+
+    private void printAllClothingInOutfit(Outfit o) {
+        for (Clothing c : o.getClothes()) {
+            System.out.println("\t\t" + "Name :" + c.getName() + "\n\t\t\tType: " + c.getType() + "\n\t\t\tColor: "
+                    + c.getColor() + "\n\t\t\tSize: " + c.getSize());
+        }
+    }
+
+    private void doEditOutfit() throws InvalidOutfitException {
+        String outfitToEdit;
+
+        System.out.println("Which outfit would you like to edit?");
+        displayAllOutfitNamesInStyleBoard();
+        System.out.println("Edit: ");
+        outfitToEdit = input.nextLine();
+        outfitToEdit = outfitToEdit.toLowerCase();
+
+        editOutfit(outfitToEdit);
+    }
+
+    private void editOutfit(String outfitToEdit) throws InvalidOutfitException {
+        String editChoice;
+        System.out.println("How would you like to edit your outfit '" + outfitToEdit + "'?");
+        System.out.println("\ta -> add clothing");
+        System.out.println("\tr -> remove clothing");
+
+        editChoice = input.nextLine();
+        editChoice = editChoice.toLowerCase();
+
+        switch (editChoice) {
+            case "a":
+                doEditAddClothingToOutfit(outfitToEdit);
+                break;
+            case "r":
+                doEditRemoveClothingFromOutfit(outfitToEdit);
+                break;
+        }
+    }
+
+    private void doEditAddClothingToOutfit(String outfitToEdit) throws InvalidOutfitException {
+        String addClothing;
+        System.out.println("These are the clothes currently in this outfit:");
+        for (Clothing c : myStyleBoard.getOutfit(outfitToEdit).getClothes()) {
+            System.out.println("\t" + "Name :" + c.getName() + "\n\t\tType: " + c.getType() + "\n\t\tColor: "
+                    + c.getColor() + "\n\t\tSize: " + c.getSize());
+        }
+
+        System.out.println("What clothing would you like to add to " + outfitToEdit);
+        System.out.println("Please type the name of the clothing you wish to add");
+        printAllClothingInCloset();
+        System.out.print("Add: ");
+        addClothing = input.nextLine();
+        addClothing = addClothing.toLowerCase();
+
+        myStyleBoard.getOutfit(outfitToEdit).addClothing(myCloset.getClothingByName(addClothing));
+        System.out.println("A new clothing has been added to " + outfitToEdit + "!!!");
+    }
+
+    private void doEditRemoveClothingFromOutfit(String outfitToEdit) throws InvalidOutfitException {
+        String removeClothing;
+        System.out.println("These are the clothes currently in this outfit:");
+        for (Clothing c : myStyleBoard.getOutfit(outfitToEdit).getClothes()) {
+            System.out.println("\t" + "Name :" + c.getName() + "\n\t\tType: " + c.getType() + "\n\t\tColor: "
+                    + c.getColor() + "\n\t\tSize: " + c.getSize());
+        }
+        System.out.println("Which clothing would you like to remove from this outfit?");
+        System.out.println("Please type the name of the clothing you wish to remove");
+        System.out.print("Remove: ");
+        removeClothing = input.nextLine();
+        removeClothing = removeClothing.toLowerCase();
+
+        myStyleBoard.getOutfit(outfitToEdit)
+                .removeClothing(myStyleBoard.getOutfit(outfitToEdit).getClothingByName(removeClothing));
+        System.out.println("You have remove " + removeClothing + " from " + outfitToEdit + "!!!");
+    }
+
+    private void doRemoveOutfit() throws InvalidOutfitException {
+        String removeOutfit;
+
+        System.out.println("Which outfit would you like to remove?");
+        displayAllOutfitNamesInStyleBoard();
+        System.out.print("Remove: ");
+        removeOutfit = input.nextLine();
+        removeOutfit = removeOutfit.toLowerCase();
+
+        myStyleBoard.removeOutfit(myStyleBoard.getOutfit(removeOutfit));
+
+        System.out.println(removeOutfit + " has been removed!");
+
+    }
+
+    private void displayAllOutfitNamesInStyleBoard() {
+        for (Outfit o : myStyleBoard.getStyleBoard()) {
+            System.out.println("\tName: " + o.getName());
+        }
+    }
+
+    private void doCreateOutfit() {
+
+        String outfitName;
+        Outfit newOutfit;
+
+        System.out.println("Give your Outfit a name");
+        System.out.print("Name: ");
+        outfitName = input.nextLine();
+        outfitName = outfitName.toLowerCase();
+
+        newOutfit = new Outfit(outfitName);
+
+        addClothingToOutfit(newOutfit);
+    }
+
+    private void addClothingToOutfit(Outfit newOutfit) {
+        String clothingName;
+
+        System.out.println("Please type the name of the clothing you want to add to this outfit");
+        System.out.println("These are the clothing currently in your closet");
+        printAllClothingInCloset();
+        System.out.println("Add: ");
+        clothingName = input.nextLine();
+        clothingName = clothingName.toLowerCase();
+        newOutfit.addClothing(myCloset.getClothingByName(clothingName));
+
+        askAddAnotherClothing(newOutfit);
+    }
+
+    private void printAllClothingInCloset() {
+        for (Clothing c : myCloset.getClothes()) {
+            System.out.println("\t" + "Name :" + c.getName() + "\n\t\tType: " + c.getType() + "\n\t\tColor: "
+                    + c.getColor() + "\n\t\tSize: " + c.getSize());
+        }
+    }
+
+    private void askAddAnotherClothing(Outfit newOutfit) {
+        String addAnother;
+        boolean answer;
+        System.out.println("Would you like to add another piece of clothing to " + newOutfit.getName());
+        System.out.println("\tyes or no");
+        System.out.print("Answer: ");
+        addAnother = input.nextLine();
+        addAnother = addAnother.toLowerCase();
+        answer = addAnotherToBoolean(addAnother);
+
+        while (answer) {
+            addAnotherClothingToOutfit(newOutfit);
+            System.out.println("Would you like to add another piece of clothing to " + newOutfit.getName());
+            System.out.println("\tyes or no");
+            System.out.print("Answer: ");
+            addAnother = input.nextLine();
+            addAnother = addAnother.toLowerCase();
+            answer = addAnotherToBoolean(addAnother);
+        }
+
+        myStyleBoard.addOutfit(newOutfit);
+
+        System.out.println("Your new outfit has been created!");
+    }
+
+    private void addAnotherClothingToOutfit(Outfit newOutfit) {
+        String clothingName;
+
+        System.out.println("Please type the name of the clothing you want to add to this outfit");
+        System.out.println("These are the clothing currently in your closet");
+        printAllClothingInCloset();
+
+        clothingName = input.nextLine();
+        clothingName = clothingName.toLowerCase();
+        newOutfit.addClothing(myCloset.getClothingByName(clothingName));
+    }
+
+    private boolean addAnotherToBoolean(String input) {
+        return input.equals("yes");
+    }
+
+    private void displayStyleBoardOptions() {
+        System.out.println("Welcome to your StyleBoard!");
+        System.out.println("What would you like to do?");
+        System.out.println("\tc -> create an outfit");
+        System.out.println("\tr -> remove an outfit");
+        System.out.println("\te -> edit an outfit");
+        System.out.println("\tv -> view your StyleBoard");
     }
 
     private void displayMenu() {
@@ -123,21 +346,21 @@ public class ClosetApp {
     private void completeEdit(String edit, String attribute) {
         switch (attribute) {
             case "name":
-                editName(edit, attribute);
+                editName(edit);
                 break;
             case "type":
-                editType(edit, attribute);
+                editType(edit);
                 break;
             case "color":
-                editColor(edit, attribute);
+                editColor(edit);
                 break;
             case "size":
-                editSize(edit, attribute);
+                editSize(edit);
                 break;
         }
     }
 
-    private void editName(String edit, String attribute) {
+    private void editName(String edit) {
         String change;
 
         System.out.println("The current name is: " + edit);
@@ -150,7 +373,7 @@ public class ClosetApp {
         myCloset.getClothingByName(edit).changeName(change);
     }
 
-    private void editType(String edit, String attribute) {
+    private void editType(String edit) {
         String changeType;
         String changeSize;
 
@@ -175,7 +398,7 @@ public class ClosetApp {
         myCloset.getClothingByName(edit).changeTypeAndSize(changeType, Double.parseDouble(changeSize));
     }
 
-    private void editColor(String edit, String attribute) {
+    private void editColor(String edit) {
         String change;
 
         System.out.println("The current color of '" + edit + "' is: "
@@ -189,7 +412,7 @@ public class ClosetApp {
         myCloset.getClothingByName(edit).changeColor(change);
     }
 
-    private void editSize(String edit, String attribute) {
+    private void editSize(String edit) {
         String change;
         String type;
 
@@ -255,10 +478,7 @@ public class ClosetApp {
 
     private void viewAll() {
         System.out.println("These are all the clothes in your closet:");
-        for (Clothing c : myCloset.getClothes()) {
-            System.out.println("\t" + "Name :" + c.getName() + "\n\t\tType: " + c.getType() + "\n\t\tColor: "
-                    + c.getColor() + "\n\t\tSize: " + c.getSize());
-        }
+        printAllClothingInCloset();
 
     }
 
