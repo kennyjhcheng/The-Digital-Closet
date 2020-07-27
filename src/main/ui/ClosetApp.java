@@ -90,7 +90,7 @@ public class ClosetApp {
     private void doViewOutfit() {
         System.out.println("These are all your outfits:");
         for (Outfit o : myStyleBoard.getStyleBoard()) {
-            System.out.println("\tName: " + o.getName());
+            System.out.println("\tOutfit Name: " + o.getName());
             printAllClothingInOutfit(o);
         }
     }
@@ -212,7 +212,7 @@ public class ClosetApp {
         System.out.println("Please type the name of the clothing you want to add to this outfit");
         System.out.println("These are the clothing currently in your closet");
         printAllClothingInCloset();
-        System.out.println("Add: ");
+        System.out.print("Add: ");
         clothingName = input.nextLine();
         clothingName = clothingName.toLowerCase();
         newOutfit.addClothing(myCloset.getClothingByName(clothingName));
@@ -258,6 +258,7 @@ public class ClosetApp {
         System.out.println("Please type the name of the clothing you want to add to this outfit");
         System.out.println("These are the clothing currently in your closet");
         printAllClothingInCloset();
+        System.out.print("Add: ");
 
         clothingName = input.nextLine();
         clothingName = clothingName.toLowerCase();
@@ -313,6 +314,7 @@ public class ClosetApp {
             case "e":
                 doEditClothing();
                 break;
+
         }
     }
 
@@ -336,6 +338,7 @@ public class ClosetApp {
         String attribute;
         System.out.println("What attribute would you like to edit?");
         System.out.println("\t(name, type, color, size");
+        System.out.print("Edit: ");
 
         attribute = input.nextLine();
         attribute = attribute.toLowerCase();
@@ -566,6 +569,7 @@ public class ClosetApp {
         size = Double.parseDouble(input.nextLine());
 
         myCloset.addClothing(new Clothing(name, type, color, size));
+        System.out.println("\nYour clothing has been added!\n");
     }
 
     private void completeAddClothingForPants(String name, String type) {
@@ -585,6 +589,7 @@ public class ClosetApp {
         size = Double.parseDouble(input.nextLine());
 
         myCloset.addClothing(new Clothing(name, type, color, size));
+        System.out.println("\nYour clothing has been added!\n");
     }
 
     private void completeAddClothingForShoes(String name, String type) {
@@ -604,6 +609,7 @@ public class ClosetApp {
         size = Double.parseDouble(input.nextLine());
 
         myCloset.addClothing(new Clothing(name, type, color, size));
+        System.out.println("\nYour clothing has been added!\n");
     }
 
     private void completeAddClothingForSocks(String name, String type) {
@@ -623,6 +629,7 @@ public class ClosetApp {
         size = Double.parseDouble(input.nextLine());
 
         myCloset.addClothing(new Clothing(name, type, color, size));
+        System.out.println("\nYour clothing has been added!\n");
     }
 
     private void completeAddClothingForAccessories(String name, String type) {
@@ -638,6 +645,7 @@ public class ClosetApp {
         size = 1.0;
 
         myCloset.addClothing(new Clothing(name, type, color, size));
+        System.out.println("\nYour clothing has been added!\n");
     }
 
     public void displaySizingForType(String type) {
