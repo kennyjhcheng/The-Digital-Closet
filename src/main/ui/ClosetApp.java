@@ -1,6 +1,5 @@
 package ui;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import exceptions.DuplicateClothingException;
 import exceptions.EmptyClosetException;
 import exceptions.InvalidOutfitException;
@@ -11,15 +10,19 @@ import model.StyleBoard;
 
 import java.util.Scanner;
 
+// Closet Application user interface
 public class ClosetApp {
     private Scanner input;
     private Closet myCloset = new Closet();
     private StyleBoard myStyleBoard = new StyleBoard();
 
+    // EFFECTS: runs Closet application
     public ClosetApp() {
         runClosetApp();
     }
 
+    // MODIFIES: this
+    // EFFECTS: runs the app until quit is inputted by the user
     private void runClosetApp() {
 //        boolean loggedIn = false;
         boolean keepGoing = true;
@@ -41,6 +44,8 @@ public class ClosetApp {
         System.out.println("\nGoodbye!");
     }
 
+    // REQUIRES: command matches the cases in the switch statement
+    // EFFECTS: based on user input, determine whether to go to closet or styleboard
     private void processCommand(String command) {
         switch (command) {
             case "c":
@@ -58,6 +63,20 @@ public class ClosetApp {
         }
     }
 
+    // prints the main menu options
+    private void displayMenu() {
+        System.out.println("Welcome to your Digital Closet!!!");
+        System.out.println("Tip: The closet is where you can add and remove clothing");
+        System.out.println("\tand the Style Board is where you can create and remove outfits");
+        System.out.println("\nSelect from:");
+        System.out.println("\tc -> open closet");
+        System.out.println("\ts -> open your Style Board");
+        System.out.println("\tq -> quit");
+    }
+
+    // STYLE BOARD FUNCTIONS ------------------------------------------------------------------------
+
+    // asks for user input to determine which style board function to run
     private void doStyleBoard() {
         String styleBoardChoice;
         boolean keepGoing = true;
@@ -83,6 +102,8 @@ public class ClosetApp {
 
     }
 
+    // REQUIRES: the styleBoardChoice is one of the switch statement cases
+    // processes the correct style board method depending on the user input
     private void processStyleBoardChoice(String styleBoardChoice) throws InvalidOutfitException,
             DuplicateClothingException {
         switch (styleBoardChoice) {
@@ -101,6 +122,7 @@ public class ClosetApp {
         }
     }
 
+    // prints out all outfits names and the clothing content for user to see
     private void doViewOutfit() {
         System.out.println("These are all your outfits:");
         for (Outfit o : myStyleBoard.getStyleBoard()) {
@@ -109,6 +131,7 @@ public class ClosetApp {
         }
     }
 
+    // prints all clothing in an outfit
     private void printAllClothingInOutfit(Outfit o) {
         for (Clothing c : o.getClothes()) {
             System.out.println("\t\t" + "Name :" + c.getName() + "\n\t\t\tType: " + c.getType() + "\n\t\t\tColor: "
@@ -116,11 +139,12 @@ public class ClosetApp {
         }
     }
 
+    // asks the user which outfit they wish to edit in the Style Board
     private void doEditOutfit() throws InvalidOutfitException, DuplicateClothingException {
         String outfitToEdit;
 
         System.out.println("Which outfit would you like to edit?");
-        displayAllOutfitNamesInStyleBoard();
+        printAllOutfitNamesInStyleBoard();
         System.out.println("Edit: ");
         outfitToEdit = input.nextLine();
         outfitToEdit = outfitToEdit.toLowerCase();
@@ -128,6 +152,8 @@ public class ClosetApp {
         editOutfit(outfitToEdit);
     }
 
+    // REQUIRES: user input matches one of options: a, r
+    // asks the user what they would like to do to the outfit chosen from Style Board
     private void editOutfit(String outfitToEdit) throws InvalidOutfitException, DuplicateClothingException {
         String editChoice;
         System.out.println("How would you like to edit your outfit '" + outfitToEdit + "'?");
@@ -147,6 +173,7 @@ public class ClosetApp {
         }
     }
 
+    // takes user input to edit by adding another clothing to an outfit in style board
     private void doEditAddClothingToOutfit(String outfitToEdit) throws InvalidOutfitException,
             DuplicateClothingException {
         String addClothing;
@@ -167,6 +194,7 @@ public class ClosetApp {
         System.out.println("A new clothing has been added to " + outfitToEdit + "!!!");
     }
 
+    // takes user input to edit by removing another clothing from an outfit in style board
     private void doEditRemoveClothingFromOutfit(String outfitToEdit) throws InvalidOutfitException {
         String removeClothing;
         System.out.println("These are the clothes currently in this outfit:");
@@ -185,11 +213,12 @@ public class ClosetApp {
         System.out.println("You have remove " + removeClothing + " from " + outfitToEdit + "!!!");
     }
 
+    // gets user input to remove an outfit from style board
     private void doRemoveOutfit() throws InvalidOutfitException {
         String removeOutfit;
 
         System.out.println("Which outfit would you like to remove?");
-        displayAllOutfitNamesInStyleBoard();
+        printAllOutfitNamesInStyleBoard();
         System.out.print("Remove: ");
         removeOutfit = input.nextLine();
         removeOutfit = removeOutfit.toLowerCase();
@@ -200,12 +229,14 @@ public class ClosetApp {
 
     }
 
-    private void displayAllOutfitNamesInStyleBoard() {
+    // prints all outfit names in style board
+    private void printAllOutfitNamesInStyleBoard() {
         for (Outfit o : myStyleBoard.getStyleBoard()) {
             System.out.println("\tName: " + o.getName());
         }
     }
 
+    // takes user input to being outfit creation -> asks for Outfit Name
     private void doCreateOutfit() throws DuplicateClothingException {
 
         String outfitName;
@@ -221,6 +252,7 @@ public class ClosetApp {
         addClothingToOutfit(newOutfit);
     }
 
+    // continues outfit creation allowing user to add clothing from closet to outfit
     private void addClothingToOutfit(Outfit newOutfit) throws DuplicateClothingException {
         String clothingName;
 
@@ -235,6 +267,7 @@ public class ClosetApp {
         askAddAnotherClothing(newOutfit);
     }
 
+    // prints all clothing in closet with all the clothing's fields
     private void printAllClothingInCloset() {
         for (Clothing c : myCloset.getClothes()) {
             System.out.println("\t" + "Name :" + c.getName() + "\n\t\tType: " + c.getType() + "\n\t\tColor: "
@@ -242,6 +275,7 @@ public class ClosetApp {
         }
     }
 
+    // after adding 1 item to an outfit, loop to ask user if they wish to add subsequent clothings to the outfit
     private void askAddAnotherClothing(Outfit newOutfit) throws DuplicateClothingException {
         String addAnother;
         boolean answer;
@@ -267,6 +301,7 @@ public class ClosetApp {
         System.out.println("Your new outfit has been created!");
     }
 
+    // adds subsequent clothing to new created outfit
     private void addAnotherClothingToOutfit(Outfit newOutfit) throws DuplicateClothingException {
         String clothingName;
 
@@ -280,10 +315,12 @@ public class ClosetApp {
         newOutfit.addClothing(myCloset.getClothingByName(clothingName));
     }
 
+    // determine if the user input semantically means that they wish to add another clothing to an outfit
     private boolean addAnotherToBoolean(String input) {
         return input.equals("yes");
     }
 
+    // prints the options for user to do in style board
     private void displayStyleBoardOptions() {
         System.out.println("Welcome to your StyleBoard!");
         System.out.println("What would you like to do?");
@@ -294,16 +331,9 @@ public class ClosetApp {
         System.out.println("\tb -> go back to the main menu");
     }
 
-    private void displayMenu() {
-        System.out.println("Welcome to your Digital Closet!!!");
-        System.out.println("Tip: The closet is where you can add and remove clothing");
-        System.out.println("\tand the Style Board is where you can create and remove outfits");
-        System.out.println("\nSelect from:");
-        System.out.println("\tc -> open closet");
-        System.out.println("\ts -> open your Style Board");
-        System.out.println("\tq -> quit");
-    }
+    // CLOTHING FUNCTIONS ------------------------------------------------------------------------
 
+    // receives user input to determine what clothing method to run
     private void doCloset() {
         String closetChoice;
         boolean keepGoing = true;
@@ -325,10 +355,20 @@ public class ClosetApp {
                 }
             }
         }
-
-
     }
 
+    // prints the options for user input to call closet methods
+    private void displayClosetOptions() {
+        System.out.println("What would you like to do?");
+        System.out.println("\ta -> add clothing");
+        System.out.println("\tr -> remove clothing");
+        System.out.println("\tv -> view clothing");
+        System.out.println("\te -> edit clothing");
+        System.out.println("\tb -> go back to main menu");
+    }
+
+    // REQUIRES: closetChoice matches on of switch cases
+    // runs the clothing method based on user choice
     private void processClosetChoice(String closetChoice) throws DuplicateClothingException, EmptyClosetException {
         switch (closetChoice) {
             case "a":
@@ -346,6 +386,7 @@ public class ClosetApp {
         }
     }
 
+    // gets user input to choose a Clothing they'd like to edit
     private void doEditClothing() {
         String edit;
         System.out.println("Please type the name of the clothing you would like to edit");
@@ -362,6 +403,8 @@ public class ClosetApp {
         askAttribute(edit);
     }
 
+    // REQUIRES: the field matches one of the valid fields: name, type, color, or size
+    // gets user input for which field of the clothing they wish to edit
     private void askAttribute(String edit) {
         String attribute;
         System.out.println("What attribute would you like to edit?");
@@ -374,6 +417,8 @@ public class ClosetApp {
         completeEdit(edit, attribute);
     }
 
+    // REQUIRES: the field matches one of the valid fields: name, type, color, or size
+    // determines which attribute edit method to call based on attribute
     private void completeEdit(String edit, String attribute) {
         switch (attribute) {
             case "name":
@@ -391,6 +436,8 @@ public class ClosetApp {
         }
     }
 
+    // REQUIRES: name of clothing is valid clothing in Closet
+    // edits the name of the clothing specified by user
     private void editName(String edit) {
         String change;
 
@@ -404,6 +451,8 @@ public class ClosetApp {
         myCloset.getClothingByName(edit).changeName(change);
     }
 
+    // REQUIRES: name of clothing is valid clothing in Closet
+    // edits the Type and Size of the clothing specified by user
     private void editType(String edit) {
         String changeType;
         String changeSize;
@@ -429,6 +478,8 @@ public class ClosetApp {
         myCloset.getClothingByName(edit).changeTypeAndSize(changeType, Double.parseDouble(changeSize));
     }
 
+    // REQUIRES: name of clothing is valid clothing in Closet
+    // edits the color of the clothing specified by user
     private void editColor(String edit) {
         String change;
 
@@ -443,6 +494,8 @@ public class ClosetApp {
         myCloset.getClothingByName(edit).changeColor(change);
     }
 
+    // REQUIRES: name of clothing is valid clothing in Closet
+    // edits the size of the clothing specified by user
     private void editSize(String edit) {
         String change;
         String type;
@@ -461,15 +514,8 @@ public class ClosetApp {
         myCloset.getClothingByName(edit).changeSize(Double.parseDouble(change));
     }
 
-    private void displayClosetOptions() {
-        System.out.println("What would you like to do?");
-        System.out.println("\ta -> add clothing");
-        System.out.println("\tr -> remove clothing");
-        System.out.println("\tv -> view clothing");
-        System.out.println("\te -> edit clothing");
-        System.out.println("\tb -> go back to main menu");
-    }
-
+    // REQUIRES: user input is one of cases in switch statement
+    // Gets user input for how to view the clothing in their closet: all or by type
     private void doViewClothing() throws DuplicateClothingException, EmptyClosetException {
         String view;
         displayViewClothingOption();
@@ -493,6 +539,18 @@ public class ClosetApp {
 
     }
 
+    // prints options for user input for how to view clothing
+    private void displayViewClothingOption() {
+        System.out.println("Please select which types of clothing you would like to view");
+        System.out.println("\tshirt -> I would like to see my shirts");
+        System.out.println("\tpants -> I would like to see my pants");
+        System.out.println("\tsocks -> I would like to see my socks");
+        System.out.println("\tshoes -> I would like to see my shoes");
+        System.out.println("\tacc -> I would like to see my accessories");
+        System.out.println("\tall -> I would like to see all my clothing");
+    }
+
+    // prints all the clothes of specified type in the closet including each clothing's fields
     private void viewByType(String type) throws DuplicateClothingException, EmptyClosetException {
         if (type.equals("shirt")) {
             System.out.println("These are all the " + type + "s in your closet:");
@@ -508,22 +566,13 @@ public class ClosetApp {
 
     }
 
+    // prints all clothing in the closet witht heir fields
     private void viewAll() {
         System.out.println("These are all the clothes in your closet:");
         printAllClothingInCloset();
-
     }
 
-    private void displayViewClothingOption() {
-        System.out.println("Please select which types of clothing you would like to view");
-        System.out.println("\tshirt -> I would like to see my shirts");
-        System.out.println("\tpants -> I would like to see my pants");
-        System.out.println("\tsocks -> I would like to see my socks");
-        System.out.println("\tshoes -> I would like to see my shoes");
-        System.out.println("\tacc -> I would like to see my accessories");
-        System.out.println("\tall -> I would like to see all my clothing");
-    }
-
+    // takes user input to remove a clothing in closet
     private void doRemoveClothing() {
         String remove;
 
@@ -541,6 +590,7 @@ public class ClosetApp {
         System.out.println(myCloset.getNumberOfClothing());
     }
 
+    // Begins the form to add a clothing to the closet -> asks clothing name
     private void doAddClothing() throws DuplicateClothingException {
         String name;
 
@@ -553,10 +603,13 @@ public class ClosetApp {
 
     }
 
+    // REQUIRES: type is one of: shirt, pants, shoes, socks, or accessories
+    // continues adding new clothing form -> asks type and calls the correct method depending on type
+    //      to complete adding the clothing
     private void completeAddClothingDetermineType(String name) throws DuplicateClothingException {
         String type;
         System.out.println("What type of clothing are you adding?");
-        System.out.println("\t(Shirt, Pants, Shoes, Socks, or Accessories)");
+        System.out.println("\t(shirt, pants, shoes, socks, or accessories)");
         System.out.print("Type: ");
         type = input.nextLine();
         type = type.toLowerCase();
@@ -581,6 +634,9 @@ public class ClosetApp {
 
     }
 
+    // REQUIRES: size is one of the options for shirt size:
+    //                0.0 = xSmall, 1.0 = small, 2.0 = medium, 3.0 = large, 4.0 = xLarge
+    // completes the add clothing form by asking user for color and shirt size
     private void completeAddClothingForShirt(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
@@ -601,6 +657,9 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
+    // REQUIRES: size is a valid pants size
+    //                waist length in inches e.g. 32.0 or 27.5
+    // completes the add clothing form by asking user for color and pant size
     private void completeAddClothingForPants(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
@@ -621,6 +680,9 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
+    // REQUIRES: size is a valid shoe size
+    //                Shoe size (US) e.g. 9.0 or 5.5
+    // completes the add clothing form by asking user for color and shoe size
     private void completeAddClothingForShoes(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
@@ -641,6 +703,9 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
+    // REQUIRES: size is a valid sock size
+    //                0.0 = xSmall, 1.0 = small, 2.0 = medium, 3.0 = large, 4.0 = xLarge
+    // completes the add clothing form by asking user for color and sock size
     private void completeAddClothingForSocks(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
@@ -661,6 +726,7 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
+    // completes the add clothing form by asking user for color of accessory
     private void completeAddClothingForAccessories(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
@@ -677,6 +743,8 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
+    // REQUIRES input string matches one of switch cases
+    // prints out the correct sizing specification depending on the type inputted
     public void displaySizingForType(String type) {
         switch (type) {
             case "shirt":
