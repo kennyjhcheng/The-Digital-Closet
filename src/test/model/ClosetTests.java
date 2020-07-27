@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DuplicateClothingException;
+import exceptions.EmptyClosetException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,14 +32,22 @@ public class ClosetTests {
     }
 
     @Test
-    public void testAddClothingMultiple() {
-        testCloset.addClothing(clothing1);
+    public void testAddClothingMultipleNoException() {
+        try {
+            testCloset.addClothing(clothing1);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
 
         assertEquals(testCloset.getNumberOfClothing(), 1);
         assertTrue(testCloset.containsClothing("H&M Shirt"));
         assertTrue(testCloset.getClothingByName("H&M Shirt").equalClothing(clothing1));
 
-        testCloset.addClothing(clothing2);
+        try {
+            testCloset.addClothing(clothing2);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
 
         assertEquals(testCloset.getNumberOfClothing(), 2);
         assertTrue(testCloset.containsClothing("Levi Jeans"));
@@ -48,9 +58,40 @@ public class ClosetTests {
     }
 
     @Test
-    public void testRemoveClothingMultiple() {
-        testCloset.addClothing(clothing1);
-        testCloset.addClothing(new Clothing("Levi Jeans", "Pants", "Blue", 32.0));
+    public void testAddClothingExpectDuplicateClothingException(){
+        try {
+            testCloset.addClothing(clothing1);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
+
+        assertEquals(testCloset.getNumberOfClothing(), 1);
+        assertTrue(testCloset.containsClothing("H&M Shirt"));
+        assertTrue(testCloset.getClothingByName("H&M Shirt").equalClothing(clothing1));
+
+        try {
+            testCloset.addClothing(clothing1);
+             fail("Exception should've been thrown");
+        } catch (DuplicateClothingException e) {
+            System.out.println("Exception caught!");
+        }
+
+        assertEquals(testCloset.getNumberOfClothing(), 1);
+        assertTrue(testCloset.containsClothing("H&M Shirt"));
+        assertTrue(testCloset.getClothingByName("H&M Shirt").equalClothing(clothing1));
+
+    }
+
+
+    @Test
+    public void testRemoveClothingMultipleNoException() {
+
+        try {
+            testCloset.addClothing(clothing1);
+            testCloset.addClothing(new Clothing("Levi Jeans", "Pants", "Blue", 32.0));
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
 
         testCloset.removeClothing(clothing1);
         assertEquals(testCloset.getNumberOfClothing(), 1);
@@ -69,30 +110,46 @@ public class ClosetTests {
     }
 
     @Test
-    public void testGetNumberOfClothingFilled() {
-        testCloset.addClothing(clothing1);
+    public void testGetNumberOfClothingFilledNoException() {
+        try {
+            testCloset.addClothing(clothing1);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
 
         assertEquals(testCloset.getNumberOfClothing(), 1);
 
-        testCloset.addClothing(clothing2);
+        try {
+            testCloset.addClothing(clothing2);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
 
         assertEquals(testCloset.getNumberOfClothing(), 2);
     }
 
     @Test
-    public void testGetClosetByType() {
-        Closet shirtCloset;
-        Closet pantsCloset;
-        Closet socksCloset;
+    public void testGetClosetByTypeNoExceptionExpected() {
+        Closet shirtCloset = new Closet();
+        Closet pantsCloset = new Closet();
+        Closet socksCloset = new Closet();
 
-        testCloset.addClothing(clothing1); //added shirt
-        testCloset.addClothing(clothing2); //added pants
-        testCloset.addClothing(clothing3); //added shirt
-        testCloset.addClothing(clothing4); //added socks
 
-        shirtCloset = testCloset.getClosetByType("shirt");
-        pantsCloset = testCloset.getClosetByType("pants");
-        socksCloset = testCloset.getClosetByType("socks");
+        try {
+            testCloset.addClothing(clothing1); //added shirt
+            testCloset.addClothing(clothing2); //added pants
+            testCloset.addClothing(clothing3); //added shirt
+            testCloset.addClothing(clothing4); //added socks
+
+            shirtCloset = testCloset.getClosetByType("shirt");
+            pantsCloset = testCloset.getClosetByType("pants");
+            socksCloset = testCloset.getClosetByType("socks");
+        } catch (DuplicateClothingException e) {
+            fail();
+        } catch (EmptyClosetException e) {
+            fail();
+        }
+
 
         assertEquals(shirtCloset.getNumberOfClothing(), 2);
         assertTrue(shirtCloset.containsClothing(clothing1.getName()));
@@ -104,6 +161,36 @@ public class ClosetTests {
         assertEquals(socksCloset.getNumberOfClothing(), 1);
         assertTrue(socksCloset.containsClothing(clothing4.getName()));
 
+    }
+
+    @Test
+    public void testGetClosetByTypeExpectEmptyClosetException() {
+        Closet shoesCloset = new Closet();
+
+        try {
+            testCloset.getClosetByType("pants");
+            fail("Exception should've thrown");
+        } catch (EmptyClosetException e) {
+            System.out.println("Exception caught!");
+        } catch (DuplicateClothingException e) {
+            fail("incorrect exception thrown");
+        }
+
+        try {
+            testCloset.addClothing(clothing1); //added shirt
+            testCloset.addClothing(clothing2); //added pants
+            testCloset.addClothing(clothing3); //added shirt
+            testCloset.addClothing(clothing4); //added socks
+
+            shoesCloset = testCloset.getClosetByType("shoes");
+            fail("Exception should've thrown");
+        } catch (DuplicateClothingException e) {
+            fail("Wrong Exception thrown");
+        } catch (EmptyClosetException e) {
+            System.out.println("Exception caught!");
+        }
+
+        assertEquals(shoesCloset.getNumberOfClothing(), 0);
 
 
     }

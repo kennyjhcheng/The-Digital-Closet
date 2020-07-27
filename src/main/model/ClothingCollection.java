@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.DuplicateClothingException;
+
 import java.util.HashSet;
 
 // An abstract class for collections of clothing
@@ -12,7 +14,7 @@ public abstract class ClothingCollection {
 
     // MODIFIES: this
     // EFFECTS: adds a Clothing to the ClothingCollection
-    public void addClothing(Clothing clothing) {
+    public void addClothing(Clothing clothing) throws DuplicateClothingException {
         this.clothes.add(clothing);
     }
 

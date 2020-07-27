@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.DuplicateClothingException;
 import exceptions.InvalidOutfitException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ public class StyleBoardTest {
     Clothing clothing1, clothing2, clothing3;
 
     @BeforeEach
-    public void setup() {
+    public void setup() throws DuplicateClothingException {
         testStyleBoard = new StyleBoard();
 
         outfit1 = new Outfit("Outfit 1");
@@ -72,30 +73,57 @@ public class StyleBoardTest {
     }
 
     @Test
-    public void testRemoveOutfitMultiple() throws InvalidOutfitException {
+    public void testRemoveOutfitMultipleNoException() {
         testStyleBoard.addOutfit(outfit1);
         testStyleBoard.addOutfit(outfit2);
         testStyleBoard.addOutfit(outfit3);
 
-        testStyleBoard.removeOutfit(outfit1);
+        try {
+            testStyleBoard.removeOutfit(outfit1);
 
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 2);
-        assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
-        assertEquals(testStyleBoard.getOutfit("Outfit 3"), outfit3);
-        assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
-        assertTrue(testStyleBoard.containsOutfit("Outfit 3"));
+            assertEquals(testStyleBoard.getNumberOfOutfits(), 2);
+            assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
+            assertEquals(testStyleBoard.getOutfit("Outfit 3"), outfit3);
+            assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
+            assertTrue(testStyleBoard.containsOutfit("Outfit 3"));
 
-        testStyleBoard.removeOutfit(outfit3);
+            testStyleBoard.removeOutfit(outfit3);
 
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 1);
-        assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
-        assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
+            assertEquals(testStyleBoard.getNumberOfOutfits(), 1);
+            assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
+            assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
 
-        testStyleBoard.removeOutfit(outfit2);
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 0);
+            testStyleBoard.removeOutfit(outfit2);
+            assertEquals(testStyleBoard.getNumberOfOutfits(), 0);
+        } catch (InvalidOutfitException e) {
+            fail();
+        }
+
+
 
 
     }
+
+    @Test
+    public void testRemoveOutfitMultipleExpectInvalidOutfitException() throws InvalidOutfitException {
+        testStyleBoard.addOutfit(outfit1);
+        testStyleBoard.addOutfit(outfit2);
+
+        try {
+            testStyleBoard.removeOutfit(outfit3);
+            fail("Exception should've been thrown");
+        } catch (InvalidOutfitException e) {
+
+        }
+
+        assertEquals(testStyleBoard.getNumberOfOutfits(), 2);
+        assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
+        assertEquals(testStyleBoard.getOutfit("Outfit 1"), outfit1);
+        assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
+        assertTrue(testStyleBoard.containsOutfit("Outfit 1"));
+    }
+
+
 
     @Test
     public void testGetOutfit() throws InvalidOutfitException {

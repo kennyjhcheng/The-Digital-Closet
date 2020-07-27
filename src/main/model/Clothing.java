@@ -56,7 +56,6 @@ public class Clothing {
         this.size = size;
     }
 
-    // REQUIRES:
     // MODIFIES: this
     // EFFECTS: indicates that the piece of clothing requires washing
     //          false = does not need washing (default)

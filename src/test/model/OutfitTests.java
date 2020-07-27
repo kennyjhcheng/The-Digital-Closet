@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.DuplicateClothingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,29 +53,47 @@ public class OutfitTests {
     }
 
     @Test
-    public void testEqualOutfitMismatch() {
-        outfit1.addClothing(clothing1);
-        outfit1.addClothing(clothing2);
-        outfit2.addClothing(clothing2);
-        outfit2.addClothing(clothing3);
+    public void testEqualOutfitMismatchNoException() {
+
+        try {
+            outfit1.addClothing(clothing1);
+            outfit1.addClothing(clothing2);
+            outfit2.addClothing(clothing2);
+            outfit2.addClothing(clothing3);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
+
 
         assertFalse(outfit1.equalOutfit(outfit2));
     }
 
     @Test
-    public void testAddClothing() {
-        outfit1.addClothing(clothing1);
+    public void testAddClothingNoExceptionsThrown() {
+        try {
+            outfit1.addClothing(clothing1);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
 
         assertEquals(outfit1.getNumberOfClothing(), 1);
         assertTrue(outfit1.containsClothing(clothing1.getName()));
 
-        outfit1.addClothing(clothing2);
+        try {
+            outfit1.addClothing(clothing2);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
 
         assertEquals(outfit1.getNumberOfClothing(), 2);
         assertTrue(outfit1.containsClothing(clothing1.getName()));
         assertTrue(outfit1.containsClothing(clothing2.getName()));
 
-        outfit1.addClothing(clothing3);
+        try {
+            outfit1.addClothing(clothing3);
+        } catch (DuplicateClothingException e) {
+            fail();
+        }
 
         assertEquals(outfit1.getNumberOfClothing(), 3);
         assertTrue(outfit1.containsClothing(clothing1.getName()));

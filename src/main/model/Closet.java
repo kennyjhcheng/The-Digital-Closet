@@ -1,5 +1,8 @@
 package model;
 
+import exceptions.DuplicateClothingException;
+import exceptions.EmptyClosetException;
+
 import java.util.HashSet;
 
 
@@ -13,25 +16,38 @@ public class Closet extends ClothingCollection {
         super();
     }
 
-    // REQUIRES: all clothing names in closet must be distinct
-    // todo: ^ add exception for this to print out message for user if they add two clothing with same name
+    // exception added -> REQUIRES: all clothing names in closet must be distinct
     // MODIFIES: this
     // EFFECTS: adds a Clothing to the ClothingCollection
     @Override
-    public void addClothing(Clothing clothing) {
-        this.clothes.add(clothing);
+    public void addClothing(Clothing clothing) throws DuplicateClothingException {
+        if (this.clothes.contains(clothing)) {
+            throw new DuplicateClothingException();
+        } else {
+            this.clothes.add(clothing);
+        }
+
     }
 
-
-    public Closet getClosetByType(String type) {
+    // added exception -> REQUIRES: Closet is not empty
+    // EFFECTS: returns a filtered Closet containing clothes of specified type
+    public Closet getClosetByType(String type) throws DuplicateClothingException, EmptyClosetException {
         Closet filteredCloset = new Closet();
-
-        for (Clothing c: this.getClothes()) {
-            if (c.getType().equals(type)) {
-                filteredCloset.addClothing(c);
+        if (this.clothes.size() == 0) {
+            throw new EmptyClosetException();
+        } else {
+            for (Clothing c: this.getClothes()) {
+                if (c.getType().equals(type)) {
+                    filteredCloset.addClothing(c);
+                }
             }
         }
-        return  filteredCloset;
+
+        if (filteredCloset.clothes.size() == 0) {
+            throw new EmptyClosetException();
+        } else {
+            return  filteredCloset;
+        }
     }
 
 

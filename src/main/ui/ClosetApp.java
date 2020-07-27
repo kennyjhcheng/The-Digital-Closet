@@ -1,6 +1,8 @@
 package ui;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import exceptions.DuplicateClothingException;
+import exceptions.EmptyClosetException;
 import exceptions.InvalidOutfitException;
 import model.Closet;
 import model.Clothing;
@@ -71,16 +73,18 @@ public class ClosetApp {
                 try {
                     processStyleBoardChoice(styleBoardChoice);
                 } catch (InvalidOutfitException e) {
-                    System.out.println("Please input a valid Outfit name from your StyleBoard");
+                    System.out.println("\nPlease input a valid Outfit name from your StyleBoard\n");
+                } catch (DuplicateClothingException e) {
+                    System.out.println("\nThat Clothing is already exists\n");
                 }
             }
         }
 
 
-
     }
 
-    private void processStyleBoardChoice(String styleBoardChoice) throws InvalidOutfitException {
+    private void processStyleBoardChoice(String styleBoardChoice) throws InvalidOutfitException,
+            DuplicateClothingException {
         switch (styleBoardChoice) {
             case "c":
                 doCreateOutfit();
@@ -112,7 +116,7 @@ public class ClosetApp {
         }
     }
 
-    private void doEditOutfit() throws InvalidOutfitException {
+    private void doEditOutfit() throws InvalidOutfitException, DuplicateClothingException {
         String outfitToEdit;
 
         System.out.println("Which outfit would you like to edit?");
@@ -124,7 +128,7 @@ public class ClosetApp {
         editOutfit(outfitToEdit);
     }
 
-    private void editOutfit(String outfitToEdit) throws InvalidOutfitException {
+    private void editOutfit(String outfitToEdit) throws InvalidOutfitException, DuplicateClothingException {
         String editChoice;
         System.out.println("How would you like to edit your outfit '" + outfitToEdit + "'?");
         System.out.println("\ta -> add clothing");
@@ -143,7 +147,8 @@ public class ClosetApp {
         }
     }
 
-    private void doEditAddClothingToOutfit(String outfitToEdit) throws InvalidOutfitException {
+    private void doEditAddClothingToOutfit(String outfitToEdit) throws InvalidOutfitException,
+            DuplicateClothingException {
         String addClothing;
         System.out.println("These are the clothes currently in this outfit:");
         for (Clothing c : myStyleBoard.getOutfit(outfitToEdit).getClothes()) {
@@ -201,7 +206,7 @@ public class ClosetApp {
         }
     }
 
-    private void doCreateOutfit() {
+    private void doCreateOutfit() throws DuplicateClothingException {
 
         String outfitName;
         Outfit newOutfit;
@@ -216,7 +221,7 @@ public class ClosetApp {
         addClothingToOutfit(newOutfit);
     }
 
-    private void addClothingToOutfit(Outfit newOutfit) {
+    private void addClothingToOutfit(Outfit newOutfit) throws DuplicateClothingException {
         String clothingName;
 
         System.out.println("Please type the name of the clothing you want to add to this outfit");
@@ -237,7 +242,7 @@ public class ClosetApp {
         }
     }
 
-    private void askAddAnotherClothing(Outfit newOutfit) {
+    private void askAddAnotherClothing(Outfit newOutfit) throws DuplicateClothingException {
         String addAnother;
         boolean answer;
         System.out.println("Would you like to add another piece of clothing to " + newOutfit.getName());
@@ -262,7 +267,7 @@ public class ClosetApp {
         System.out.println("Your new outfit has been created!");
     }
 
-    private void addAnotherClothingToOutfit(Outfit newOutfit) {
+    private void addAnotherClothingToOutfit(Outfit newOutfit) throws DuplicateClothingException {
         String clothingName;
 
         System.out.println("Please type the name of the clothing you want to add to this outfit");
@@ -311,16 +316,20 @@ public class ClosetApp {
             if (closetChoice.equals("b")) {
                 keepGoing = false;
             } else {
-                processClosetChoice(closetChoice);
+                try {
+                    processClosetChoice(closetChoice);
+                } catch (DuplicateClothingException e) {
+                    System.out.println("This clothing is already in your closet!");
+                } catch (EmptyClosetException e) {
+                    System.out.println("This closet is empty :(");
+                }
             }
         }
 
 
-
-
     }
 
-    private void processClosetChoice(String closetChoice) {
+    private void processClosetChoice(String closetChoice) throws DuplicateClothingException, EmptyClosetException {
         switch (closetChoice) {
             case "a":
                 doAddClothing();
@@ -461,7 +470,7 @@ public class ClosetApp {
         System.out.println("\tb -> go back to main menu");
     }
 
-    private void doViewClothing() {
+    private void doViewClothing() throws DuplicateClothingException, EmptyClosetException {
         String view;
         displayViewClothingOption();
 
@@ -484,7 +493,7 @@ public class ClosetApp {
 
     }
 
-    private void viewByType(String type) {
+    private void viewByType(String type) throws DuplicateClothingException, EmptyClosetException {
         if (type.equals("shirt")) {
             System.out.println("These are all the " + type + "s in your closet:");
         } else {
@@ -532,7 +541,7 @@ public class ClosetApp {
         System.out.println(myCloset.getNumberOfClothing());
     }
 
-    private void doAddClothing() {
+    private void doAddClothing() throws DuplicateClothingException {
         String name;
 
         System.out.println("Give your clothing a name!");
@@ -544,7 +553,7 @@ public class ClosetApp {
 
     }
 
-    private void completeAddClothingDetermineType(String name) {
+    private void completeAddClothingDetermineType(String name) throws DuplicateClothingException {
         String type;
         System.out.println("What type of clothing are you adding?");
         System.out.println("\t(Shirt, Pants, Shoes, Socks, or Accessories)");
@@ -572,7 +581,7 @@ public class ClosetApp {
 
     }
 
-    private void completeAddClothingForShirt(String name, String type) {
+    private void completeAddClothingForShirt(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
 
@@ -592,7 +601,7 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
-    private void completeAddClothingForPants(String name, String type) {
+    private void completeAddClothingForPants(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
 
@@ -612,7 +621,7 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
-    private void completeAddClothingForShoes(String name, String type) {
+    private void completeAddClothingForShoes(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
 
@@ -632,7 +641,7 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
-    private void completeAddClothingForSocks(String name, String type) {
+    private void completeAddClothingForSocks(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
 
@@ -652,7 +661,7 @@ public class ClosetApp {
         System.out.println("\nYour clothing has been added!\n");
     }
 
-    private void completeAddClothingForAccessories(String name, String type) {
+    private void completeAddClothingForAccessories(String name, String type) throws DuplicateClothingException {
         String color;
         double size;
 

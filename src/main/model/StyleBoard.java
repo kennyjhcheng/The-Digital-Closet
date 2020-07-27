@@ -20,19 +20,24 @@ public class StyleBoard {
         this.styleBoard.add(outfit);
     }
 
-    // REQUIRES: Outfit parameter is in styleBoard
+    // Exception added -> REQUIRES: Outfit parameter is in styleBoard
     // MODIFIES: this
     // EFFECTS: removes Outfit from styleBoard
-    public void removeOutfit(Outfit outfit) {
-        this.styleBoard.remove(outfit);
+    public void removeOutfit(Outfit outfit) throws InvalidOutfitException {
+        if (this.styleBoard.contains(outfit)) {
+            this.styleBoard.remove(outfit);
+        } else {
+            throw new InvalidOutfitException();
+        }
+
     }
 
-    // REQUIRES: outfit name is a valid name of an outfit in styleBoard
+    // Exception added -> REQUIRES: outfit name is a valid name of an outfit in styleBoard
     // EFFECTS: returns the outfit with the inputted name
     public Outfit getOutfit(String outfitName) throws InvalidOutfitException {
         Outfit theOutfit = new Outfit("");
         if (this.containsOutfit(outfitName)) {
-            for (Outfit o: styleBoard) {
+            for (Outfit o : styleBoard) {
                 if (o.getName().equals(outfitName)) {
                     theOutfit = o;
                 }
@@ -48,7 +53,7 @@ public class StyleBoard {
     // EFFECTS: produced true if outfitName matches the name of an Outfit in styleBoard
     public boolean containsOutfit(String outfitName) {
         boolean answer = false;
-        for (Outfit o: styleBoard) {
+        for (Outfit o : styleBoard) {
             if (o.getName().equals(outfitName)) {
                 answer = true;
                 break;
