@@ -760,7 +760,7 @@ public class ClosetApp {
         }
     }
 
-//    private void displayLogin() {
+    //    private void displayLogin() {
 //        System.out.println("Welcome to your Digital Closet!!!");
 //        System.out.println("\nSelect from:");
 //        System.out.println("\tl -> login");
@@ -805,5 +805,4 @@ public class ClosetApp {
 //            String passwordCommand = null;
 //        }
 //    }
-
 }

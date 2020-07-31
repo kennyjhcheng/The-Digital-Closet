@@ -42,6 +42,8 @@ be used by anyone who simply wants to look good without the stress!
 * As a user, I want to be able to view and sort clothing according to their tags
 * As a user, I want to be able to create sets of clothing to design outfits
 * As a user, I want to be able to edit my outfits and clothes
+* As a user, I want to be able to login and register an account in which my closet is saved
+* as a user, I want to be able to load the closet associated with my account when I Login
 
 # Setup
 >Import everything in the External Libraries folder to your classpath
