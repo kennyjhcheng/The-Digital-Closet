@@ -9,7 +9,7 @@ import model.Clothing;
 import model.Outfit;
 import model.StyleBoard;
 import persistence.Json;
-import ui.logandregister.Registration;
+import persistence.Registration;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class ClosetApp {
 
     // prints the login menu options
     private void displayLogin() {
-        System.out.println("Welcome to your Digital Closet!!!");
+        System.out.println("\nWelcome to your Digital Closet!!!");
         System.out.println("\nSelect from:");
         System.out.println("\tl -> login");
         System.out.println("\tr -> register");
@@ -130,7 +130,7 @@ public class ClosetApp {
 
             account = new Registration(usernameCommand, passwordCommand);
             JsonNode accountNode = Json.toJson(account);
-            Json.writeRegistrationToFile(accountNode);
+            Json.writeRegistrationToFile(accountNode, "User");
         } catch (Exception e) {
             System.out.println("Could not complete registration");
         }
@@ -156,7 +156,12 @@ public class ClosetApp {
 
         account = new Registration(usernameCommand, passwordCommand);
         JsonNode accountNode = Json.toJson(account);
-        Json.removeRegistrationFromFile(accountNode);
+        try {
+            Json.removeRegistrationFromFile(accountNode, "User");
+        } catch (IOException e) {
+            System.out.println("Could not register user");
+            e.printStackTrace();
+        }
     }
 
     //todo implement saving and loading data using account node?

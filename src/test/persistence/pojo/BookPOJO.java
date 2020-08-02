@@ -7,6 +7,10 @@ public class BookPOJO {
     private boolean inPrint;
     private LocalDate publishDate;
 
+    public BookPOJO() {
+
+    }
+
     public String getTitle() {
         return title;
     }

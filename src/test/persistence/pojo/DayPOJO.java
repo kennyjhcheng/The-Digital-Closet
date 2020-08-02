@@ -6,6 +6,10 @@ public class DayPOJO {
     private String name;
     private LocalDate date;
 
+    public DayPOJO() {
+
+    }
+
     public String getName() {
         return name;
     }

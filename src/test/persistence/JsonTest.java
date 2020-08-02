@@ -1,21 +1,25 @@
 package persistence;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import exceptions.DuplicateClothingException;
 import model.Closet;
 import model.Clothing;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistence.pojo.SimpleTestCaseJsonPOJO;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonTest {
 
-    private String simpleTestCaseJsonSource = "{ \n" +
-            "  \"title\": \"Coder From Scratch\",\n" +
-            "  \"author\": \"Rui\"\n" +
+    private String simpleTestCaseJsonSource = "{\n" +
+            "  \"title\": \"Coder From Scratch\"\n" +
             "}";
 
     private String dayScenario1 = "{\n" +
@@ -56,50 +60,30 @@ class JsonTest {
         testCloset.addClothing(clothing3);
         testCloset.addClothing(clothing4);
     }
-//    @Test
-//    public void parse() throws JsonProcessingException {
-//
-//        JsonNode node = Json.parse(simpleTestCaseJsonSource);
-//        assertEquals(node.get("title").asText(), "Coder From Scratch");
-//    }
-//
-//    @Test
-//    public void fromJson() throws JsonProcessingException {
-//
-//        JsonNode node = Json.parse(simpleTestCaseJsonSource);
-//        SimpleTestCaseJsonPOJO pojo = Json.fromJson(node, SimpleTestCaseJsonPOJO.class);
-//
-//        assertEquals(pojo.getTitle(), "Coder From Scratch");
-//
-//    }
-//
-//    @Test
-//    public void toJson() {
-//        SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
-//        pojo.setTitle("Testing 123");
-//
-//        JsonNode node = Json.toJson(pojo);
-//
-//        assertEquals(node.get("title").asText(), "Testing 123");
-//    }
-//
-//    @Test
-//    public void stringify() throws JsonProcessingException {
-//        SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
-//        pojo.setTitle("Testing 123");
-//
-//        JsonNode node = Json.toJson(pojo);
-//
-//        System.out.println(Json.stringify(node));
-//        System.out.println(Json.prettyPrint(node));
-//
-//    }
-//
-//    @Test
+
+    @Test
+    public void fromJson() throws JsonProcessingException {
+
+        SimpleTestCaseJsonPOJO pojo = Json.fromJson(simpleTestCaseJsonSource, SimpleTestCaseJsonPOJO.class);
+
+        assertEquals(pojo.getTitle(), "Coder From Scratch");
+
+    }
+
+    @Test
+    public void toJson() {
+        SimpleTestCaseJsonPOJO pojo = new SimpleTestCaseJsonPOJO();
+        pojo.setTitle("Testing 123");
+
+        JsonNode node = Json.toJson(pojo);
+
+        assertEquals(node.get("title").asText(), "Testing 123");
+    }
+
+    //    @Test
 //    public void dayTestScenario1() throws JsonProcessingException {
 //
-//        JsonNode node = Json.parse(dayScenario1);
-//        DayPOJO pojo = Json.fromJson(node, DayPOJO.class);
+//        DayPOJO pojo = Json.fromJson(dayScenario1, DayPOJO.class);
 //
 //        assertEquals("2019-12-25", pojo.getDate().toString());
 //    }
@@ -107,8 +91,7 @@ class JsonTest {
 //    @Test
 //    public void authorBookScenario1() throws JsonProcessingException {
 //
-//        JsonNode node = Json.parse(authorBookScenario);
-//        AuthorPOJO pojo = Json.fromJson(node, AuthorPOJO.class);
+//        AuthorPOJO pojo = Json.fromJson(authorBookScenario, AuthorPOJO.class);
 //
 //        System.out.println("Author : " + pojo.getAuthorName());
 //        for (BookPOJO b : pojo.getBooks()) {
@@ -117,6 +100,106 @@ class JsonTest {
 //            System.out.println("Date : " + b.getPublishDate());
 //        }
 //    }
+    @Test
+    public void testWriteRegistrationToFile() {
+        try {
+            Registration account = new Registration("testUsername", "testPassword");
+            boolean found = false;
+
+            JsonNode accountNode = Json.toJson(account);
+            Json.writeRegistrationToFile(accountNode, "test");
+            ArrayNode accounts = Json.getDefaultObjectMapper().readValue(Paths.get("./data/testInfo.json").toFile(),
+                    ArrayNode.class);
+
+            for (int i = 0; i < accounts.size(); i++) {
+                if (accounts.get(i).equals(accountNode)) {
+                    found = true;
+                    break;
+                }
+            }
+            assertTrue(found);
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("shouldn't throw exception");
+        }
+
+
+    }
+
+    @Test
+    public void testWriteRegistrationToFileFailExceptionThrown() {
+        try {
+            Registration account = new Registration("testUsername", "testPassword");
+            boolean found = false;
+
+            JsonNode accountNode = Json.toJson(account);
+            Json.writeRegistrationToFile(accountNode, "test");
+            ArrayNode accounts = Json.getDefaultObjectMapper().readValue(Paths.get("./data/test.json").toFile(),
+                    ArrayNode.class);
+
+            for (int i = 0; i < accounts.size(); i++) {
+                if (accounts.get(i).equals(accountNode)) {
+                    found = true;
+                    break;
+                }
+            }
+            assertTrue(found);
+            fail();
+        } catch (IOException e) {
+
+        }
+    }
+
+    @Test
+    public void testRemoveRegistrationFromFileFound() {
+        Registration account1 = new Registration("testUsername", "testPassword");
+        JsonNode accountNode1 = Json.toJson(account1);
+        boolean found = true;
+        try {
+            Json.writeRegistrationToFile(accountNode1, "test");
+            Json.removeRegistrationFromFile(accountNode1, "test");
+            ArrayNode accounts = Json.getDefaultObjectMapper().readValue(Paths.get("./data/testInfo.json").toFile(),
+                    ArrayNode.class);
+
+            for (int i = 0; i < accounts.size(); i++) {
+                if (accounts.get(i).equals(accountNode1)) {
+                    found = false;
+                    break;
+                }
+            }
+            assertFalse(found);
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void testRemoveRegistrationFromFilNoteFound() {
+        Registration account1 = new Registration("testUsername", "testPassword");
+        Registration account2 = new Registration("testUsername2", "testPassword2");
+        JsonNode accountNode1 = Json.toJson(account1);
+        JsonNode accountNode2 = Json.toJson(account2);
+
+        boolean found = true;
+        try {
+            Json.writeRegistrationToFile(accountNode1, "test");
+            Json.removeRegistrationFromFile(accountNode2, "test");
+            ArrayNode accounts = Json.getDefaultObjectMapper().readValue(Paths.get("./data/testInfo.json").toFile(),
+                    ArrayNode.class);
+
+            for (int i = 0; i < accounts.size(); i++) {
+                if (accounts.get(i).equals(accountNode2)) {
+                    found = false;
+                    break;
+                }
+            }
+            assertTrue(found);
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
 
     @Test
     public void testSaveClosetToFile() {

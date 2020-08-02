@@ -1,4 +1,4 @@
-package ui.logandregister;
+package persistence;
 
 public class Registration {
 

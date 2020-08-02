@@ -36,7 +36,7 @@ public class Json {
 
 
     // converts json node parsed from Json string into an object of the specified class
-    public static <A> A fromJson(String jsonStr, Class<A> clazz)  {
+    public static <A> A fromJson(String jsonStr, Class<A> clazz) {
         try {
             return getDefaultObjectMapper().readValue(jsonStr, clazz);
         } catch (JsonProcessingException e) {
@@ -50,22 +50,19 @@ public class Json {
     }
 
     // writes the registered information to a file
-    public static void writeRegistrationToFile(JsonNode inputNode) {
-        try {
-            userList.add(inputNode);
-            writer.writeValue(new File("./data/UserInfo.json"), userList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void writeRegistrationToFile(JsonNode inputNode, String user) throws IOException {
+        userList.add(inputNode);
+        writer.writeValue(new File("./data/" + user + "Info.json"), userList);
     }
 
-    public static void removeRegistrationFromFile(JsonNode inputNode) {
+    public static void removeRegistrationFromFile(JsonNode inputNode, String user) throws IOException {
         int index = 0;
         boolean foundUser = false;
+        ArrayNode accounts = Json.getDefaultObjectMapper().readValue(Paths.get("./data/" + user + "Info.json")
+                .toFile(), ArrayNode.class);
 
-
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).equals(inputNode) && inputNode != null) {
+        for (int i = 0; i < accounts.size(); i++) {
+            if (accounts.get(i).equals(inputNode) && inputNode != null) {
                 index = i;
                 foundUser = true;
                 break;
@@ -73,12 +70,10 @@ public class Json {
         }
 
         if (foundUser) {
-            userList.remove(index);
-            try {
-                writer.writeValue(new File("./data/UserInfo.json"), userList);
-            } catch (IOException e) {
-                System.out.println("Could not remove user");
-            }
+            accounts.remove(index);
+            userList = accounts;
+            writer.writeValue(new File("./data/" + user + "Info.json"), accounts);
+
         } // todo exception for if user not found
     }
 

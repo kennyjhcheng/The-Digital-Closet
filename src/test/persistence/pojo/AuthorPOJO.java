@@ -6,6 +6,10 @@ public class AuthorPOJO {
     private String authorName;
     private List<BookPOJO> books;
 
+    public AuthorPOJO() {
+
+    }
+
     public String getAuthorName() {
         return authorName;
     }
