@@ -169,9 +169,9 @@ public class ClosetApp {
         String command = null;
         input = new Scanner(System.in);
         String username = accountNode.get("username").asText();
-        
+
         loadUser(username);
-        
+
         while (keepGoing) {
             displayMenu(username);
             command = input.nextLine();
@@ -189,11 +189,16 @@ public class ClosetApp {
     }
 
     private void loadUser(String username) {
+
         try {
-            this.myCloset = Json.parseUserCloset(username);
-            this.myStyleBoard = Json.parseUserStyleBoard(username);
+            if (Json.getDefaultObjectMapper().readValue(new File("./data/" + username + "Logged.json"),
+                    boolean.class)) {
+                this.myCloset = Json.parseUserCloset(username);
+                this.myStyleBoard = Json.parseUserStyleBoard(username);
+            }
         } catch (IOException e) {
             System.out.println("Could not load user");
+            e.printStackTrace();
         }
 
     }
@@ -202,6 +207,7 @@ public class ClosetApp {
         try {
             Json.writer.writeValue(new File("./data/" + username + "Closet.json"), myCloset);
             Json.writer.writeValue(new File("./data/" + username + "StyleBoard.json"), myStyleBoard);
+            Json.writer.writeValue(new File("./data/" + username + "Logged.json"), true);
         } catch (IOException e) {
             System.out.println("Could not save user to file");
         }
@@ -627,6 +633,7 @@ public class ClosetApp {
             changeSize = "1.0";
         } else {
             System.out.println("What would you like to change the size to?");
+            System.out.print("Size: ");
             displaySizingForType(changeType);
             changeSize = input.nextLine();
             changeSize = changeSize.toLowerCase();
@@ -744,7 +751,7 @@ public class ClosetApp {
         remove = remove.toLowerCase();
 
         myCloset.removeClothing(myCloset.getClothingByName(remove));
-        System.out.println(myCloset.getNumberOfClothing());
+        System.out.println(myCloset.getCollectionSize());
     }
 
     // Begins the form to add a clothing to the closet -> asks clothing name

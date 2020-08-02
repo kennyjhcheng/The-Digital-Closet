@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import exceptions.DuplicateClothingException;
 import exceptions.EmptyClosetException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 
 // Represents a Closet with all clothing
 public class Closet extends ClothingCollection {
-
 
     // EFFECTS: constructor for a closet -> hashset of Clothing
     //          Set is empty

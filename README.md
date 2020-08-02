@@ -49,7 +49,10 @@ be used by anyone who simply wants to look good without the stress!
 >Import everything in the External Libraries folder to your classpath
 
 This project uses:
-* Jackson
+* jackson-annotations-2.11.1.jar
+* jackson-core-2.11.1.jar
+* jackson-databind-2.11.1.jar
+* jackson-datatype-jsr310-2.11.1.jar
 
 
 

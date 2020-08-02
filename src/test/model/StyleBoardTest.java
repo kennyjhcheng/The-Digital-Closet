@@ -40,7 +40,7 @@ public class StyleBoardTest {
 
     @Test
     public void testConstructor() {
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 0 );
+        assertEquals(testStyleBoard.getStyleBoardSize(), 0 );
 
     }
 
@@ -50,7 +50,7 @@ public class StyleBoardTest {
 
         assertEquals(testStyleBoard.getOutfit("Outfit 1"), outfit1);
         assertTrue(testStyleBoard.containsOutfit("Outfit 1"));
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 1);
+        assertEquals(testStyleBoard.getStyleBoardSize(), 1);
 
         testStyleBoard.addOutfit(outfit2);
 
@@ -58,7 +58,7 @@ public class StyleBoardTest {
         assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
         assertTrue(testStyleBoard.containsOutfit("Outfit 1"));
         assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 2);
+        assertEquals(testStyleBoard.getStyleBoardSize(), 2);
 
         testStyleBoard.addOutfit(outfit3);
 
@@ -68,7 +68,7 @@ public class StyleBoardTest {
         assertTrue(testStyleBoard.containsOutfit("Outfit 1"));
         assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
         assertTrue(testStyleBoard.containsOutfit("Outfit 3"));
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 3);
+        assertEquals(testStyleBoard.getStyleBoardSize(), 3);
 
     }
 
@@ -81,7 +81,7 @@ public class StyleBoardTest {
         try {
             testStyleBoard.removeOutfit(outfit1);
 
-            assertEquals(testStyleBoard.getNumberOfOutfits(), 2);
+            assertEquals(testStyleBoard.getStyleBoardSize(), 2);
             assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
             assertEquals(testStyleBoard.getOutfit("Outfit 3"), outfit3);
             assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
@@ -89,12 +89,12 @@ public class StyleBoardTest {
 
             testStyleBoard.removeOutfit(outfit3);
 
-            assertEquals(testStyleBoard.getNumberOfOutfits(), 1);
+            assertEquals(testStyleBoard.getStyleBoardSize(), 1);
             assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
             assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
 
             testStyleBoard.removeOutfit(outfit2);
-            assertEquals(testStyleBoard.getNumberOfOutfits(), 0);
+            assertEquals(testStyleBoard.getStyleBoardSize(), 0);
         } catch (InvalidOutfitException e) {
             fail();
         }
@@ -116,7 +116,7 @@ public class StyleBoardTest {
 
         }
 
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 2);
+        assertEquals(testStyleBoard.getStyleBoardSize(), 2);
         assertEquals(testStyleBoard.getOutfit("Outfit 2"), outfit2);
         assertEquals(testStyleBoard.getOutfit("Outfit 1"), outfit1);
         assertTrue(testStyleBoard.containsOutfit("Outfit 2"));
@@ -210,22 +210,22 @@ public class StyleBoardTest {
 
     @Test
     public void testGetNumberOfOutfitsEmpty() {
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 0);
+        assertEquals(testStyleBoard.getStyleBoardSize(), 0);
     }
 
     @Test
     public void testGetNumberOfOutfitsNotEmpty() {
         testStyleBoard.addOutfit(outfit1);
 
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 1);
+        assertEquals(testStyleBoard.getStyleBoardSize(), 1);
 
         testStyleBoard.addOutfit(outfit2);
 
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 2);
+        assertEquals(testStyleBoard.getStyleBoardSize(), 2);
 
         testStyleBoard.addOutfit(outfit3);
 
-        assertEquals(testStyleBoard.getNumberOfOutfits(), 3);
+        assertEquals(testStyleBoard.getStyleBoardSize(), 3);
     }
 
     @Test

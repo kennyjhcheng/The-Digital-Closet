@@ -64,8 +64,8 @@ public class StyleBoard {
 
 
     // EFFECTS: returns the number of outfits in styleBoard
-    public int getNumberOfOutfits() {
-        return styleBoard.size(); //stub
+    public int getStyleBoardSize() {
+        return styleBoard.size();
     }
 
     public ArrayList<Outfit> getStyleBoard() {

@@ -7,12 +7,17 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import jdk.internal.org.objectweb.asm.TypeReference;
 import model.Closet;
+import model.Clothing;
 import model.StyleBoard;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 // handles converting data to and from Json files
 public class Json {
@@ -22,22 +27,21 @@ public class Json {
 
 
     // creates object mapper
-    private static ObjectMapper getDefaultObjectMapper() {
+    public static ObjectMapper getDefaultObjectMapper() {
         ObjectMapper defaultObjectMapper = new ObjectMapper();
-        defaultObjectMapper.registerModule(new JavaTimeModule());
-        defaultObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//        defaultObjectMapper.registerModule(new JavaTimeModule());
+//        defaultObjectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return defaultObjectMapper;
     }
 
-    // parses Json format string
-    public static JsonNode parse(String src) throws JsonProcessingException {
-
-        return objectMapper.readTree(src);
-    }
 
     // converts json node parsed from Json string into an object of the specified class
-    public static <A> A fromJson(JsonNode node, Class<A> clazz) throws JsonProcessingException {
-        return objectMapper.treeToValue(node, clazz);
+    public static <A> A fromJson(String jsonStr, Class<A> clazz)  {
+        try {
+            return getDefaultObjectMapper().readValue(jsonStr, clazz);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     // converts an object to a JsonNode
@@ -45,29 +49,6 @@ public class Json {
         return objectMapper.valueToTree(a);
     }
 
-    // converts a JsonNode to a json string
-    public static String stringify(JsonNode node) throws JsonProcessingException {
-
-        return generateString(node, false);
-    }
-
-    // converts a JsonNode into a json string with a better format
-    public static String prettyPrint(JsonNode node) throws JsonProcessingException {
-        return generateString(node, true);
-    }
-
-    // converts json node to json string that is 'pretty' if true, 'normal' if false
-    private static String generateString(JsonNode node, boolean pretty) throws JsonProcessingException {
-
-        ObjectWriter objectwriter = objectMapper.writer();
-        if (pretty) {
-            objectwriter = objectwriter.with(SerializationFeature.INDENT_OUTPUT);
-        }
-
-        return objectwriter.writeValueAsString(node);
-    }
-
-    // TODO: TESTS
     // writes the registered information to a file
     public static void writeRegistrationToFile(JsonNode inputNode) {
         try {
@@ -117,18 +98,20 @@ public class Json {
     }
 
     public static Closet parseUserCloset(String username) throws IOException {
-        JsonNode closet = getDefaultObjectMapper().readValue(Paths.get("./data/" + username + "Closet.json")
-                .toFile(), JsonNode.class);
-        Closet theCloset = Json.fromJson(closet,  Closet.class);
+        String jsonstr = new String(Files.readAllBytes(Paths.get("./data/" + username
+                + "Closet.json")), StandardCharsets.UTF_8);
+
+        Closet theCloset = Json.fromJson(jsonstr, Closet.class);
 
         return theCloset;
 
     }
 
     public static StyleBoard parseUserStyleBoard(String username) throws IOException {
-        JsonNode styleBoard =  getDefaultObjectMapper().readValue(Paths.get("./data/" + username + "StyleBoard.json")
-                .toFile(), JsonNode.class);
-        StyleBoard theStyleBoard = Json.fromJson(styleBoard, StyleBoard.class);
+        String jsonstr = new String(Files.readAllBytes(Paths.get("./data/" + username
+                + "StyleBoard.json")), StandardCharsets.UTF_8);
+
+        StyleBoard theStyleBoard = Json.fromJson(jsonstr, StyleBoard.class);
 
         return theStyleBoard;
     }

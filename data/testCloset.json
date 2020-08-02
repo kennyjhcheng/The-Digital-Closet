@@ -1,10 +1,28 @@
 {
   "clothes" : [ {
-    "name" : "korea",
+    "name" : "H&M Shirt",
     "type" : "shirt",
-    "color" : "blue and white",
-    "size" : 1.0,
+    "color" : "black",
+    "size" : 2.0,
+    "needsWashing" : false
+  }, {
+    "name" : "Levi Jeans",
+    "type" : "pants",
+    "color" : "blue",
+    "size" : 32.0,
+    "needsWashing" : false
+  }, {
+    "name" : "Gucci Shirt",
+    "type" : "shirt",
+    "color" : "yellow",
+    "size" : 3.0,
+    "needsWashing" : false
+  }, {
+    "name" : "off-white socks",
+    "type" : "socks",
+    "color" : "white",
+    "size" : 3.0,
     "needsWashing" : false
   } ],
-  "numberOfClothing" : 1
+  "collectionSize" : 4
 }

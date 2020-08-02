@@ -24,7 +24,7 @@ public class OutfitTests {
 
     @Test
     public void testConstructor() {
-        assertEquals(outfit1.getNumberOfClothing(), 0);
+        assertEquals(outfit1.getCollectionSize(), 0);
         assertFalse(outfit1.isFavorite());
     }
 
@@ -76,7 +76,7 @@ public class OutfitTests {
             fail();
         }
 
-        assertEquals(outfit1.getNumberOfClothing(), 1);
+        assertEquals(outfit1.getCollectionSize(), 1);
         assertTrue(outfit1.containsClothing(clothing1.getName()));
 
         try {
@@ -85,7 +85,7 @@ public class OutfitTests {
             fail();
         }
 
-        assertEquals(outfit1.getNumberOfClothing(), 2);
+        assertEquals(outfit1.getCollectionSize(), 2);
         assertTrue(outfit1.containsClothing(clothing1.getName()));
         assertTrue(outfit1.containsClothing(clothing2.getName()));
 
@@ -95,7 +95,7 @@ public class OutfitTests {
             fail();
         }
 
-        assertEquals(outfit1.getNumberOfClothing(), 3);
+        assertEquals(outfit1.getCollectionSize(), 3);
         assertTrue(outfit1.containsClothing(clothing1.getName()));
         assertTrue(outfit1.containsClothing(clothing2.getName()));
         assertTrue(outfit1.containsClothing(clothing3.getName()));

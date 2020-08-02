@@ -2,14 +2,16 @@ package model;
 
 import exceptions.DuplicateClothingException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 // An abstract class for collections of clothing
 public abstract class ClothingCollection {
-    protected HashSet<Clothing> clothes;
+    protected List<Clothing> clothes;
 
     public ClothingCollection() {
-        this.clothes = new HashSet<Clothing>();
+        this.clothes = new ArrayList<>();
     }
 
     // MODIFIES: this
@@ -25,7 +27,7 @@ public abstract class ClothingCollection {
     }
 
     // EFFECTS: returns the number of Clothing objects in the closet
-    public int getNumberOfClothing() {
+    public int getCollectionSize() {
         return this.clothes.size();
     }
 
@@ -54,7 +56,7 @@ public abstract class ClothingCollection {
         return isFound;
     }
 
-    public HashSet<Clothing> getClothes() {
+    public List<Clothing> getClothes() {
         return clothes;
     }
 }
