@@ -1,11 +1,11 @@
 package ui.logandregister;
 
-public class Register {
+public class Registration {
 
     String username;
     String password;
 
-    public Register(String username, String password) {
+    public Registration(String username, String password) {
         this.username = username;
         this.password = password;
     }

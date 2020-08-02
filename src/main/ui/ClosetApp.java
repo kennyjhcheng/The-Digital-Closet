@@ -1,5 +1,6 @@
 package ui;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import exceptions.DuplicateClothingException;
 import exceptions.EmptyClosetException;
 import exceptions.InvalidOutfitException;
@@ -7,7 +8,11 @@ import model.Closet;
 import model.Clothing;
 import model.Outfit;
 import model.StyleBoard;
+import persistence.Json;
+import ui.logandregister.Registration;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Closet Application user interface
@@ -18,19 +23,157 @@ public class ClosetApp {
 
     // EFFECTS: runs Closet application
     public ClosetApp() {
-        runClosetApp();
+        runLogin();
     }
 
+    // Runs the login interface allowing the user to register, login, delete account, or quit the app
+    private void runLogin() {
+        boolean keepGoing = true;
+        String command;
+        input = new Scanner(System.in);
+
+        try {
+            Json.userList = Json.parseUserInfo();
+        } catch (IOException e) {
+            System.out.println("Could not retrieve user data");
+        }
+
+        while (keepGoing) {
+            displayLogin();
+            command = input.nextLine();
+            command = command.toLowerCase();
+
+            if (command.equals("q")) {
+                keepGoing = false;
+            } else {
+                processLoginCommand(command);
+            }
+        }
+    }
+
+    // prints the login menu options
+    private void displayLogin() {
+        System.out.println("Welcome to your Digital Closet!!!");
+        System.out.println("\nSelect from:");
+        System.out.println("\tl -> login");
+        System.out.println("\tr -> register");
+        System.out.println("\td -> delete an account");
+        System.out.println("\tq -> quit");
+    }
+
+    // directs the user input command to the correct method for login, registration, or removing an account
+    private void processLoginCommand(String command) {
+        switch (command) {
+            case "l":
+                doLogin();
+                break;
+            case "r":
+                doRegistration();
+                break;
+            case "d":
+                doDeleteAccount();
+
+        }
+    }
+
+    // allows the user to login using their credentials, if credentials do not match an account, login fails
+    private void doLogin() {
+        String usernameCommand;
+        String passwordCommand;
+        Registration account;
+        boolean successfulLogin = false;
+
+        System.out.println("Username and Password are not capital-sensitive");
+        System.out.println("\nEnter the username of the account your account");
+        System.out.print("Username: ");
+        usernameCommand = input.nextLine();
+        usernameCommand = usernameCommand.toLowerCase();
+
+        System.out.println("\nEnter the password of your account");
+        System.out.print("Password: ");
+        passwordCommand = input.nextLine();
+        passwordCommand = passwordCommand.toLowerCase();
+
+        account = new Registration(usernameCommand, passwordCommand);
+        JsonNode accountNode = Json.toJson(account);
+        successfulLogin = Json.userListContains(accountNode);
+
+        if (successfulLogin) {
+            System.out.println("Login Successful!");
+            runClosetApp(accountNode);
+        } else {
+            System.out.println("Login Unsuccessful");
+        }
+
+
+    }
+
+    // MODIFIES: UserInfo.json
+    // EFFECTS: register a username and password of user to the UserInfo json file
+    private void doRegistration() {
+        input = new Scanner(System.in);
+        String usernameCommand;
+        String passwordCommand;
+        Registration account;
+
+        try {
+            System.out.println("Username and Password are not capital-sensitive");
+            System.out.println("\nEnter your desired username");
+            System.out.print("Username: ");
+            usernameCommand = input.nextLine();
+            usernameCommand = usernameCommand.toLowerCase();
+
+            System.out.println("Enter your desired password");
+            System.out.print("Password: ");
+            passwordCommand = input.nextLine();
+            passwordCommand = passwordCommand.toLowerCase();
+
+            account = new Registration(usernameCommand, passwordCommand);
+            JsonNode accountNode = Json.toJson(account);
+            Json.writeRegistrationToFile(accountNode);
+        } catch (Exception e) {
+            System.out.println("Could not complete registration");
+        }
+    }
+
+    // MODIFIES: UserInfo.json
+    // EFFECTS: removes the account specified by the user from UserInfo.json
+    private void doDeleteAccount() {
+        String usernameCommand;
+        String passwordCommand;
+        Registration account;
+
+        System.out.println("Username and Password are not capital-sensitive");
+        System.out.println("\nEnter the username of the account you wish to delete");
+        System.out.print("Username: ");
+        usernameCommand = input.nextLine();
+        usernameCommand = usernameCommand.toLowerCase();
+
+        System.out.println("\nEnter the password of the account you wish to delete");
+        System.out.print("Password: ");
+        passwordCommand = input.nextLine();
+        passwordCommand = passwordCommand.toLowerCase();
+
+        account = new Registration(usernameCommand, passwordCommand);
+        JsonNode accountNode = Json.toJson(account);
+        Json.removeRegistrationFromFile(accountNode);
+    }
+
+    //todo implement saving and loading data using account node?
+    //todo change 'quit' in closet app to signout where account information is saved and new account
+    //       can be loaded
     // MODIFIES: this
     // EFFECTS: runs the app until quit is inputted by the user
-    private void runClosetApp() {
-//        boolean loggedIn = false;
+    private void runClosetApp(JsonNode accountNode) {
         boolean keepGoing = true;
         String command = null;
         input = new Scanner(System.in);
-
+        String username = accountNode.get("username").asText();
+        
+        loadUser(username);
+        
         while (keepGoing) {
-            displayMenu();
+            displayMenu(username);
             command = input.nextLine();
             command = command.toLowerCase();
 
@@ -41,7 +184,27 @@ public class ClosetApp {
             }
         }
 
+        saveUserToFile(username);
         System.out.println("\nGoodbye!");
+    }
+
+    private void loadUser(String username) {
+        try {
+            this.myCloset = Json.parseUserCloset(username);
+            this.myStyleBoard = Json.parseUserStyleBoard(username);
+        } catch (IOException e) {
+            System.out.println("Could not load user");
+        }
+
+    }
+
+    private void saveUserToFile(String username) {
+        try {
+            Json.writer.writeValue(new File("./data/" + username + "Closet.json"), myCloset);
+            Json.writer.writeValue(new File("./data/" + username + "StyleBoard.json"), myStyleBoard);
+        } catch (IOException e) {
+            System.out.println("Could not save user to file");
+        }
     }
 
     // REQUIRES: command matches the cases in the switch statement
@@ -54,24 +217,18 @@ public class ClosetApp {
             case "s":
                 doStyleBoard();
                 break;
-//            case "l":
-//                //
-//                break;
-//            case "r":
-//                doRegistration();
-//                break;
         }
     }
 
     // prints the main menu options
-    private void displayMenu() {
-        System.out.println("Welcome to your Digital Closet!!!");
+    private void displayMenu(String username) {
+        System.out.println("\nWelcome to your Digital Closet " + username + "!!!");
         System.out.println("Tip: The closet is where you can add and remove clothing");
         System.out.println("\tand the Style Board is where you can create and remove outfits");
         System.out.println("\nSelect from:");
         System.out.println("\tc -> open closet");
         System.out.println("\ts -> open your Style Board");
-        System.out.println("\tq -> quit");
+        System.out.println("\tq -> save and signout");
     }
 
     // STYLE BOARD FUNCTIONS ------------------------------------------------------------------------
@@ -298,7 +455,7 @@ public class ClosetApp {
 
         myStyleBoard.addOutfit(newOutfit);
 
-        System.out.println("Your new outfit has been created!");
+        System.out.println("Your new outfit has been created!\n");
     }
 
     // adds subsequent clothing to new created outfit
@@ -687,7 +844,7 @@ public class ClosetApp {
         String color;
         double size;
 
-        System.out.println("What color are your pants?");
+        System.out.println("What color are your shoes?");
         System.out.println("\tIf multiple colors, choose the one that stands out or a name for the combination");
         System.out.print("Color: ");
         color = input.nextLine();

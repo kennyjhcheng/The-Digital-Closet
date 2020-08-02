@@ -1,9 +1,11 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import exceptions.DuplicateClothingException;
 import exceptions.EmptyClosetException;
 
 import java.util.HashSet;
+import java.util.Map;
 
 
 // Represents a Closet with all clothing
@@ -49,6 +51,7 @@ public class Closet extends ClothingCollection {
             return  filteredCloset;
         }
     }
+
 
 
 }

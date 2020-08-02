@@ -1,4 +1,4 @@
-package jsonparsing.pojo;
+package persistence.pojo;
 
 public class SimpleTestCaseJsonPOJO {
 

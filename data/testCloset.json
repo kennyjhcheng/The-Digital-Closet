@@ -1,0 +1,10 @@
+{
+  "clothes" : [ {
+    "name" : "korea",
+    "type" : "shirt",
+    "color" : "blue and white",
+    "size" : 1.0,
+    "needsWashing" : false
+  } ],
+  "numberOfClothing" : 1
+}
