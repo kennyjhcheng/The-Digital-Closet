@@ -27,7 +27,7 @@ public abstract class ClothingCollection {
     }
 
     // EFFECTS: returns the number of Clothing objects in the closet
-    public int getCollectionSize() {
+    public int collectionSize() {
         return this.clothes.size();
     }
 

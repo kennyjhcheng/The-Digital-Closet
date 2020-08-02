@@ -64,7 +64,7 @@ public class StyleBoard {
 
 
     // EFFECTS: returns the number of outfits in styleBoard
-    public int getStyleBoardSize() {
+    public int styleBoardSize() {
         return styleBoard.size();
     }
 

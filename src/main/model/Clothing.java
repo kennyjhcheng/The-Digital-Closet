@@ -27,6 +27,10 @@ public class Clothing {
         this.needsWashing = false;
     }
 
+    public Clothing() {
+
+    }
+
     // REQUIRES: valid size input corresponding to the type
     // MODIFIES: this
     // EFFECTS: changes the type of the clothing item and also the size

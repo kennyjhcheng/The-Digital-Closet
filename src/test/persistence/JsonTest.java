@@ -139,7 +139,7 @@ class JsonTest {
         }
 
         assertTrue(testCloset.containsClothing("Levi Jeans"));
-        assertEquals(testCloset.getCollectionSize(), 4);
+        assertEquals(testCloset.collectionSize(), 4);
     }
 
 }

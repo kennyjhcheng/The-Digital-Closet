@@ -27,7 +27,7 @@ public class ClosetTests {
 
     @Test
     public void testConstructor() {
-        assertEquals(testCloset.getCollectionSize(), 0);
+        assertEquals(testCloset.collectionSize(), 0);
 
     }
 
@@ -39,7 +39,7 @@ public class ClosetTests {
             fail();
         }
 
-        assertEquals(testCloset.getCollectionSize(), 1);
+        assertEquals(testCloset.collectionSize(), 1);
         assertTrue(testCloset.containsClothing("H&M Shirt"));
         assertTrue(testCloset.getClothingByName("H&M Shirt").equalClothing(clothing1));
 
@@ -49,7 +49,7 @@ public class ClosetTests {
             fail();
         }
 
-        assertEquals(testCloset.getCollectionSize(), 2);
+        assertEquals(testCloset.collectionSize(), 2);
         assertTrue(testCloset.containsClothing("Levi Jeans"));
         assertTrue(testCloset.getClothingByName("Levi Jeans").equalClothing(clothing2));
 
@@ -65,7 +65,7 @@ public class ClosetTests {
             fail();
         }
 
-        assertEquals(testCloset.getCollectionSize(), 1);
+        assertEquals(testCloset.collectionSize(), 1);
         assertTrue(testCloset.containsClothing("H&M Shirt"));
         assertTrue(testCloset.getClothingByName("H&M Shirt").equalClothing(clothing1));
 
@@ -76,7 +76,7 @@ public class ClosetTests {
             System.out.println("Exception caught!");
         }
 
-        assertEquals(testCloset.getCollectionSize(), 1);
+        assertEquals(testCloset.collectionSize(), 1);
         assertTrue(testCloset.containsClothing("H&M Shirt"));
         assertTrue(testCloset.getClothingByName("H&M Shirt").equalClothing(clothing1));
 
@@ -94,19 +94,19 @@ public class ClosetTests {
         }
 
         testCloset.removeClothing(clothing1);
-        assertEquals(testCloset.getCollectionSize(), 1);
+        assertEquals(testCloset.collectionSize(), 1);
         assertTrue(testCloset.containsClothing("Levi Jeans"));
         assertFalse(testCloset.containsClothing("H&M Shirt"));
 
         testCloset.removeClothing(testCloset.getClothingByName("Levi Jeans"));
-        assertEquals(testCloset.getCollectionSize(), 0);
+        assertEquals(testCloset.collectionSize(), 0);
         assertFalse(testCloset.containsClothing("Levi Jeans"));
         assertFalse(testCloset.containsClothing("H&M Shirt"));
     }
 
     @Test
     public void testGetNumberOfClothingEmpty() {
-        assertEquals(testCloset.getCollectionSize(), 0);
+        assertEquals(testCloset.collectionSize(), 0);
     }
 
     @Test
@@ -117,7 +117,7 @@ public class ClosetTests {
             fail();
         }
 
-        assertEquals(testCloset.getCollectionSize(), 1);
+        assertEquals(testCloset.collectionSize(), 1);
 
         try {
             testCloset.addClothing(clothing2);
@@ -125,7 +125,7 @@ public class ClosetTests {
             fail();
         }
 
-        assertEquals(testCloset.getCollectionSize(), 2);
+        assertEquals(testCloset.collectionSize(), 2);
     }
 
     @Test
@@ -151,14 +151,14 @@ public class ClosetTests {
         }
 
 
-        assertEquals(shirtCloset.getCollectionSize(), 2);
+        assertEquals(shirtCloset.collectionSize(), 2);
         assertTrue(shirtCloset.containsClothing(clothing1.getName()));
         assertTrue(shirtCloset.containsClothing(clothing3.getName()));
 
-        assertEquals(pantsCloset.getCollectionSize(), 1);
+        assertEquals(pantsCloset.collectionSize(), 1);
         assertTrue(pantsCloset.containsClothing(clothing2.getName()));
 
-        assertEquals(socksCloset.getCollectionSize(), 1);
+        assertEquals(socksCloset.collectionSize(), 1);
         assertTrue(socksCloset.containsClothing(clothing4.getName()));
 
     }
@@ -190,7 +190,7 @@ public class ClosetTests {
             System.out.println("Exception caught!");
         }
 
-        assertEquals(shoesCloset.getCollectionSize(), 0);
+        assertEquals(shoesCloset.collectionSize(), 0);
 
 
     }

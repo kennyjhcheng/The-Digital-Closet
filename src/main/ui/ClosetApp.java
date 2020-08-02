@@ -751,7 +751,7 @@ public class ClosetApp {
         remove = remove.toLowerCase();
 
         myCloset.removeClothing(myCloset.getClothingByName(remove));
-        System.out.println(myCloset.getCollectionSize());
+        System.out.println(myCloset.collectionSize());
     }
 
     // Begins the form to add a clothing to the closet -> asks clothing name
