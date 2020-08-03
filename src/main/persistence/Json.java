@@ -23,6 +23,10 @@ public class Json {
     public static ArrayNode userList = getDefaultObjectMapper().createArrayNode();
     public static ObjectWriter writer = getDefaultObjectMapper().writer(new DefaultPrettyPrinter());
 
+    //constructor made to test Class -> no other purpose
+    public Json() {
+
+    }
 
     // creates object mapper
     public static ObjectMapper getDefaultObjectMapper() {

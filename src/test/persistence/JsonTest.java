@@ -75,11 +75,23 @@ class JsonTest {
     }
 
     @Test
+    void testConstructor() {
+        Json json = new Json();
+    }
+
+    @Test
     public void fromJson() throws JsonProcessingException {
 
         SimpleTestCaseJsonPOJO pojo = Json.fromJson(simpleTestCaseJsonSource, SimpleTestCaseJsonPOJO.class);
 
         assertEquals(pojo.getTitle(), "Coder From Scratch");
+
+        try {
+            SimpleTestCaseJsonPOJO failPojo = Json.fromJson(dayScenario1, SimpleTestCaseJsonPOJO.class);
+            fail();
+        } catch (Exception e) {
+
+        }
 
     }
 
@@ -144,13 +156,37 @@ class JsonTest {
     }
 
     @Test
-    public void testRemoveRegistrationFromFileFound() {
-        Registration account1 = new Registration("testUsername", "testPassword");
+    public void testRemoveRegistrationFromFileSuccess() {
+        Registration account1 = new Registration("removeuser", "removepass");
         JsonNode accountNode1 = Json.toJson(account1);
         boolean found = true;
         try {
             Json.writeRegistrationToFile(accountNode1, "test");
             Json.removeRegistrationFromFile(accountNode1, "test");
+            ArrayNode accounts = Json.getDefaultObjectMapper().readValue(Paths.get("./data/testInfo.json").toFile(),
+                    ArrayNode.class);
+
+            for (int i = 0; i < accounts.size(); i++) {
+                if (accounts.get(i).equals(accountNode1)) {
+                    found = false;
+                    break;
+                }
+            }
+            assertTrue(found);
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
+
+    @Test
+    public void testRemoveRegistrationFromFileInputNodeNull() {
+        Registration account1 = new Registration("reguser", "regpass");
+        JsonNode accountNode1 = Json.toJson(account1);
+        boolean found = true;
+        try {
+            Json.writeRegistrationToFile(accountNode1, "test");
+            Json.removeRegistrationFromFile(null, "test");
             ArrayNode accounts = Json.getDefaultObjectMapper().readValue(Paths.get("./data/testInfo.json").toFile(),
                     ArrayNode.class);
 
@@ -237,6 +273,15 @@ class JsonTest {
         Json.userList = Json.getDefaultObjectMapper().createArrayNode();
 
         assertFalse(Json.userListContains(accountNode1));
+    }
+
+    @Test
+    public void testUserListContainsNullInput() {
+        Registration account1 = new Registration("contains700", "testpass1");
+        JsonNode accountNode1 = Json.toJson(account1);
+        Json.userList = Json.getDefaultObjectMapper().createArrayNode();
+
+        assertFalse(Json.userListContains(null));
     }
 
     @Test

@@ -5,8 +5,8 @@
   "username" : "contains2",
   "password" : "testpass2"
 }, {
-  "username" : "testUsername",
-  "password" : "testPassword"
+  "username" : "reguser",
+  "password" : "regpass"
 }, {
   "username" : "testUsername",
   "password" : "testPassword"
