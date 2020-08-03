@@ -322,7 +322,13 @@ public class ClosetApp {
         outfitToEdit = input.nextLine();
         outfitToEdit = outfitToEdit.toLowerCase();
 
-        editOutfit(outfitToEdit);
+        if (myStyleBoard.containsOutfit(outfitToEdit)) {
+            editOutfit(outfitToEdit);
+        } else {
+            System.out.println("Could not find the outfit. Please double check your StyleBoard!");
+        }
+
+
     }
 
     // REQUIRES: user input matches one of options: a, r
@@ -332,6 +338,8 @@ public class ClosetApp {
         System.out.println("How would you like to edit your outfit '" + outfitToEdit + "'?");
         System.out.println("\ta -> add clothing");
         System.out.println("\tr -> remove clothing");
+        System.out.println("\tn -> change outfit name");
+        System.out.println("\tc -> cancel");
 
         editChoice = input.nextLine();
         editChoice = editChoice.toLowerCase();
@@ -343,7 +351,23 @@ public class ClosetApp {
             case "r":
                 doEditRemoveClothingFromOutfit(outfitToEdit);
                 break;
+            case "n":
+                doEditClothingName(outfitToEdit);
+                break;
+            case "c":
+                break;
         }
+    }
+
+    // edits the clothing name specified by the user
+    private void doEditClothingName(String outfitToEdit) throws InvalidOutfitException {
+        String nameChange;
+        System.out.println("what would you like to change " + outfitToEdit + " to?");
+        System.out.print("Name: ");
+        nameChange = input.nextLine();
+        nameChange = nameChange.toLowerCase();
+
+        myStyleBoard.getOutfit(outfitToEdit).changeName(nameChange);
     }
 
     // takes user input to edit by adding another clothing to an outfit in style board
@@ -383,6 +407,7 @@ public class ClosetApp {
 
         myStyleBoard.getOutfit(outfitToEdit)
                 .removeClothing(myStyleBoard.getOutfit(outfitToEdit).getClothingByName(removeClothing));
+
         System.out.println("You have remove " + removeClothing + " from " + outfitToEdit + "!!!");
     }
 
@@ -761,7 +786,7 @@ public class ClosetApp {
         remove = remove.toLowerCase();
 
         myCloset.removeClothing(myCloset.getClothingByName(remove));
-        System.out.println(myCloset.collectionSize());
+        System.out.println("You have removed " + remove + "  from your Closet.");
     }
 
     // Begins the form to add a clothing to the closet -> asks clothing name

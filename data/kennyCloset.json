@@ -1,0 +1,9 @@
+{
+  "clothes" : [ {
+    "name" : "myshirt",
+    "type" : "shirt",
+    "color" : "black",
+    "size" : 2.0,
+    "needsWashing" : false
+  } ]
+}
