@@ -1,0 +1,41 @@
+{
+  "styleBoard" : [ {
+    "clothes" : [ {
+      "name" : "H&M Shirt",
+      "type" : "shirt",
+      "color" : "black",
+      "size" : 2.0,
+      "needsWashing" : false
+    }, {
+      "name" : "Levi Jeans",
+      "type" : "pants",
+      "color" : "blue",
+      "size" : 32.0,
+      "needsWashing" : false
+    }, {
+      "name" : "off-white socks",
+      "type" : "socks",
+      "color" : "white",
+      "size" : 3.0,
+      "needsWashing" : false
+    } ],
+    "favorite" : false,
+    "name" : "3piece"
+  }, {
+    "clothes" : [ {
+      "name" : "H&M Shirt",
+      "type" : "shirt",
+      "color" : "black",
+      "size" : 2.0,
+      "needsWashing" : false
+    }, {
+      "name" : "Levi Jeans",
+      "type" : "pants",
+      "color" : "blue",
+      "size" : 32.0,
+      "needsWashing" : false
+    } ],
+    "favorite" : false,
+    "name" : "2piece"
+  } ]
+}

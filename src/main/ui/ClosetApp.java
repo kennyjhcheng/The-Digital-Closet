@@ -33,7 +33,7 @@ public class ClosetApp {
         input = new Scanner(System.in);
 
         try {
-            Json.userList = Json.parseUserInfo();
+            Json.userList = Json.parseUserInfo("User");
         } catch (IOException e) {
             System.out.println("Could not retrieve user data");
         }
@@ -44,6 +44,10 @@ public class ClosetApp {
             command = command.toLowerCase();
 
             if (command.equals("q")) {
+                keepGoing = false;
+            } else if (command.equals("r")) {
+                processLoginCommand(command);
+                System.out.println("Please re-run the app to load user login data");
                 keepGoing = false;
             } else {
                 processLoginCommand(command);
@@ -196,8 +200,9 @@ public class ClosetApp {
     private void loadUser(String username) {
 
         try {
-            if (Json.getDefaultObjectMapper().readValue(new File("./data/" + username + "Logged.json"),
-                    boolean.class)) {
+            File tmpDir = new File("./data/" + username + "Logged.json");
+            if (tmpDir.exists() || Json.getDefaultObjectMapper().readValue(new File("./data/"
+                    + username + "Logged.json"), boolean.class)) {
                 this.myCloset = Json.parseUserCloset(username);
                 this.myStyleBoard = Json.parseUserStyleBoard(username);
             }
@@ -313,7 +318,7 @@ public class ClosetApp {
 
         System.out.println("Which outfit would you like to edit?");
         printAllOutfitNamesInStyleBoard();
-        System.out.println("Edit: ");
+        System.out.print("Edit: ");
         outfitToEdit = input.nextLine();
         outfitToEdit = outfitToEdit.toLowerCase();
 
@@ -735,7 +740,7 @@ public class ClosetApp {
 
     }
 
-    // prints all clothing in the closet witht heir fields
+    // prints all clothing in the closet with their fields
     private void viewAll() {
         System.out.println("These are all the clothes in your closet:");
         printAllClothingInCloset();

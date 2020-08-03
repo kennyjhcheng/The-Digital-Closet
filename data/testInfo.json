@@ -1,4 +1,10 @@
 [ {
+  "username" : "contains1",
+  "password" : "testpass1"
+}, {
+  "username" : "contains2",
+  "password" : "testpass2"
+}, {
   "username" : "testUsername",
   "password" : "testPassword"
 }, {

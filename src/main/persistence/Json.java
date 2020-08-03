@@ -22,7 +22,7 @@ import java.util.List;
 // handles converting data to and from Json files
 public class Json {
     private static ObjectMapper objectMapper = getDefaultObjectMapper();
-    public static ArrayNode userList = objectMapper.createArrayNode();
+    public static ArrayNode userList = getDefaultObjectMapper().createArrayNode();
     public static ObjectWriter writer = getDefaultObjectMapper().writer(new DefaultPrettyPrinter());
 
 
@@ -51,8 +51,14 @@ public class Json {
 
     // writes the registered information to a file
     public static void writeRegistrationToFile(JsonNode inputNode, String user) throws IOException {
+        String username = inputNode.get("username").asText();
+        Closet closet = new Closet();
+        StyleBoard styleBoard = new StyleBoard();
         userList.add(inputNode);
         writer.writeValue(new File("./data/" + user + "Info.json"), userList);
+        writer.writeValue(new File("./data/" + username + "Logged.json"), true);
+        writer.writeValue(new File("./data/" + username + "Closet.json"), closet);
+        writer.writeValue(new File("./data/" + username + "StyleBoard.json"), styleBoard);
     }
 
     public static void removeRegistrationFromFile(JsonNode inputNode, String user) throws IOException {
@@ -70,6 +76,14 @@ public class Json {
         }
 
         if (foundUser) {
+            File closet = new File("./data/" + accounts.get(index).get("username").asText() + "Closet.json");
+            File styleBoard = new File("./data/" + accounts.get(index).get("username").asText()
+                    + "StyleBoard.json");
+            File logged = new File("./data/" + accounts.get(index).get("username").asText() + "Logged.json");
+            closet.delete();
+            styleBoard.delete();
+            logged.delete();
+
             accounts.remove(index);
             userList = accounts;
             writer.writeValue(new File("./data/" + user + "Info.json"), accounts);
@@ -77,8 +91,9 @@ public class Json {
         } // todo exception for if user not found
     }
 
-    public static ArrayNode parseUserInfo() throws IOException {
-        return getDefaultObjectMapper().readValue(Paths.get("./data/UserInfo.json").toFile(), ArrayNode.class);
+    public static ArrayNode parseUserInfo(String user) throws IOException {
+        return getDefaultObjectMapper().readValue(Paths.get("./data/" + user + "Info.json").toFile(),
+                ArrayNode.class);
     }
 
     public static boolean userListContains(JsonNode node) {
@@ -93,20 +108,20 @@ public class Json {
     }
 
     public static Closet parseUserCloset(String username) throws IOException {
-        String jsonstr = new String(Files.readAllBytes(Paths.get("./data/" + username
+        String jsonStr = new String(Files.readAllBytes(Paths.get("./data/" + username
                 + "Closet.json")), StandardCharsets.UTF_8);
 
-        Closet theCloset = Json.fromJson(jsonstr, Closet.class);
+        Closet theCloset = Json.fromJson(jsonStr, Closet.class);
 
         return theCloset;
 
     }
 
     public static StyleBoard parseUserStyleBoard(String username) throws IOException {
-        String jsonstr = new String(Files.readAllBytes(Paths.get("./data/" + username
+        String jsonStr = new String(Files.readAllBytes(Paths.get("./data/" + username
                 + "StyleBoard.json")), StandardCharsets.UTF_8);
 
-        StyleBoard theStyleBoard = Json.fromJson(jsonstr, StyleBoard.class);
+        StyleBoard theStyleBoard = Json.fromJson(jsonStr, StyleBoard.class);
 
         return theStyleBoard;
     }

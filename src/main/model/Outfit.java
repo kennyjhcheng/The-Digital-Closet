@@ -15,6 +15,10 @@ public class Outfit extends ClothingCollection {
         this.favorite = false;
     }
 
+    public Outfit() {
+
+    }
+
     // EFFECTS: setter
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
