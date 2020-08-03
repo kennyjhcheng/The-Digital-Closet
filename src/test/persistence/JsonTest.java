@@ -197,6 +197,7 @@ class JsonTest {
                 }
             }
             assertFalse(found);
+            Json.removeRegistrationFromFile(accountNode1, "test");
         } catch (IOException e) {
             e.printStackTrace();
             fail();

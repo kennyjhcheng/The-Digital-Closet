@@ -71,7 +71,7 @@ public class Json {
                 .toFile(), ArrayNode.class);
 
         for (int i = 0; i < accounts.size(); i++) {
-            if (accounts.get(i).equals(inputNode) && inputNode != null) {
+            if (accounts.get(i).equals(inputNode)) {
                 index = i;
                 foundUser = true;
                 break;
@@ -102,7 +102,7 @@ public class Json {
     public static boolean userListContains(JsonNode node) {
         boolean foundUser = false;
         for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).equals(node) && node != null) {
+            if (userList.get(i).equals(node)) {
                 foundUser = true;
                 break;
             }
