@@ -6,10 +6,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import jdk.internal.org.objectweb.asm.TypeReference;
+
 import model.Closet;
-import model.Clothing;
+
 import model.StyleBoard;
 
 import java.io.File;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 
 // handles converting data to and from Json files
 public class Json {
@@ -61,6 +59,7 @@ public class Json {
         writer.writeValue(new File("./data/" + username + "StyleBoard.json"), styleBoard);
     }
 
+    // removes registration from userList and files and removes associated files
     public static void removeRegistrationFromFile(JsonNode inputNode, String user) throws IOException {
         int index = 0;
         boolean foundUser = false;
