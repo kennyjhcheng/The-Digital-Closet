@@ -52,19 +52,24 @@ public class Json {
     }
 
     // writes the registered information to a file
-    public static void writeRegistrationToFile(JsonNode inputNode, String user) throws IOException {
+    public static boolean writeRegistrationToFile(JsonNode inputNode, String user) throws IOException {
         String username = inputNode.get("username").asText();
         Closet closet = new Closet();
         StyleBoard styleBoard = new StyleBoard();
-        userList.add(inputNode);
-        writer.writeValue(new File("./data/" + user + "Info.json"), userList);
-        writer.writeValue(new File("./data/" + username + "Logged.json"), true);
-        writer.writeValue(new File("./data/" + username + "Closet.json"), closet);
-        writer.writeValue(new File("./data/" + username + "StyleBoard.json"), styleBoard);
+        boolean successfulLogin = !userListContains(inputNode);
+        if (successfulLogin) {
+            userList.add(inputNode);
+            writer.writeValue(new File("./data/" + user + "Info.json"), userList);
+            writer.writeValue(new File("./data/" + username + "Logged.json"), true);
+            writer.writeValue(new File("./data/" + username + "Closet.json"), closet);
+            writer.writeValue(new File("./data/" + username + "StyleBoard.json"), styleBoard);
+        }
+
+        return successfulLogin;
     }
 
     // removes registration from userList and files and removes associated files
-    public static void removeRegistrationFromFile(JsonNode inputNode, String user) throws IOException {
+    public static boolean removeRegistrationFromFile(JsonNode inputNode, String user) throws IOException {
         int index = 0;
         boolean foundUser = false;
         ArrayNode accounts = Json.getDefaultObjectMapper().readValue(Paths.get("./data/" + user + "Info.json")
@@ -90,8 +95,8 @@ public class Json {
             accounts.remove(index);
             userList = accounts;
             writer.writeValue(new File("./data/" + user + "Info.json"), accounts);
-
-        } // todo exception for if user not found
+        }
+        return foundUser;
     }
 
     public static ArrayNode parseUserInfo(String user) throws IOException {

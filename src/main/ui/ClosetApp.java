@@ -168,9 +168,6 @@ public class ClosetApp {
         }
     }
 
-    //todo implement saving and loading data using account node?
-    //todo change 'quit' in closet app to signout where account information is saved and new account
-    //       can be loaded
     // MODIFIES: this
     // EFFECTS: runs the app until quit is inputted by the user
     private void runClosetApp(JsonNode accountNode) {
