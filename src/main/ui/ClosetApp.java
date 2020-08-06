@@ -324,8 +324,6 @@ public class ClosetApp {
         } else {
             System.out.println("Could not find the outfit. Please double check your StyleBoard!");
         }
-
-
     }
 
     // REQUIRES: user input matches one of options: a, r
@@ -526,7 +524,7 @@ public class ClosetApp {
         System.out.println("\tb -> go back to the main menu");
     }
 
-    // CLOTHING FUNCTIONS ------------------------------------------------------------------------
+    // CLOSET FUNCTIONS ------------------------------------------------------------------------
 
     // receives user input to determine what clothing method to run
     private void doCloset() {
@@ -956,49 +954,5 @@ public class ClosetApp {
         }
     }
 
-    //    private void displayLogin() {
-//        System.out.println("Welcome to your Digital Closet!!!");
-//        System.out.println("\nSelect from:");
-//        System.out.println("\tl -> login");
-//        System.out.println("\tr -> register");
-//        System.out.println("\tq -> quit");
-//    }
-//
-//    private void doRegistration() {
-//        try {
-//            input = new Scanner(System.in);
-//            String usernameCommand = null;
-//            String passwordCommand = null;
-//            Register account;
-//
-//            System.out.println("Username and Password are not capital-sensitive");
-//            System.out.println("\nEnter your desired username");
-//            System.out.print("Username: ");
-//            usernameCommand = input.next();
-//            usernameCommand = usernameCommand.toLowerCase();
-//
-//            System.out.println("Enter your desired password");
-//            System.out.print("Password: ");
-//            passwordCommand = input.next();
-//            passwordCommand = passwordCommand.toLowerCase();
-//
-//            account = new Register(usernameCommand, passwordCommand);
-//            JsonNode accountNode = Json.toJson(account);
-//            Json.writeRegistrationToFile(usernameCommand, accountNode);
-//
-//            System.out.println(accountNode.get("username").asText());
-//            System.out.println(accountNode.get("password").asText());
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void doLogin() {
-//        try {
-//            input = new Scanner(System.in);
-//            String usernameCommand = null;
-//            String passwordCommand = null;
-//        }
-//    }
+
 }

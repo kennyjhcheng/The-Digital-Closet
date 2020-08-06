@@ -138,7 +138,7 @@ public class MainMenu extends JFrame {
 
         menuFrame.setLocation(frameXPos, frameYPos);
         menuFrame.setResizable(false);
-        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuFrame.setTitle("Main Menu");
     }
 
