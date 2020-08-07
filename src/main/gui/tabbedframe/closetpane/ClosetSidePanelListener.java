@@ -1,4 +1,4 @@
-package gui.tabbedframe.closet;
+package gui.tabbedframe.closetpane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

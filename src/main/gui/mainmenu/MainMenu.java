@@ -1,8 +1,11 @@
 package gui.mainmenu;
 
+import model.Closet;
+import model.StyleBoard;
 import persistence.Json;
 
 import javax.swing.*;
+import javax.swing.text.Style;
 import java.awt.*;
 import java.io.IOException;
 
@@ -16,16 +19,16 @@ public class MainMenu extends JFrame {
     public static final int MENU_BUTTON_HEIGHT = 60;
 
     public static JFrame menuFrame;
-    private JTextField usernameInfo;
-    private JTextField passwordInfo;
+    public static JTextField usernameInfo;
+    public static JTextField passwordInfo;
 
     public static JButton loginButton;
     public static JButton registerButton;
     public static JButton deleteButton;
     public static JButton quitButton;
 
-    public static MainMenu theMenu;
-
+    public static Closet myCloset = new Closet();
+    public static StyleBoard myStyleBoard = new StyleBoard();
 
     private ListenForMenuButton listenLogin = new ListenForMenuButton();
     private ListenForMenuButton listenRegister = new ListenForMenuButton();
@@ -35,15 +38,14 @@ public class MainMenu extends JFrame {
 
     public static void main(String[] args) {
 
-        theMenu = new MainMenu();
-
     }
 
     public MainMenu() {
+
         try {
             Json.userList = Json.parseUserInfo("User");
         } catch (IOException e) {
-            System.out.println("Could not find uesr information");
+            System.out.println("Could not find user information");
             e.printStackTrace();
         }
 

@@ -1,6 +1,8 @@
 package gui.mainmenu;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import gui.Main;
+import gui.tabbedframe.TabbedPane;
 import persistence.Json;
 import persistence.Registration;
 
@@ -8,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.File;
 import java.io.IOException;
 
 public class ListenForMenuButton implements ActionListener {
@@ -26,8 +29,8 @@ public class ListenForMenuButton implements ActionListener {
     }
 
     private void doLoginProcess() {
-        String username = MainMenu.theMenu.getUsernameInfo().getText();
-        String password = MainMenu.theMenu.getPasswordInfo().getText();
+        String username = MainMenu.usernameInfo.getText();
+        String password = MainMenu.passwordInfo.getText();
         username = username.toLowerCase();
         password = password.toLowerCase();
         boolean successfulLogin = false;
@@ -36,15 +39,17 @@ public class ListenForMenuButton implements ActionListener {
         successfulLogin = Json.userListContains(accountNode);
         if (successfulLogin) {
             JOptionPane.showMessageDialog(MainMenu.menuFrame, "Login Successful!\n");
-            // todo: open new jframe when login success
+            loadUser(username);
+            new TabbedPane();
+
         } else {
             JOptionPane.showMessageDialog(MainMenu.menuFrame, "Login Unsuccessful!\n");
         }
     }
 
     private void doRegisterProcess() {
-        String username = MainMenu.theMenu.getUsernameInfo().getText();
-        String password = MainMenu.theMenu.getPasswordInfo().getText();
+        String username = MainMenu.usernameInfo.getText();
+        String password = MainMenu.passwordInfo.getText();
         username = username.toLowerCase();
         password = password.toLowerCase();
 
@@ -67,8 +72,8 @@ public class ListenForMenuButton implements ActionListener {
     }
 
     private void doDeleteProcess() {
-        String username = MainMenu.theMenu.getUsernameInfo().getText();
-        String password = MainMenu.theMenu.getPasswordInfo().getText();
+        String username = MainMenu.usernameInfo.getText();
+        String password = MainMenu.passwordInfo.getText();
         username = username.toLowerCase();
         password = password.toLowerCase();
         boolean foundUser = false;
@@ -94,6 +99,22 @@ public class ListenForMenuButton implements ActionListener {
 
     private void doQuitProcess() {
         MainMenu.menuFrame.dispatchEvent(new WindowEvent(MainMenu.menuFrame, WindowEvent.WINDOW_CLOSING));
+    }
+
+    private void loadUser(String username) {
+
+        try {
+            File tmpDir = new File("./data/" + username + "Logged.json");
+            if (tmpDir.exists() || Json.getDefaultObjectMapper().readValue(new File("./data/"
+                    + username + "Logged.json"), boolean.class)) {
+                MainMenu.myCloset = Json.parseUserCloset(username);
+                MainMenu.myStyleBoard = Json.parseUserStyleBoard(username);
+            }
+        } catch (IOException e) {
+            System.out.println("Could not load user");
+            e.printStackTrace();
+        }
+
     }
 
 

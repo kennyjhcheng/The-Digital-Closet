@@ -1,4 +1,4 @@
-package gui.tabbedframe.closet;
+package gui.tabbedframe.closetpane;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,8 +6,10 @@ import java.awt.*;
 public class ViewClothingPanel extends OptionPanelConstructor {
     public ViewClothingPanel() {
         super();
-        this.panel.setBackground(Color.DARK_GRAY);
-        this.panel.setVisible(false);
+        this.getPanel().setBackground(Color.DARK_GRAY);
+        makeFormTitleLabel();
+        formTitle.setText("View Clothing");
+
     }
 
     @Override
