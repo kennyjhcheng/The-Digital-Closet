@@ -5,5 +5,17 @@
     "color" : "black",
     "size" : 2.0,
     "needsWashing" : false
+  }, {
+    "name" : "mypants",
+    "type" : "",
+    "color" : "red",
+    "size" : 1.0,
+    "needsWashing" : false
+  }, {
+    "name" : "myshoes",
+    "type" : "",
+    "color" : "black",
+    "size" : 9.0,
+    "needsWashing" : false
   } ]
 }

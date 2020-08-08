@@ -1,6 +1,7 @@
 package gui.tabbedframe;
 
 import gui.tabbedframe.closetpane.ClosetPane;
+import gui.tabbedframe.saveandquitpane.SaveAndQuitPane;
 
 import javax.swing.*;
 import java.awt.*;

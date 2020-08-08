@@ -22,6 +22,9 @@ public class AddClothingButtonListener implements ActionListener {
         String type = typeComboBox.getEditor().getItem().toString();
         String color = colorTextField.getText();
 
+        name = name.toLowerCase();
+        color = color.toLowerCase();
+
         try {
             double size = Double.parseDouble(sizeTextField.getText());
             MainMenu.myCloset.addClothing(new Clothing(name, type, color, size));
@@ -32,7 +35,7 @@ public class AddClothingButtonListener implements ActionListener {
                     + "this clothing\n");
             duplicateClothingException.printStackTrace();
         } catch (Exception exception) {
-            JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Please input a size\n");
+            JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Please input a valid size\n");
 
         }
 
