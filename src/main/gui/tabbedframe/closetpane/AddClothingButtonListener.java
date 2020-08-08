@@ -28,6 +28,7 @@ public class AddClothingButtonListener implements ActionListener {
         try {
             double size = Double.parseDouble(sizeTextField.getText());
             MainMenu.myCloset.addClothing(new Clothing(name, type, color, size));
+            resetForm();
             JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Successfully Added\n" + "\t" + name
                     + " to your Closet!");
         } catch (DuplicateClothingException duplicateClothingException) {
@@ -39,6 +40,11 @@ public class AddClothingButtonListener implements ActionListener {
 
         }
 
+    }
 
+    private void resetForm() {
+        nameTextField.setText(null);
+        colorTextField.setText(null);
+        sizeTextField.setText(null);
     }
 }

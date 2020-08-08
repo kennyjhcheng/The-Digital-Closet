@@ -8,7 +8,7 @@ public class AddClothingPanel extends OptionPanelConstructor {
     private JLabel warningBeforeAdd;
 
     public static JTextField nameTextField;
-    public static JComboBox typeComboBox;
+    public static JComboBox<String> typeComboBox;
     public static JTextField colorTextField;
     public static JTextField sizeTextField;
 
@@ -93,11 +93,11 @@ public class AddClothingPanel extends OptionPanelConstructor {
         this.getPanel().add(pantsSizingChart);
         this.getPanel().add(shoesSizingChart);
         this.getPanel().add(socksSizingChart);
-        this.getPanel().add(pantsSizingChart);
+        this.getPanel().add(accessoriesSizingChart);
     }
 
     private void makeTypeComboBox() {
-        typeComboBox = new JComboBox(TYPES);
+        typeComboBox = new JComboBox<>(TYPES);
         typeComboBox.setBounds(90, 154, 400, 25);
         this.getPanel().add(typeComboBox);
     }
