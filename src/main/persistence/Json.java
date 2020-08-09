@@ -84,19 +84,23 @@ public class Json {
         }
 
         if (foundUser) {
-            File closet = new File("./data/" + accounts.get(index).get("username").asText() + "Closet.json");
-            File styleBoard = new File("./data/" + accounts.get(index).get("username").asText()
-                    + "StyleBoard.json");
-            File logged = new File("./data/" + accounts.get(index).get("username").asText() + "Logged.json");
-            closet.delete();
-            styleBoard.delete();
-            logged.delete();
-
-            accounts.remove(index);
-            userList = accounts;
-            writer.writeValue(new File("./data/" + user + "Info.json"), accounts);
+            removeRegistration(user, index, accounts);
         }
         return foundUser;
+    }
+
+    private static void removeRegistration(String user, int index, ArrayNode accounts) throws IOException {
+        File closet = new File("./data/" + accounts.get(index).get("username").asText() + "Closet.json");
+        File styleBoard = new File("./data/" + accounts.get(index).get("username").asText()
+                + "StyleBoard.json");
+        File logged = new File("./data/" + accounts.get(index).get("username").asText() + "Logged.json");
+        closet.delete();
+        styleBoard.delete();
+        logged.delete();
+
+        accounts.remove(index);
+        userList = accounts;
+        writer.writeValue(new File("./data/" + user + "Info.json"), accounts);
     }
 
     public static ArrayNode parseUserInfo(String user) throws IOException {

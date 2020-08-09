@@ -2,20 +2,44 @@
   "clothes" : [ {
     "name" : "myshirt",
     "type" : "shirt",
+    "color" : "red",
+    "size" : 2.0,
+    "needsWashing" : false
+  }, {
+    "name" : "myaccessory",
+    "type" : "accessories",
+    "color" : "gold",
+    "size" : 1.0,
+    "needsWashing" : false
+  }, {
+    "name" : "big shirt",
+    "type" : "shirt",
     "color" : "black",
+    "size" : 4.0,
+    "needsWashing" : false
+  }, {
+    "name" : "blue shoes",
+    "type" : "shoes",
+    "color" : "blue",
+    "size" : 8.0,
+    "needsWashing" : false
+  }, {
+    "name" : "mysocks",
+    "type" : "socks",
+    "color" : "red",
     "size" : 2.0,
     "needsWashing" : false
   }, {
     "name" : "mypants",
-    "type" : "",
+    "type" : "pants",
     "color" : "red",
-    "size" : 1.0,
+    "size" : 8.0,
     "needsWashing" : false
   }, {
-    "name" : "myshoes",
-    "type" : "",
-    "color" : "black",
-    "size" : 9.0,
+    "name" : "gucci shirt",
+    "type" : "shirt",
+    "color" : "gold",
+    "size" : 3.0,
     "needsWashing" : false
   } ]
 }

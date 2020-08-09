@@ -18,13 +18,18 @@ public class AddClothingPanel extends OptionPanelConstructor {
 
     public AddClothingPanel() {
         super();
+        this.getPanel().setBackground(Color.LIGHT_GRAY);
         makeFormTitleLabel();
         formTitle.setText("Add Clothing Form");
         makeNameComponents();
         makeTypeComponents();
         makeColorComponents();
         makeSizeComponents();
+        makeAddClothingButton();
 
+    }
+
+    private void makeAddClothingButton() {
         warningBeforeAdd = new JLabel("WARNING: Form will be cleared after adding, please double check the form!");
         warningBeforeAdd.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
         warningBeforeAdd.setForeground(Color.RED);
@@ -35,7 +40,6 @@ public class AddClothingPanel extends OptionPanelConstructor {
         addClothingButton.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
         addClothingButton.addActionListener(addClothingListener);
         this.getPanel().add(addClothingButton);
-
     }
 
     private void makeSizeComponents() {
@@ -99,6 +103,7 @@ public class AddClothingPanel extends OptionPanelConstructor {
     private void makeTypeComboBox() {
         typeComboBox = new JComboBox<>(TYPES);
         typeComboBox.setBounds(90, 154, 400, 25);
+        typeComboBox.setSelectedItem(null);
         this.getPanel().add(typeComboBox);
     }
 

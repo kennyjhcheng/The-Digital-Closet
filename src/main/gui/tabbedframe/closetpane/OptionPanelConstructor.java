@@ -10,7 +10,8 @@ public abstract class OptionPanelConstructor implements OptionPanel {
     protected static final Font REQUEST_FONT = new Font("Comic Sans MS", Font.PLAIN, 15);
     protected static final Font LABEL_FONT = new Font("Comic Sans MS", Font.BOLD, 18);
     protected static final int COMPONENT_DISTANCE_INCREMENT = 60;
-    public static final String[] TYPES = { "shirts", "pants", "shoes", "socks", "accessories" };
+    public static final String[] TYPES = {"shirt", "pants", "shoes", "socks", "accessories"};
+    public static final String[] TYPES_WITH_ALL = {"shirt", "pants", "shoes", "socks", "accessories", "all"};
 
     protected JPanel panel;
     protected JLabel formTitle;
@@ -25,7 +26,7 @@ public abstract class OptionPanelConstructor implements OptionPanel {
 
     public void makeFormTitleLabel() {
         formTitle = new JLabel();
-        formTitle.setBounds(255,10,400,50);
+        formTitle.setBounds(255, 10, 400, 50);
         formTitle.setFont(TITLE_FONT);
         this.getPanel().add(formTitle);
     }

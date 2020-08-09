@@ -101,5 +101,8 @@ public class Clothing {
                 && this.size == other.size;
     }
 
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }

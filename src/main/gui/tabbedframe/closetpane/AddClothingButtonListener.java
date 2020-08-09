@@ -19,7 +19,7 @@ public class AddClothingButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String name = nameTextField.getText();
-        String type = typeComboBox.getEditor().getItem().toString();
+        String type = (String) typeComboBox.getSelectedItem();
         String color = colorTextField.getText();
 
         name = name.toLowerCase();
@@ -28,6 +28,7 @@ public class AddClothingButtonListener implements ActionListener {
         try {
             double size = Double.parseDouble(sizeTextField.getText());
             MainMenu.myCloset.addClothing(new Clothing(name, type, color, size));
+            RemoveClothingPanel.removeClothingModel.addElement(new Clothing(name,type,color,size));
             resetForm();
             JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Successfully Added\n" + "\t" + name
                     + " to your Closet!");
@@ -44,6 +45,7 @@ public class AddClothingButtonListener implements ActionListener {
 
     private void resetForm() {
         nameTextField.setText(null);
+        typeComboBox.setSelectedItem(null);
         colorTextField.setText(null);
         sizeTextField.setText(null);
     }

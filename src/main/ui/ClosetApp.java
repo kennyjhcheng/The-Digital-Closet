@@ -740,7 +740,7 @@ public class ClosetApp {
         System.out.println("\tpants -> I would like to see my pants");
         System.out.println("\tsocks -> I would like to see my socks");
         System.out.println("\tshoes -> I would like to see my shoes");
-        System.out.println("\tacc -> I would like to see my accessories");
+        System.out.println("\taccessories -> I would like to see my accessories");
         System.out.println("\tall -> I would like to see all my clothing");
     }
 
