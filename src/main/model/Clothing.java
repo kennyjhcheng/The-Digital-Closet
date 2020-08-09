@@ -1,6 +1,8 @@
 package model;
 
 
+import java.util.Objects;
+
 //Represents a piece of clothing with a name, a type, a color, and size
 public class Clothing {
     private String name;
@@ -104,5 +106,23 @@ public class Clothing {
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Clothing clothing = (Clothing) o;
+        return Objects.equals(name, clothing.name);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

@@ -41,11 +41,5 @@
     "color" : "gold",
     "size" : 3.0,
     "needsWashing" : false
-  }, {
-    "name" : "rolex watch",
-    "type" : "accessories",
-    "color" : "gold",
-    "size" : 1.0,
-    "needsWashing" : false
   } ]
 }
