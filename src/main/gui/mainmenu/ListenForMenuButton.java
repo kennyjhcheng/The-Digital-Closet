@@ -63,10 +63,10 @@ public class ListenForMenuButton implements ActionListener {
                 JOptionPane.showMessageDialog(MainMenu.menuFrame, "Registration Success!\n username: "
                         + username + "\npassword: " + password + "\n has been successfully registered!");
             } else {
-                JOptionPane.showMessageDialog(MainMenu.menuFrame,"User already registered\n");
+                JOptionPane.showMessageDialog(MainMenu.menuFrame, "User already registered\n");
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(MainMenu.menuFrame,"Registration Unsuccessful!\n");
+            JOptionPane.showMessageDialog(MainMenu.menuFrame, "Registration Unsuccessful!\n");
         }
 
     }
@@ -76,12 +76,25 @@ public class ListenForMenuButton implements ActionListener {
         String password = MainMenu.passwordInfo.getText();
         username = username.toLowerCase();
         password = password.toLowerCase();
-        boolean foundUser = false;
 
         Registration account = new Registration(username, password);
         JsonNode accountNode = Json.toJson(account);
 
         try {
+            confirmAndRemove(username, password, accountNode);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(MainMenu.menuFrame, "User removal unsuccessful");
+            e.printStackTrace();
+        }
+
+    }
+
+    private void confirmAndRemove(String username, String password, JsonNode accountNode) throws IOException {
+        boolean foundUser;
+        int a = JOptionPane.showConfirmDialog(null,
+                "Are you sure you would like to delete this account?",
+                "Delete Confirmation", JOptionPane.YES_NO_OPTION);
+        if (a == JOptionPane.YES_OPTION) {
             foundUser = Json.removeRegistrationFromFile(accountNode, "User");
             if (foundUser) {
                 JOptionPane.showMessageDialog(MainMenu.menuFrame, "username: "
@@ -90,11 +103,7 @@ public class ListenForMenuButton implements ActionListener {
                 JOptionPane.showMessageDialog(MainMenu.menuFrame, "Could not remove user "
                         + "\n Error 404: User was not found");
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(MainMenu.menuFrame, "User removal unsuccessful");
-            e.printStackTrace();
         }
-
     }
 
     private void doQuitProcess() {

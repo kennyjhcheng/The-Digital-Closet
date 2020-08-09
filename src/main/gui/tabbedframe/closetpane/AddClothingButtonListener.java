@@ -26,9 +26,12 @@ public class AddClothingButtonListener implements ActionListener {
         color = color.toLowerCase();
 
         try {
+
             double size = Double.parseDouble(sizeTextField.getText());
-            MainMenu.myCloset.addClothing(new Clothing(name, type, color, size));
-            RemoveClothingPanel.removeClothingModel.addElement(new Clothing(name,type,color,size));
+            Clothing c = new Clothing(name, type, color, size);
+            MainMenu.myCloset.addClothing(c);
+            RemoveClothingPanel.removeClothingModel.addElement(c);
+            addToViewClothingModels(c);
             resetForm();
             JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Successfully Added\n" + "\t" + name
                     + " to your Closet!");
@@ -41,6 +44,27 @@ public class AddClothingButtonListener implements ActionListener {
 
         }
 
+    }
+
+    private void addToViewClothingModels(Clothing c) {
+        ViewClothingPanel.allModel.addElement(c);
+        switch (c.getType()) {
+            case "shirt":
+                ViewClothingPanel.shirtModel.addElement(c);
+                break;
+            case "pants":
+                ViewClothingPanel.pantsModel.addElement(c);
+                break;
+            case "shoes":
+                ViewClothingPanel.shoesModel.addElement(c);
+                break;
+            case "socks":
+                ViewClothingPanel.socksModel.addElement(c);
+                break;
+            case "accessories":
+                ViewClothingPanel.accessoriesModel.addElement(c);
+                break;
+        }
     }
 
     private void resetForm() {
