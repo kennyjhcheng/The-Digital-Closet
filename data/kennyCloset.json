@@ -41,5 +41,11 @@
     "color" : "gold",
     "size" : 3.0,
     "needsWashing" : false
+  }, {
+    "name" : "cute accessory",
+    "type" : "accessories",
+    "color" : "red",
+    "size" : 1.0,
+    "needsWashing" : false
   } ]
 }

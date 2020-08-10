@@ -45,7 +45,9 @@ be used by anyone who simply wants to look good without the stress!
 * As a user, I want to be able to login and register an account in which my closet is saved
 * as a user, I want to be able to load the closet associated with my account when I Login
 
-# Setup
+---
+
+### Setup
 >Import everything in the External Libraries folder to your classpath
 
 This project uses:
@@ -53,6 +55,29 @@ This project uses:
 * jackson-core-2.11.1.jar
 * jackson-databind-2.11.1.jar
 * jackson-datatype-jsr310-2.11.1.jar
+
+---
+
+### Instructions for Grader
+* To run the GUI, please run the ***Main*** class in the gui package
+* You can generate the ***first*** required event by inputting a username and password in the respective text fields
+and press the Register button
+    * You may register any number of accounts, which will be saved in the UserInfo.json file in the data directory
+    * You must login by inputting a **registered** account and clicking the login button to use the application 
+* You can generate the ***second*** required event by navigating to the Closet tab and into the Add Clothing Form
+    * Fill out the form according to the instructions and click the Add Clothing button
+    * You can add as many items of Clothing as you wish, which can be viewed in the View Clothing section
+* You can trigger one of the 3 audio components by:
+    * starting the application will play soothing startup music
+    * closing a frame by clicking the top-right "X" or clicking the Save and Quit button will play a shut-down sound
+    * clicking any button will play a button click (in the panels containing implementations)
+* You can save the state of the application by navigating to the ***Save and Quit*** tab and clicking the Save and Quit Button
+    * you may quit from the Main Menu or login again/to a different account
+    * data is stored in the 2 user-specific files labelled *username*Closet.json and *username*StyleBoard.json
+    * for the purpose of this phase of the project, there will only be data in the *username*Closet.json file
+* You can reload the state of the application by logging in with the user-specific credentials
+    * loaded data is user-specific
+    
 
 
 

@@ -72,4 +72,9 @@ class ClothingTests {
         assertFalse(testClothing.equalClothing(new Clothing("H&M Shirt", "Shirt", "Red", 3.0)));
         assertFalse(testClothing.equalClothing(new Clothing("H&M Shirt", "Shirt", "Black", 3.0)));
     }
+
+    @Test
+    public void testToString() {
+        assertEquals(testClothing.toString(), "H&M Shirt");
+    }
 }

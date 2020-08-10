@@ -107,22 +107,4 @@ public class Clothing {
     public String toString() {
         return name;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Clothing clothing = (Clothing) o;
-        return Objects.equals(name, clothing.name);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
 }

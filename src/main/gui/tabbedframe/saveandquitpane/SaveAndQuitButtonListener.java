@@ -1,5 +1,6 @@
 package gui.tabbedframe.saveandquitpane;
 
+import gui.PlayButtonSound;
 import gui.mainmenu.MainMenu;
 import gui.tabbedframe.TabbedPane;
 import persistence.Json;
@@ -15,7 +16,7 @@ public class SaveAndQuitButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String username = MainMenu.usernameInfo.getText();
         saveUserToFile(username);
-
+        PlayButtonSound.playButtonSound("button_click.wav");
         TabbedPane.tabbedPaneFrame.dispose();
 
     }
