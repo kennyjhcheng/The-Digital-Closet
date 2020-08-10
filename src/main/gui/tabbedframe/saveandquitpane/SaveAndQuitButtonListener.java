@@ -17,6 +17,7 @@ public class SaveAndQuitButtonListener implements ActionListener {
         String username = MainMenu.usernameInfo.getText();
         saveUserToFile(username);
         PlayButtonSound.playButtonSound("button_click.wav");
+        PlayButtonSound.playButtonSound("shutdown.wav");
         TabbedPane.tabbedPaneFrame.dispose();
 
     }

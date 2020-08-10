@@ -15,7 +15,6 @@ public class RemoveClothingPanel extends OptionPanelConstructor {
 
     JLabel removeRequest;
     JLabel removeLabel;
-    JLabel removeWarningLabel;
 
     private JLabel nameLabel;
     private JLabel typeLabel;
@@ -23,7 +22,7 @@ public class RemoveClothingPanel extends OptionPanelConstructor {
     private JLabel sizeLabel;
     private JPanel viewClothingPanel;
     public static DefaultListModel<Clothing> removeClothingModel;
-    private JList<Clothing> clothingJList;
+    public static JList<Clothing> clothingJList;
     private JSplitPane viewAreaSplitPane;
 
     RemoveClothingButtonListener removeClothingButtonListener = new RemoveClothingButtonListener();
@@ -40,12 +39,6 @@ public class RemoveClothingPanel extends OptionPanelConstructor {
 
         makeSplitPane();
 
-        removeWarningLabel = new JLabel("Warning: Please restart the entire app to update removal changes below"
-                + " and in View Clothing");
-        removeWarningLabel.setForeground(Color.RED);
-        removeWarningLabel.setFont(REQUEST_FONT);
-        removeWarningLabel.setBounds(30,550,800,50);
-        this.getPanel().add(removeWarningLabel);
     }
 
     private void makeRemoveButton() {
@@ -58,7 +51,7 @@ public class RemoveClothingPanel extends OptionPanelConstructor {
 
     private void makeRemoveLabelsAndTextField() {
         removeRequest = new JLabel("Which clothing would you like to remove from your Closet?"
-                + " (Please type the name)");
+                + " (Please select below)");
         removeRequest.setFont(REQUEST_FONT);
         removeRequest.setBounds(30, 50, 600, 50);
         this.getPanel().add(removeRequest);
@@ -85,17 +78,23 @@ public class RemoveClothingPanel extends OptionPanelConstructor {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 Clothing c = clothingJList.getSelectedValue();
-                nameLabel.setText("Name: " + c.getName());
-                typeLabel.setText("Type: " + c.getType());
-                colorLabel.setText("Color: " + c.getType());
-                sizeLabel.setText("Size: " + c.getSize());
-                removeTextField.setText(c.getName());
+                if (c != null) {
+                    nameLabel.setText("Name: " + c.getName());
+                    typeLabel.setText("Type: " + c.getType());
+                    colorLabel.setText("Color: " + c.getType());
+                    sizeLabel.setText("Size: " + c.getSize());
+                    removeTextField.setText(c.getName());
+                }
             }
         });
 
         viewClothingPanel.setLayout(new BoxLayout(viewClothingPanel, BoxLayout.PAGE_AXIS));
         addLabelsToViewClothingPanel();
 
+        setSplitPane();
+    }
+
+    private void setSplitPane() {
         viewAreaSplitPane.setLeftComponent(new JScrollPane(clothingJList));
         viewAreaSplitPane.setRightComponent(viewClothingPanel);
         viewAreaSplitPane.setBounds(30, 150, 700, 400);
