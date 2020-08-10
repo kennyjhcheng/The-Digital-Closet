@@ -1,5 +1,6 @@
 package gui.mainmenu;
 
+import gui.PlayButtonSound;
 import model.Closet;
 import model.StyleBoard;
 import persistence.Json;
@@ -7,6 +8,8 @@ import persistence.Json;
 import javax.swing.*;
 import javax.swing.text.Style;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class MainMenu extends JFrame {
@@ -70,10 +73,22 @@ public class MainMenu extends JFrame {
                 MENU_BUTTON_INITIAL_X + 3 * MENU_BUTTON_INCREMENT_X, 60);
 
         addActionListenerToMenuButtons();
+        addShutDownSound();
 
 
         menuFrame.setVisible(true);
     }
+
+    private void addShutDownSound() {
+        menuFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                PlayButtonSound.playButtonSound("shutdown.wav");
+                menuFrame.dispose();
+            }
+        });
+    }
+
 
     private void addActionListenerToMenuButtons() {
         loginButton.addActionListener(listenLogin);

@@ -1,6 +1,7 @@
 package gui.tabbedframe.closetpane;
 
 import exceptions.DuplicateClothingException;
+import gui.PlayButtonSound;
 import gui.mainmenu.MainMenu;
 import gui.tabbedframe.TabbedPane;
 import model.Clothing;
@@ -26,6 +27,7 @@ public class AddClothingButtonListener implements ActionListener {
         color = color.toLowerCase();
 
         try {
+            PlayButtonSound.playButtonSound("button_click.wav");
 
             double size = Double.parseDouble(sizeTextField.getText());
             Clothing c = new Clothing(name, type, color, size);
@@ -41,7 +43,6 @@ public class AddClothingButtonListener implements ActionListener {
             duplicateClothingException.printStackTrace();
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Please input a valid size\n");
-
         }
 
     }

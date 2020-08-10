@@ -1,7 +1,7 @@
 package gui.mainmenu;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import gui.Main;
+import gui.PlayButtonSound;
 import gui.tabbedframe.TabbedPane;
 import persistence.Json;
 import persistence.Registration;
@@ -17,6 +17,7 @@ public class ListenForMenuButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
+        PlayButtonSound.playButtonSound("button_click.wav");
         if (MainMenu.loginButton.equals(source)) {
             doLoginProcess();
         } else if (MainMenu.registerButton.equals(source)) {

@@ -1,5 +1,6 @@
 package gui.tabbedframe.closetpane;
 
+import gui.PlayButtonSound;
 import gui.mainmenu.MainMenu;
 import gui.tabbedframe.TabbedPane;
 import model.Clothing;
@@ -14,6 +15,7 @@ public class RemoveClothingButtonListener implements ActionListener {
         String removeName = RemoveClothingPanel.removeTextField.getText();
         removeName = removeName.toLowerCase();
 
+        PlayButtonSound.playButtonSound("button_click.wav");
         if (MainMenu.myCloset.containsClothing(removeName)) {
             int a = JOptionPane.showConfirmDialog(null, "Are you sure you would like to remove "
                     + "this clothing?", "Remove Confirmation", JOptionPane.YES_NO_OPTION);

@@ -15,8 +15,7 @@ public class SaveAndQuitButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String username = MainMenu.usernameInfo.getText();
         saveUserToFile(username);
-//        TabbedPane.tabbedPaneFrame.dispatchEvent(new WindowEvent(TabbedPane.tabbedPaneFrame,
-//                WindowEvent.WINDOW_CLOSING));
+
         TabbedPane.tabbedPaneFrame.dispose();
 
     }
