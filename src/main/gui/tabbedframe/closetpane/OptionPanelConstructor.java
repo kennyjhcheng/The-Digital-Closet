@@ -9,9 +9,6 @@ public abstract class OptionPanelConstructor implements OptionPanel {
     protected static final Font TITLE_FONT = new Font("Comic Sans MS", Font.BOLD, 30);
     protected static final Font REQUEST_FONT = new Font("Comic Sans MS", Font.PLAIN, 15);
     protected static final Font LABEL_FONT = new Font("Comic Sans MS", Font.BOLD, 18);
-    protected static final int COMPONENT_DISTANCE_INCREMENT = 60;
-    public static final String[] TYPES = {"shirt", "pants", "shoes", "socks", "accessories"};
-    public static final String[] TYPES_WITH_ALL = {"shirt", "pants", "shoes", "socks", "accessories", "all"};
 
     protected JPanel panel;
     protected JLabel formTitle;

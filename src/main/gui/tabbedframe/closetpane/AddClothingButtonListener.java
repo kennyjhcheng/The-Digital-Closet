@@ -34,6 +34,7 @@ public class AddClothingButtonListener implements ActionListener {
             MainMenu.myCloset.addClothing(c);
             RemoveClothingPanel.removeClothingModel.addElement(c);
             addToViewClothingModels(c);
+            EditClothingPanel.editClothingModel.addElement(c);
             resetForm();
             JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Successfully Added\n" + "\t" + name
                     + " to your Closet!");

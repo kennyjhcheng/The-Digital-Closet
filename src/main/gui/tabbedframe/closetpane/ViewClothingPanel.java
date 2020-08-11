@@ -224,11 +224,12 @@ public class ViewClothingPanel extends OptionPanelConstructor {
                                         JLabel colorLabel, JLabel sizeLabel) {
         listType.getSelectionModel().addListSelectionListener(e -> {
             Clothing c = listType.getSelectedValue();
-            nameLabel.setText("Name: " + c.getName());
-            typeLabel.setText("Type: " + c.getType());
-            colorLabel.setText("Color: " + c.getColor());
-            sizeLabel.setText("Size: " + c.getSize());
-
+            if (c != null) {
+                nameLabel.setText("Name: " + c.getName());
+                typeLabel.setText("Type: " + c.getType());
+                colorLabel.setText("Color: " + c.getColor());
+                sizeLabel.setText("Size: " + c.getSize());
+            }
         });
     }
 

@@ -5,6 +5,9 @@ import java.awt.*;
 
 
 public class AddClothingPanel extends OptionPanelConstructor {
+    public static final String[] TYPES = {"shirt", "pants", "shoes", "socks", "accessories"};
+    public static final int COMPONENT_DISTANCE_INCREMENT = 60;
+
     private JLabel warningBeforeAdd;
 
     public static JTextField nameTextField;

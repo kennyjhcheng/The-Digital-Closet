@@ -28,6 +28,7 @@ public class RemoveClothingButtonListener implements ActionListener {
                     model.remove(selectedIndex);
                 }
                 removeFromViewPane(removeName, removeType);
+                removeFromIndex(removeName, EditClothingPanel.editClothingModel);
                 MainMenu.myCloset.removeClothing(MainMenu.myCloset.getClothingByName(removeName));
                 JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Successfully removed " + removeName);
             }

@@ -41,5 +41,11 @@
     "color" : "gold",
     "size" : 3.0,
     "needsWashing" : false
+  }, {
+    "name" : "successful edit test",
+    "type" : "shirt",
+    "color" : "black",
+    "size" : 0.0,
+    "needsWashing" : false
   } ]
 }
