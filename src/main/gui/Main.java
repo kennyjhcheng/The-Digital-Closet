@@ -2,11 +2,12 @@ package gui;
 
 import gui.mainmenu.MainMenu;
 
+// Runs the GUI
 public class Main {
 
 
     public static void main(String[] args) {
-        PlayButtonSound.playButtonSound("startup_music.wav");
+        PlayButtonSound.playSound("startup_music.wav");
         new MainMenu();
     }
 }

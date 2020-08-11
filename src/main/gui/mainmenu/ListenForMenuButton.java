@@ -13,11 +13,14 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
+// Action Listener for all buttons pressed in the main menu -> Login, Register, Remove Account, and Quit
 public class ListenForMenuButton implements ActionListener {
+
+    // Determines which button has been pressed and calls the correct process
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        PlayButtonSound.playButtonSound("button_click.wav");
+        PlayButtonSound.playSound("button_click.wav");
         if (MainMenu.loginButton.equals(source)) {
             doLoginProcess();
         } else if (MainMenu.registerButton.equals(source)) {
@@ -29,6 +32,8 @@ public class ListenForMenuButton implements ActionListener {
         }
     }
 
+    // check the inputted information to see if it matches an account. If so, gives user access to application
+    // loads user info if login is successful
     private void doLoginProcess() {
         String username = MainMenu.usernameInfo.getText();
         String password = MainMenu.passwordInfo.getText();
@@ -48,6 +53,7 @@ public class ListenForMenuButton implements ActionListener {
         }
     }
 
+    // Adds the user to UserInfo.json and creates data files allowing the user to login.
     private void doRegisterProcess() {
         String username = MainMenu.usernameInfo.getText();
         String password = MainMenu.passwordInfo.getText();
@@ -72,6 +78,7 @@ public class ListenForMenuButton implements ActionListener {
 
     }
 
+    // removes the user from UserInfo.json and removes all associated data files
     private void doDeleteProcess() {
         String username = MainMenu.usernameInfo.getText();
         String password = MainMenu.passwordInfo.getText();
@@ -90,6 +97,8 @@ public class ListenForMenuButton implements ActionListener {
 
     }
 
+    // Prompts a confirmation to give the user a chance to change whether they wish to remove the account or not
+    // if the user selects yes, account is removed
     private void confirmAndRemove(String username, String password, JsonNode accountNode) throws IOException {
         boolean foundUser;
         int a = JOptionPane.showConfirmDialog(null,
@@ -107,10 +116,12 @@ public class ListenForMenuButton implements ActionListener {
         }
     }
 
+    //  Closes the Main Menu
     private void doQuitProcess() {
         MainMenu.menuFrame.dispatchEvent(new WindowEvent(MainMenu.menuFrame, WindowEvent.WINDOW_CLOSING));
     }
 
+    // loads user information
     private void loadUser(String username) {
 
         try {

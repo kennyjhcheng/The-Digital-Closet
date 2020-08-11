@@ -6,12 +6,12 @@ import model.StyleBoard;
 import persistence.Json;
 
 import javax.swing.*;
-import javax.swing.text.Style;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+// GUI containing text fields for account information and buttons for account actions in the Main Menu
 public class MainMenu extends JFrame {
     public static final int MENU_FRAME_HEIGHT = 340;
     public static final int MENU_FRAME_WIDTH = 670;
@@ -83,7 +83,7 @@ public class MainMenu extends JFrame {
         menuFrame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                PlayButtonSound.playButtonSound("shutdown.wav");
+                PlayButtonSound.playSound("shutdown.wav");
                 menuFrame.dispose();
             }
         });

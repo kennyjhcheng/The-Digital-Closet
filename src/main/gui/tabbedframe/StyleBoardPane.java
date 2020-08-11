@@ -2,6 +2,7 @@ package gui.tabbedframe;
 
 import javax.swing.*;
 
+// The Pane housing all StyleBoard options
 public class StyleBoardPane {
     JPanel styleBoardPanel;
     JLabel styleBoardPaneLabel;

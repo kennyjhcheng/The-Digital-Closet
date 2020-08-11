@@ -5,6 +5,7 @@ import gui.tabbedframe.TabbedPane;
 import javax.swing.*;
 import java.awt.*;
 
+// Abstract Class containing Title and Panel constructor for all Closet Option Panels
 public abstract class OptionPanelConstructor implements OptionPanel {
     protected static final Font TITLE_FONT = new Font("Comic Sans MS", Font.BOLD, 30);
     protected static final Font REQUEST_FONT = new Font("Comic Sans MS", Font.PLAIN, 15);

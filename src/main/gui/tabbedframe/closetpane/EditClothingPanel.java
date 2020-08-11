@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// The GUI for the panel allowing users to edit existing clothing in myCloset and edit their attributes
 public class EditClothingPanel extends OptionPanelConstructor {
     JLabel editRequest;
     JLabel editLabel;

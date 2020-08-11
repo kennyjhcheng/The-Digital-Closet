@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+// Creates a JFrame containing JPanels with Tabs -> Closet, StyleBoard, and Save and Quit Tabs
 public class TabbedPane extends JFrame {
     public static final int TABBED_PANE_WIDTH = 1000;
     public static final int TABBED_PANE_HEIGHT = 666;
@@ -63,7 +64,7 @@ public class TabbedPane extends JFrame {
                 "Quit Confirmation", JOptionPane.YES_NO_OPTION);
 
         if (a == JOptionPane.YES_OPTION) {
-            PlayButtonSound.playButtonSound("shutdown.wav");
+            PlayButtonSound.playSound("shutdown.wav");
             tabbedPaneFrame.dispose();
         }
     }

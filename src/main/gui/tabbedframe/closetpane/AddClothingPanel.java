@@ -3,7 +3,7 @@ package gui.tabbedframe.closetpane;
 import javax.swing.*;
 import java.awt.*;
 
-
+// GUI for the Panel allowing users to add clothing to their closet
 public class AddClothingPanel extends OptionPanelConstructor {
     public static final String[] TYPES = {"shirt", "pants", "shoes", "socks", "accessories"};
     public static final int COMPONENT_DISTANCE_INCREMENT = 60;

@@ -15,7 +15,7 @@ import static gui.tabbedframe.closetpane.AddClothingPanel.typeComboBox;
 import static gui.tabbedframe.closetpane.AddClothingPanel.colorTextField;
 import static gui.tabbedframe.closetpane.AddClothingPanel.sizeTextField;
 
-
+// Action Listener for Add Clothing Button adding the clothing specified by the user to myCloset and all JLists
 public class AddClothingButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -27,7 +27,7 @@ public class AddClothingButtonListener implements ActionListener {
         color = color.toLowerCase();
 
         try {
-            PlayButtonSound.playButtonSound("button_click.wav");
+            PlayButtonSound.playSound("button_click.wav");
 
             double size = Double.parseDouble(sizeTextField.getText());
             Clothing c = new Clothing(name, type, color, size);

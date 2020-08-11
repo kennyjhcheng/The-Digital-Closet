@@ -3,6 +3,7 @@ package gui.tabbedframe.closetpane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Action Listener for side panel which allows users to select which Closet option they would like to use
 public class ClosetSidePanelListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {

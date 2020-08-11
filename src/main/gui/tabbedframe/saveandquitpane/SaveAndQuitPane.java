@@ -3,6 +3,7 @@ package gui.tabbedframe.saveandquitpane;
 import javax.swing.*;
 import java.awt.*;
 
+//  The Panel which houses a button for the user to save and quit
 public class SaveAndQuitPane {
     JPanel exitPanel;
     JLabel exitLabel;

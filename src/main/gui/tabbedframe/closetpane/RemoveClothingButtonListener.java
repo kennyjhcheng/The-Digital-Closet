@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Action Listener for the Button that removes the user-specified clothing from myCloset and all JLists viewing Clothing
 public class RemoveClothingButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -16,7 +17,7 @@ public class RemoveClothingButtonListener implements ActionListener {
         removeName = removeName.toLowerCase();
         String removeType = MainMenu.myCloset.getClothingByName(removeName).getType();
 
-        PlayButtonSound.playButtonSound("button_click.wav");
+        PlayButtonSound.playSound("button_click.wav");
         if (MainMenu.myCloset.containsClothing(removeName)) {
             int a = JOptionPane.showConfirmDialog(null, "Are you sure you would like to remove "
                     + "this clothing?", "Remove Confirmation", JOptionPane.YES_NO_OPTION);

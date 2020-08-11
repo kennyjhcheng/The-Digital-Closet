@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 import java.awt.*;
 
+// The Panel containing all Closet Option Buttons in the side panel
 public class ClosetPane {
     public static final Font SIDE_PANEL_FONT = new Font("Comic Sans MS", Font.BOLD, 14);
     public static final int SIDE_PANEL_BUTTON_X = 5;

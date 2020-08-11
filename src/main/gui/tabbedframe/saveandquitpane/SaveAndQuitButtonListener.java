@@ -7,17 +7,17 @@ import persistence.Json;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
+// Action Listener for the Save and Quit Button which saved all data to specific user file
 public class SaveAndQuitButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String username = MainMenu.usernameInfo.getText();
         saveUserToFile(username);
-        PlayButtonSound.playButtonSound("button_click.wav");
-        PlayButtonSound.playButtonSound("shutdown.wav");
+        PlayButtonSound.playSound("button_click.wav");
+        PlayButtonSound.playSound("shutdown.wav");
         TabbedPane.tabbedPaneFrame.dispose();
 
     }

@@ -9,6 +9,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
+// The GUI for the panel allowing the user to view all clothing
 public class ViewClothingPanel extends OptionPanelConstructor {
     JTabbedPane viewClothingTabbedPane;
 
