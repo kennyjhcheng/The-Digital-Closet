@@ -58,6 +58,7 @@ This project uses:
 
 ---
 
+## Phase 3
 ### Instructions for Grader
 * To run the GUI, please run the ***Main*** class in the gui package
 * You can generate the ***first*** required event by inputting a username and password in the respective text fields
@@ -78,8 +79,20 @@ and press the Register button
 * You can reload the state of the application by logging in with the user-specific credentials
     * loaded data is user-specific
     
+---
 
-
+## Phase 4
+### Phase 4: Task 2
+> Test and design a class that is robust.  You must have at least one method that throws a checked exception. 
+> You must have one test for the case where the exception is expected and another where the exception is not expected.
+* An exception that I designed for my project is the DuplicateClothingException
+* A method that throws this exception is the addClothing(Clothing clothing) method in the Closet class of my model 
+* An example of when this exception is caught is in gui.tabbedframe.closetpane.AddClothingButtonListener
+    * when adding a clothing, if the clothing already exists in the closet, exception is thrown, and a message is
+     displayed to the user informing them that this clothing already exists
+* This is tested in the test.model.ClosetTests Class in which:
+    * testAddClothingMultipleNoException is a test case where no exception is expected
+    * testAddClothingExpectDuplicateClothingException is a test case where the exception is expected
 
 
 
