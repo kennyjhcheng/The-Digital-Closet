@@ -94,7 +94,18 @@ and press the Register button
     * testAddClothingMultipleNoException is a test case where no exception is expected
     * testAddClothingExpectDuplicateClothingException is a test case where the exception is expected
 
+### Phase 4: Task 3
+*Problem 1*
+* Poor Cohesion in the gui.tabbedframe.closetpane.viewclothing.ViewClothingPanel Class
+    * Class contains much design for designing complicated panel components inside the
+    ViewClothing JPanel related to viewing specific types of clothing
+    * There are too many fields that need dedicated methods just to initialize them 
 
+Solution 1
+* Refactored the 6 identical split pane designs into one class ViewSplitPane which extends JSplitPane
+    * contains a method to set which category of clothing will be put into the split pane
+    * 6 split panes can be created just by instantiated 6 ViewSplitPane objects
+    
 
 
 

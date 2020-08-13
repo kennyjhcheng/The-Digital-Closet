@@ -1,6 +1,7 @@
 package gui.tabbedframe.closetpane;
 
 import gui.tabbedframe.TabbedPane;
+import gui.tabbedframe.closetpane.viewclothing.ViewClothingPanel;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;

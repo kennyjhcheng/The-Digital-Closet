@@ -3,6 +3,7 @@ package gui.tabbedframe.closetpane;
 import gui.PlayButtonSound;
 import gui.mainmenu.MainMenu;
 import gui.tabbedframe.TabbedPane;
+import gui.tabbedframe.closetpane.viewclothing.ViewClothingPanel;
 import model.Clothing;
 
 import javax.swing.*;
@@ -39,22 +40,22 @@ public class RemoveClothingButtonListener implements ActionListener {
     }
 
     private void removeFromViewPane(String removeName, String removeType) {
-        removeFromIndex(removeName, ViewClothingPanel.allModel);
+        removeFromIndex(removeName, ViewClothingPanel.allSplitPane.getTypeModel());
         switch (removeType) {
             case "shirt":
-                removeFromIndex(removeName, ViewClothingPanel.shirtModel);
+                removeFromIndex(removeName, ViewClothingPanel.shirtSplitPane.getTypeModel());
                 break;
             case "pants":
-                removeFromIndex(removeName, ViewClothingPanel.pantsModel);
+                removeFromIndex(removeName, ViewClothingPanel.pantsSplitPane.getTypeModel());
                 break;
             case "shoes":
-                removeFromIndex(removeName, ViewClothingPanel.shoesModel);
+                removeFromIndex(removeName, ViewClothingPanel.shoesSplitPane.getTypeModel());
                 break;
             case "socks":
-                removeFromIndex(removeName, ViewClothingPanel.socksModel);
+                removeFromIndex(removeName, ViewClothingPanel.socksSplitPane.getTypeModel());
                 break;
             case "accessories":
-                removeFromIndex(removeName, ViewClothingPanel.accessoriesModel);
+                removeFromIndex(removeName, ViewClothingPanel.accessoriesSplitPane.getTypeModel());
                 break;
         }
     }

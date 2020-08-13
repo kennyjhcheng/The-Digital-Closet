@@ -1,6 +1,7 @@
 package gui.tabbedframe;
 
 import gui.PlayButtonSound;
+import gui.mainmenu.MainMenu;
 import gui.tabbedframe.closetpane.ClosetPane;
 import gui.tabbedframe.saveandquitpane.SaveAndQuitPane;
 
@@ -66,6 +67,7 @@ public class TabbedPane extends JFrame {
         if (a == JOptionPane.YES_OPTION) {
             PlayButtonSound.playSound("shutdown.wav");
             tabbedPaneFrame.dispose();
+            MainMenu.menuFrame.dispose();
         }
     }
 }

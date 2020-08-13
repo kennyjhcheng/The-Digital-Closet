@@ -4,6 +4,7 @@ import exceptions.DuplicateClothingException;
 import gui.PlayButtonSound;
 import gui.mainmenu.MainMenu;
 import gui.tabbedframe.TabbedPane;
+import gui.tabbedframe.closetpane.viewclothing.ViewClothingPanel;
 import model.Clothing;
 
 import javax.swing.*;
@@ -49,22 +50,22 @@ public class AddClothingButtonListener implements ActionListener {
     }
 
     private void addToViewClothingModels(Clothing c) {
-        ViewClothingPanel.allModel.addElement(c);
+        ViewClothingPanel.allSplitPane.getTypeModel().addElement(c);
         switch (c.getType()) {
             case "shirt":
-                ViewClothingPanel.shirtModel.addElement(c);
+                ViewClothingPanel.shirtSplitPane.getTypeModel().addElement(c);
                 break;
             case "pants":
-                ViewClothingPanel.pantsModel.addElement(c);
+                ViewClothingPanel.pantsSplitPane.getTypeModel().addElement(c);
                 break;
             case "shoes":
-                ViewClothingPanel.shoesModel.addElement(c);
+                ViewClothingPanel.shoesSplitPane.getTypeModel().addElement(c);
                 break;
             case "socks":
-                ViewClothingPanel.socksModel.addElement(c);
+                ViewClothingPanel.socksSplitPane.getTypeModel().addElement(c);
                 break;
             case "accessories":
-                ViewClothingPanel.accessoriesModel.addElement(c);
+                ViewClothingPanel.accessoriesSplitPane.getTypeModel().addElement(c);
                 break;
         }
     }

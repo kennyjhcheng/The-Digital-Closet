@@ -19,6 +19,7 @@ public class SaveAndQuitButtonListener implements ActionListener {
         PlayButtonSound.playSound("button_click.wav");
         PlayButtonSound.playSound("shutdown.wav");
         TabbedPane.tabbedPaneFrame.dispose();
+        MainMenu.menuFrame.dispose();
 
     }
 

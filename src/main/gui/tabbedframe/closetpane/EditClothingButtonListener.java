@@ -2,7 +2,7 @@ package gui.tabbedframe.closetpane;
 
 import gui.mainmenu.MainMenu;
 import gui.tabbedframe.TabbedPane;
-import jdk.nashorn.internal.scripts.JO;
+import gui.tabbedframe.closetpane.viewclothing.ViewClothingPanel;
 import model.Clothing;
 
 import javax.swing.*;
@@ -21,7 +21,7 @@ public class EditClothingButtonListener implements ActionListener {
         newType = newType.toLowerCase();
         String newColor = EditClothingPanel.editColorTextField.getText();
         newColor = newColor.toLowerCase();
-        double newSize = Double.parseDouble(EditClothingPanel. editSizeTextField.getText());
+        double newSize = Double.parseDouble(EditClothingPanel.editSizeTextField.getText());
 
         Clothing editedClothing = new Clothing(newName, newType, newColor, newSize);
 
@@ -39,10 +39,10 @@ public class EditClothingButtonListener implements ActionListener {
     }
 
     private void editInViewModel(String selectedName, Clothing editedClothing) {
-        int indexAll = getIndexOfClothingInModel(selectedName, ViewClothingPanel.allModel);
+        int indexAll = getIndexOfClothingInModel(selectedName, ViewClothingPanel.allSplitPane.getTypeModel());
         if (indexAll != -1) {
-            ViewClothingPanel.allModel.remove(indexAll);
-            ViewClothingPanel.allModel.add(indexAll, editedClothing);
+            ViewClothingPanel.allSplitPane.getTypeModel().remove(indexAll);
+            ViewClothingPanel.allSplitPane.getTypeModel().add(indexAll, editedClothing);
         } else {
             JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Edit update in View All Pane failed");
         }
@@ -54,19 +54,19 @@ public class EditClothingButtonListener implements ActionListener {
     private void addToNewTypePanel(Clothing editedClothing) {
         switch (editedClothing.getType()) {
             case "shirt":
-                ViewClothingPanel.shirtModel.addElement(editedClothing);
+                ViewClothingPanel.shirtSplitPane.getTypeModel().addElement(editedClothing);
                 break;
             case "pants":
-                ViewClothingPanel.pantsModel.addElement(editedClothing);
+                ViewClothingPanel.pantsSplitPane.getTypeModel().addElement(editedClothing);
                 break;
             case "shoes":
-                ViewClothingPanel.shoesModel.addElement(editedClothing);
+                ViewClothingPanel.shoesSplitPane.getTypeModel().addElement(editedClothing);
                 break;
             case "socks":
-                ViewClothingPanel.socksModel.addElement(editedClothing);
+                ViewClothingPanel.socksSplitPane.getTypeModel().addElement(editedClothing);
                 break;
             case "accessories":
-                ViewClothingPanel.accessoriesModel.addElement(editedClothing);
+                ViewClothingPanel.accessoriesSplitPane.getTypeModel().addElement(editedClothing);
                 break;
         }
     }
@@ -75,24 +75,25 @@ public class EditClothingButtonListener implements ActionListener {
         int indexOldType;
         switch (MainMenu.myCloset.getClothingByName(selectedName).getType()) {
             case "shirt":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.shirtModel);
-                ViewClothingPanel.shirtModel.remove(indexOldType);
+                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.shoesSplitPane.getTypeModel());
+                ViewClothingPanel.shirtSplitPane.getTypeModel().remove(indexOldType);
                 break;
             case "pants":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.pantsModel);
-                ViewClothingPanel.pantsModel.remove(indexOldType);
+                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.pantsSplitPane.getTypeModel());
+                ViewClothingPanel.pantsSplitPane.getTypeModel().remove(indexOldType);
                 break;
             case "shoes":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.shoesModel);
-                ViewClothingPanel.shoesModel.remove(indexOldType);
+                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.shoesSplitPane.getTypeModel());
+                ViewClothingPanel.shoesSplitPane.getTypeModel().remove(indexOldType);
                 break;
             case "socks":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.socksModel);
-                ViewClothingPanel.socksModel.remove(indexOldType);
+                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.socksSplitPane.getTypeModel());
+                ViewClothingPanel.socksSplitPane.getTypeModel().remove(indexOldType);
                 break;
             case "accessories":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.accessoriesModel);
-                ViewClothingPanel.accessoriesModel.remove(indexOldType);
+                indexOldType =
+                        getIndexOfClothingInModel(selectedName, ViewClothingPanel.accessoriesSplitPane.getTypeModel());
+                ViewClothingPanel.accessoriesSplitPane.getTypeModel().remove(indexOldType);
                 break;
         }
     }
