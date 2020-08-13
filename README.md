@@ -145,6 +145,16 @@ Solution
 * Modified all for loops that reference the list fields (e.g. myCloset.clothes, myOutfit.clothes, myStyleBoard.styleboard) reference
 the objects directly.
 
+### Phase 4 Task 3: UML Diagram Notes
+* As I haven't fully implemented all of the functions of my program into a GUI, my UML Class Diagram's GUI section only
+contains the class hierarchy and association relationships of the classes I've implemented for the current features
+    * These features include: All Closet functions, Save and Quit, MainMenu functions.
+    * These do not include: StyleBoard functions (even though a panel where StyleBoard function would be was made)
+* Added 1 dependency relationship in the GUI section of the UML for clarity
+    * arrow is highlighted in red
+* Diagram is organized into sections by the major packages that contain the classes. 
+    * Organized by 'notes' boxes surrounding groups of classes with labels in the top left corner of the 'note' box
+
 
 
 
