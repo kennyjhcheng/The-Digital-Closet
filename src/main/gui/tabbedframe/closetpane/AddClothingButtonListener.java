@@ -18,6 +18,7 @@ import static gui.tabbedframe.closetpane.AddClothingPanel.sizeTextField;
 
 // Action Listener for Add Clothing Button adding the clothing specified by the user to myCloset and all JLists
 public class AddClothingButtonListener implements ActionListener {
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String name = nameTextField.getText();
@@ -44,10 +45,8 @@ public class AddClothingButtonListener implements ActionListener {
                     + "this clothing\n");
             duplicateClothingException.printStackTrace();
         } catch (Exception exception) {
-            exception.printStackTrace();
             JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Please input a valid size\n");
         }
-
     }
 
     private void addToViewClothingModels(Clothing c) {
