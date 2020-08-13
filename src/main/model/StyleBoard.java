@@ -3,9 +3,10 @@ package model;
 import exceptions.InvalidOutfitException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 // Represents a collection of Outfits
-public class StyleBoard {
+public class StyleBoard implements Iterable<Outfit> {
     ArrayList<Outfit> styleBoard;
 
     // REQUIRES: Outfit names are distinct in styleBoard
@@ -37,7 +38,7 @@ public class StyleBoard {
     public Outfit getOutfit(String outfitName) throws InvalidOutfitException {
         Outfit theOutfit = new Outfit("");
         if (this.containsOutfit(outfitName)) {
-            for (Outfit o : styleBoard) {
+            for (Outfit o : this) {
                 if (o.getName().equals(outfitName)) {
                     theOutfit = o;
                 }
@@ -53,7 +54,7 @@ public class StyleBoard {
     // EFFECTS: produced true if outfitName matches the name of an Outfit in styleBoard
     public boolean containsOutfit(String outfitName) {
         boolean answer = false;
-        for (Outfit o : styleBoard) {
+        for (Outfit o : this) {
             if (o.getName().equals(outfitName)) {
                 answer = true;
                 break;
@@ -70,5 +71,10 @@ public class StyleBoard {
 
     public ArrayList<Outfit> getStyleBoard() {
         return styleBoard;
+    }
+
+    @Override
+    public Iterator<Outfit> iterator() {
+        return styleBoard.iterator();
     }
 }

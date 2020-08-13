@@ -134,7 +134,18 @@ configuration implementations (makeFormTitleLabel()) and a protected field (JLab
     
 *Problem 3*
 > if the above two design issues/solutions were insufficient for the phase 4 criteria
->* iterator pattern design
+
+* The classes extending the ClothingCollection abstract class and the StyleBoard class in the model package are iterated through by
+calling the List fields in them. This increases the coupling which can be reduced by using the iterator pattern
+
+Solution
+* Made the ClothingCollection abstract class implement Iterable<Clothing> and implemented the overriden iterator() method
+    * Both the Closet class and Outfit class that extend ClothingCollection will also be iterable
+* Made the StyleBoard class implement Iterable<Outfit> and implemented the overriden iterator() method 
+* Modified all for loops that reference the list fields (e.g. myCloset.clothes, myOutfit.clothes, myStyleBoard.styleboard) reference
+the objects directly.
+
+
 
 
 

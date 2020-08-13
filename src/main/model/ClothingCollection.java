@@ -4,10 +4,11 @@ import exceptions.DuplicateClothingException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 // An abstract class for collections of clothing
-public abstract class ClothingCollection {
+public abstract class ClothingCollection implements Iterable<Clothing> {
     protected List<Clothing> clothes;
 
     public ClothingCollection() {
@@ -36,7 +37,7 @@ public abstract class ClothingCollection {
     // EFFECTS: returns the Clothing given the clothing's name
     public Clothing getClothingByName(String clothingName) {
         Clothing foundClothing = new Clothing("", "", "", 0);
-        for (Clothing c : this.clothes) {
+        for (Clothing c : this) {
             if (c.getName().equals(clothingName)) {
                 foundClothing = c;
             }
@@ -47,7 +48,7 @@ public abstract class ClothingCollection {
     // EFFECTS: returns true if name matches the name of a clothing in closet
     public boolean containsClothing(String name) {
         boolean isFound = false;
-        for (Clothing c : clothes) {
+        for (Clothing c : this) {
             if (c.getName().equals(name)) {
                 isFound = true;
                 break;
@@ -58,5 +59,10 @@ public abstract class ClothingCollection {
 
     public List<Clothing> getClothes() {
         return clothes;
+    }
+
+    @Override
+    public Iterator<Clothing> iterator() {
+        return clothes.iterator();
     }
 }

@@ -41,7 +41,7 @@ public class ViewSplitPane extends JSplitPane {
 
     public void setCloset(Closet closetByType) {
         this.typeList.setModel(typeModel);
-        for (Clothing c : closetByType.getClothes()) {
+        for (Clothing c : closetByType) {
             typeModel.addElement(c);
         }
     }

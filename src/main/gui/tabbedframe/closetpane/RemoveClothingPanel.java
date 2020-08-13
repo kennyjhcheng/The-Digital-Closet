@@ -72,7 +72,7 @@ public class RemoveClothingPanel extends OptionPanelConstructor {
     private void makeSplitPane() {
         initializeSplitPaneFields();
 
-        for (Clothing c : MainMenu.myCloset.getClothes()) {
+        for (Clothing c : MainMenu.myCloset) {
             removeClothingModel.addElement(c);
         }
         clothingJList.setModel(removeClothingModel);

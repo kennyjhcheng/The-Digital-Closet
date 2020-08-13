@@ -159,7 +159,7 @@ public class EditClothingPanel extends OptionPanelConstructor {
     private void makeSplitPane() {
         initializeSplitPaneFields();
 
-        for (Clothing c : MainMenu.myCloset.getClothes()) {
+        for (Clothing c : MainMenu.myCloset) {
             editClothingModel.addElement(c);
         }
         clothingJList.setModel(editClothingModel);
