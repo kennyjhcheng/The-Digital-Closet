@@ -1,6 +1,7 @@
 package gui.tabbedframe.closetpane;
 
 import gui.mainmenu.MainMenu;
+import gui.tabbedframe.TabbedPane;
 import model.Clothing;
 
 import javax.swing.*;
@@ -45,7 +46,7 @@ public class RemoveClothingPanel extends OptionPanelConstructor {
     private void makeRemoveButton() {
         removeButton = new JButton("Remove");
         removeButton.setBounds(525, 90, 125,50);
-        removeButton.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        removeButton.setFont(new Font(TabbedPane.TABBED_PANE_FONT_STYLE, Font.BOLD, 20));
         removeButton.addActionListener(removeClothingButtonListener);
         this.getPanel().add(removeButton);
     }

@@ -69,4 +69,6 @@ public class RemoveClothingButtonListener implements ActionListener {
             }
         }
     }
+
+
 }

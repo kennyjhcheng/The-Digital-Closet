@@ -20,6 +20,7 @@ public class MainMenu extends JFrame {
     public static final int MENU_BUTTON_Y = 210;
     public static final int MENU_BUTTON_WIDTH = 120;
     public static final int MENU_BUTTON_HEIGHT = 60;
+    public static final String MAIN_MENU_FONT_STYLE = "Comic Sans MS";
 
     public static JFrame menuFrame;
     public static JTextField usernameInfo;
@@ -40,7 +41,7 @@ public class MainMenu extends JFrame {
 
 
     public static void main(String[] args) {
-
+        new MainMenu();
     }
 
     public MainMenu() {
@@ -99,7 +100,7 @@ public class MainMenu extends JFrame {
 
     private void makeWelcomeLabel(JPanel menuPanel) {
         JLabel welcomeLabel = new JLabel("Welcome to your Digital Closet!");
-        welcomeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 30));
+        welcomeLabel.setFont(new Font(MAIN_MENU_FONT_STYLE, Font.PLAIN, 30));
         welcomeLabel.setBounds(MENU_BUTTON_WIDTH, 0, 600, 100);
         menuPanel.add(welcomeLabel);
     }
@@ -107,7 +108,7 @@ public class MainMenu extends JFrame {
     private JButton makeMenuButton(JPanel menuPanel, String login, int menuButtonInitialX, int menuButtonHeight) {
         JButton menuButton = new JButton(login);
         menuButton.setBounds(menuButtonInitialX, MENU_BUTTON_Y, MENU_BUTTON_WIDTH, menuButtonHeight);
-        menuButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+        menuButton.setFont(new Font(MAIN_MENU_FONT_STYLE, Font.PLAIN, 20));
         menuPanel.add(menuButton);
         return menuButton;
     }
@@ -115,7 +116,7 @@ public class MainMenu extends JFrame {
     private JTextField makePassTextField(JPanel thePanel) {
         JTextField passTextField = new JPasswordField("", 15);
         passTextField.setBounds(194, 135, 300, 35);
-        passTextField.setFont(new Font("Comic Sans", Font.PLAIN, 20));
+        passTextField.setFont(new Font(MAIN_MENU_FONT_STYLE, Font.PLAIN, 20));
         thePanel.add(passTextField);
 
         return passTextField;
@@ -124,7 +125,7 @@ public class MainMenu extends JFrame {
     private JTextField makeUserTextField(JPanel thePanel) {
         JTextField userTextField = new JTextField("", 15);
         userTextField.setBounds(194, 85, 300, 35);
-        userTextField.setFont(new Font("Comic San MSs", Font.PLAIN, 20));
+        userTextField.setFont(new Font("Comic San MS", Font.PLAIN, 20));
         thePanel.add(userTextField);
         return userTextField;
     }
@@ -133,7 +134,7 @@ public class MainMenu extends JFrame {
         JLabel userLabel = new JLabel();
         userLabel.setText(s);
         userLabel.setBounds(x, y, 300, 300);
-        userLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+        userLabel.setFont(new Font(MAIN_MENU_FONT_STYLE, Font.BOLD, 30));
         thePanel.add(userLabel);
     }
 

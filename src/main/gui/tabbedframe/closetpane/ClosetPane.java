@@ -9,7 +9,7 @@ import java.awt.*;
 
 // The Panel containing all Closet Option Buttons in the side panel
 public class ClosetPane {
-    public static final Font SIDE_PANEL_FONT = new Font("Comic Sans MS", Font.BOLD, 14);
+    public static final Font SIDE_PANEL_FONT = new Font(TabbedPane.TABBED_PANE_FONT_STYLE, Font.BOLD, 14);
     public static final int SIDE_PANEL_BUTTON_X = 5;
     public static final int SIDE_PANEL_BUTTON_INITIAL_Y = 50;
     public static final int SIDE_PANEL_BUTTON_INCREMENT_Y = 100;

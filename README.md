@@ -105,7 +105,37 @@ Solution 1
 * Refactored the 6 identical split pane designs into one class ViewSplitPane which extends JSplitPane
     * contains a method to set which category of clothing will be put into the split pane
     * 6 split panes can be created just by instantiated 6 ViewSplitPane objects
+
+*Problem 2*
+* High coupling with values widely used in many of the gui classes
+    * Semantic coupling issues with insufficient single point of control 
+    * Problematic values:
+        * Font style "Comic Sans MS" is individually assigned for each JTextField or JLabel
+        * Font objects are constant for different groups of JLabels
+        * Strings that represent the sizing chart using JLabels used in a couple classes
+            * Lengthy strings may be hard to change if specification for the sizing chart changes
+        * Each OptionPanel in the gui.tabbedpane.closetpane package has a Title which indicates the closet function in the
+        respective JPanel.
+            * JLabel and the configuration method calls can be put in an abstract class to reduce duplication
+
+Solution 2
+* made the String "Comic Sans MS" a constant, separate constant for MainMenu and TabbedPane in case a
+different font style is desired
+    * constants are called TABBED_PANE_FONT_STYLE and MAIN_MENU_FONT_STYLE
+* The Font objects corresponding to titles of panes in closetpane package (TITLE_FONT)),
+ the fonts for label textfields (LABEL_FONT) and the font for form request textfields (REQUEST_FONT) are given constants
+ in the OptionPanelConstructor abstract class
+* Sizing chart separated into 5 constant strings in abstract class OptionPaneConstructor
+    * SHIRT_SIZING, PANTS_SIZING, SHOES_SIZING, SOCKS_SIZING, ACCESSORIES_SIZING
+    * refactored necessary values in AddClothingPanel and EditClothingPanel classes
+* Identical title design methods put into OptionPanel interface and OptionPanelConstructor abstract class with
+configuration implementations (makeFormTitleLabel()) and a protected field (JLabel formTitle) 
+    * Each class extending OptionPanel can call the formTitle.setText(*String*) method to set the text respectively
     
+*Problem 3*
+> if the above two design issues/solutions were insufficient for the phase 4 criteria
+>* iterator pattern design
+
 
 
 

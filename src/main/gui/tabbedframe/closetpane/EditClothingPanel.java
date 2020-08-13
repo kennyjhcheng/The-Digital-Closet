@@ -63,17 +63,17 @@ public class EditClothingPanel extends OptionPanelConstructor {
 
     private void makeSizingChartButton() {
         sizingChartButton = new JButton("Sizing Chart");
-        sizingChartButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 12));
+        sizingChartButton.setFont(new Font(TabbedPane.TABBED_PANE_FONT_STYLE, Font.PLAIN, 12));
         sizingChartButton.setBounds(475, 200, 125, 25);
         sizingChartButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame,
-                        "Shirt Sizes: 0.0 = xSmall, 1.0 = small, 2.0 = medium, 3.0 = large, 4.0 = xLarge\n"
-                                + "Pants Sizes: waist length in inches (e.g. 32.0 or 27.5)\n"
-                                + "Shoe sizes: US Sizing (e.g. 9.0 or 5.5)\n"
-                                + "Sock Sizes: 0.0 = xSmall, 1.0 = small, 2.0 = medium, 3.0 = large, 4.0 = xLarge\n"
-                                + "Accessories are not sized -> please input 1.0");
+                        SHIRT_SIZING + "\n"
+                                + PANTS_SIZING + "\n"
+                                + SHOES_SIZING + "\n"
+                                + SOCKS_SIZING + "\n"
+                                + ACCESSORIES_SIZING);
             }
         });
         this.getPanel().add(sizingChartButton);
@@ -89,7 +89,7 @@ public class EditClothingPanel extends OptionPanelConstructor {
 
     private void makeEditButton() {
         editButton = new JButton("Edit Clothing");
-        editButton.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        editButton.setFont(new Font(TabbedPane.TABBED_PANE_FONT_STYLE, Font.BOLD, 20));
         editButton.setBounds(475, 75, 200, 50);
         editButton.addActionListener(editClothingButtonListener);
         this.getPanel().add(editButton);

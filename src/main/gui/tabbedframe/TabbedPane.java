@@ -14,6 +14,7 @@ import java.awt.event.WindowEvent;
 public class TabbedPane extends JFrame {
     public static final int TABBED_PANE_WIDTH = 1000;
     public static final int TABBED_PANE_HEIGHT = 666;
+    public static final String TABBED_PANE_FONT_STYLE = MainMenu.MAIN_MENU_FONT_STYLE;
 
     public static JFrame tabbedPaneFrame;
 
@@ -66,8 +67,12 @@ public class TabbedPane extends JFrame {
 
         if (a == JOptionPane.YES_OPTION) {
             PlayButtonSound.playSound("shutdown.wav");
-            tabbedPaneFrame.dispose();
-            MainMenu.menuFrame.dispose();
+            try {
+                tabbedPaneFrame.dispose();
+                MainMenu.menuFrame.dispose();
+            } catch (Exception exception) {
+                System.err.println("Exception thrown because application was open from TabbedPane instead of Main");
+            }
         }
     }
 }

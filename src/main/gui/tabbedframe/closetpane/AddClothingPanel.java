@@ -1,5 +1,7 @@
 package gui.tabbedframe.closetpane;
 
+import gui.tabbedframe.TabbedPane;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -34,13 +36,13 @@ public class AddClothingPanel extends OptionPanelConstructor {
 
     private void makeAddClothingButton() {
         warningBeforeAdd = new JLabel("WARNING: Form will be cleared after adding, please double check the form!");
-        warningBeforeAdd.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
+        warningBeforeAdd.setFont(new Font(TabbedPane.TABBED_PANE_FONT_STYLE, Font.BOLD, 16));
         warningBeforeAdd.setForeground(Color.RED);
         warningBeforeAdd.setBounds(30, 450, 800, 50);
         this.getPanel().add(warningBeforeAdd);
         addClothingButton = new JButton("Add Clothing to Closet");
         addClothingButton.setBounds(30, 500, 400, 50);
-        addClothingButton.setFont(new Font("Comic Sans MS", Font.BOLD, 20));
+        addClothingButton.setFont(new Font(TabbedPane.TABBED_PANE_FONT_STYLE, Font.BOLD, 20));
         addClothingButton.addActionListener(addClothingListener);
         this.getPanel().add(addClothingButton);
     }
@@ -74,25 +76,23 @@ public class AddClothingPanel extends OptionPanelConstructor {
     }
 
     private void makeSizingChart() {
-        JLabel shirtSizingChart = new JLabel("Shirt Sizes: "
-                + "0.0 = xSmall, 1.0 = small, 2.0 = medium, 3.0 = large, 4.0 = xLarge");
+        JLabel shirtSizingChart = new JLabel(SHIRT_SIZING);
         shirtSizingChart.setBounds(30, 300, 800, 30);
         shirtSizingChart.setFont(REQUEST_FONT);
 
-        JLabel pantsSizingChart = new JLabel("Pants Sizes: waist length in inches (e.g. 32.0 or 27.5)");
+        JLabel pantsSizingChart = new JLabel(PANTS_SIZING);
         pantsSizingChart.setBounds(30, 330, 800, 30);
         pantsSizingChart.setFont(REQUEST_FONT);
 
-        JLabel shoesSizingChart = new JLabel("Shoe sizes: US Sizing (e.g. 9.0 or 5.5)");
+        JLabel shoesSizingChart = new JLabel(SHOES_SIZING);
         shoesSizingChart.setBounds(30, 360, 800, 30);
         shoesSizingChart.setFont(REQUEST_FONT);
 
-        JLabel socksSizingChart = new JLabel("Sock Sizes: 0.0 = xSmall, 1.0 = small, 2.0 = medium,"
-                + " 3.0 = large, 4.0 = xLarge");
+        JLabel socksSizingChart = new JLabel(SOCKS_SIZING);
         socksSizingChart.setBounds(30, 390, 800, 30);
         socksSizingChart.setFont(REQUEST_FONT);
 
-        JLabel accessoriesSizingChart = new JLabel("Accessories are not sized -> please input 1.0");
+        JLabel accessoriesSizingChart = new JLabel(ACCESSORIES_SIZING);
         accessoriesSizingChart.setBounds(30, 420, 800, 30);
         accessoriesSizingChart.setFont(REQUEST_FONT);
 
