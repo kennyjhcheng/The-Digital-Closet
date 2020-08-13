@@ -1,8 +1,6 @@
 package gui.tabbedframe.closetpane.viewclothing;
 
-
 import exceptions.DuplicateClothingException;
-import exceptions.EmptyClosetException;
 import gui.mainmenu.MainMenu;
 import gui.tabbedframe.closetpane.OptionPanelConstructor;
 import model.Closet;
@@ -47,7 +45,7 @@ public class ViewClothingPanel extends OptionPanelConstructor {
 
             accessoriesSplitPane = new ViewSplitPane();
             accessoriesSplitPane.setCloset(MainMenu.myCloset.getClosetByType("accessories"));
-        } catch (Exception e) {
+        } catch (DuplicateClothingException e) {
             ;
         }
 

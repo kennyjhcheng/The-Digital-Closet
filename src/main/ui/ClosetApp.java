@@ -2,7 +2,7 @@ package ui;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import exceptions.DuplicateClothingException;
-import exceptions.EmptyClosetException;
+
 import exceptions.InvalidOutfitException;
 import model.Closet;
 import model.Clothing;
@@ -543,8 +543,6 @@ public class ClosetApp {
                     processClosetChoice(closetChoice);
                 } catch (DuplicateClothingException e) {
                     System.out.println("This clothing is already in your closet!");
-                } catch (EmptyClosetException e) {
-                    System.out.println("This closet is empty :(");
                 }
             }
         }
@@ -562,7 +560,7 @@ public class ClosetApp {
 
     // REQUIRES: closetChoice matches on of switch cases
     // runs the clothing method based on user choice
-    private void processClosetChoice(String closetChoice) throws DuplicateClothingException, EmptyClosetException {
+    private void processClosetChoice(String closetChoice) throws DuplicateClothingException {
         switch (closetChoice) {
             case "a":
                 doAddClothing();
@@ -710,7 +708,7 @@ public class ClosetApp {
 
     // REQUIRES: user input is one of cases in switch statement
     // Gets user input for how to view the clothing in their closet: all or by type
-    private void doViewClothing() throws DuplicateClothingException, EmptyClosetException {
+    private void doViewClothing() throws DuplicateClothingException {
         String view;
         displayViewClothingOption();
 
@@ -745,7 +743,7 @@ public class ClosetApp {
     }
 
     // prints all the clothes of specified type in the closet including each clothing's fields
-    private void viewByType(String type) throws DuplicateClothingException, EmptyClosetException {
+    private void viewByType(String type) throws DuplicateClothingException {
         if (type.equals("shirt")) {
             System.out.println("These are all the " + type + "s in your closet:");
         } else {
@@ -753,11 +751,14 @@ public class ClosetApp {
         }
 
         Closet filteredCloset = myCloset.getClosetByType(type);
-        for (Clothing c : filteredCloset.getClothes()) {
-            System.out.println("\t" + "Name :" + c.getName() + "\n\t\tType: " + c.getType()
-                    + "\n\t\tColor: " + c.getColor() + "\n\t\tSize: " + c.getSize());
+        if (filteredCloset.collectionSize() == 0) {
+            System.out.println("this closet is empty!");
+        } else {
+            for (Clothing c : filteredCloset.getClothes()) {
+                System.out.println("\t" + "Name :" + c.getName() + "\n\t\tType: " + c.getType()
+                        + "\n\t\tColor: " + c.getColor() + "\n\t\tSize: " + c.getSize());
+            }
         }
-
     }
 
     // prints all clothing in the closet with their fields

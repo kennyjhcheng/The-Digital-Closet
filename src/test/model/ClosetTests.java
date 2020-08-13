@@ -1,7 +1,6 @@
 package model;
 
 import exceptions.DuplicateClothingException;
-import exceptions.EmptyClosetException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -146,8 +145,6 @@ public class ClosetTests {
             socksCloset = testCloset.getClosetByType("socks");
         } catch (DuplicateClothingException e) {
             fail();
-        } catch (EmptyClosetException e) {
-            fail();
         }
 
 
@@ -163,37 +160,6 @@ public class ClosetTests {
 
     }
 
-    @Test
-    public void testGetClosetByTypeExpectEmptyClosetException() {
-        Closet shoesCloset = new Closet();
-
-        try {
-            testCloset.getClosetByType("pants");
-            fail("Exception should've thrown");
-        } catch (EmptyClosetException e) {
-            System.out.println("Exception caught!");
-        } catch (DuplicateClothingException e) {
-            fail("incorrect exception thrown");
-        }
-
-        try {
-            testCloset.addClothing(clothing1); //added shirt
-            testCloset.addClothing(clothing2); //added pants
-            testCloset.addClothing(clothing3); //added shirt
-            testCloset.addClothing(clothing4); //added socks
-
-            shoesCloset = testCloset.getClosetByType("shoes");
-            fail("Exception should've thrown");
-        } catch (DuplicateClothingException e) {
-            fail("Wrong Exception thrown");
-        } catch (EmptyClosetException e) {
-            System.out.println("Exception caught!");
-        }
-
-        assertEquals(shoesCloset.collectionSize(), 0);
-
-
-    }
 
 
 }

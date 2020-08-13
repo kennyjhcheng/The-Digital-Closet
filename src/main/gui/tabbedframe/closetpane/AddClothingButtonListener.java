@@ -44,6 +44,7 @@ public class AddClothingButtonListener implements ActionListener {
                     + "this clothing\n");
             duplicateClothingException.printStackTrace();
         } catch (Exception exception) {
+            exception.printStackTrace();
             JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame, "Please input a valid size\n");
         }
 

@@ -1,14 +1,7 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import exceptions.DuplicateClothingException;
-import exceptions.EmptyClosetException;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-
 
 // Represents a Closet with all clothing
 public class Closet extends ClothingCollection {
@@ -34,25 +27,16 @@ public class Closet extends ClothingCollection {
 
     // added exception -> REQUIRES: Closet is not empty
     // EFFECTS: returns a filtered Closet containing clothes of specified type
-    public Closet getClosetByType(String type) throws DuplicateClothingException, EmptyClosetException {
+    public Closet getClosetByType(String type) throws DuplicateClothingException {
         Closet filteredCloset = new Closet();
-        if (this.clothes.size() == 0) {
-            throw new EmptyClosetException();
-        } else {
-            for (Clothing c: this.getClothes()) {
-                if (c.getType().equals(type)) {
-                    filteredCloset.addClothing(c);
-                }
+        for (Clothing c : this.getClothes()) {
+            if (c.getType().equals(type)) {
+                filteredCloset.addClothing(c);
             }
         }
 
-        if (filteredCloset.clothes.size() == 0) {
-            throw new EmptyClosetException();
-        } else {
-            return  filteredCloset;
-        }
+        return filteredCloset;
     }
-
 
 
 }
