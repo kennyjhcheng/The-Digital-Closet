@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 public class EditClothingPanel extends OptionPanelConstructor {
     JLabel editRequest;
     JLabel editLabel;
-    JTextField editTextField;
+    public static JTextField editTextField;
 
     JLabel editAttributeRequest;
     JLabel editNameLabel;

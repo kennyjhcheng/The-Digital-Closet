@@ -3,6 +3,7 @@ package gui.tabbedframe.closetpane;
 import gui.mainmenu.MainMenu;
 import gui.tabbedframe.TabbedPane;
 import gui.tabbedframe.closetpane.viewclothing.ViewClothingPanel;
+import gui.tabbedframe.closetpane.viewclothing.ViewSplitPane;
 import model.Clothing;
 
 import javax.swing.*;
@@ -36,6 +37,18 @@ public class EditClothingButtonListener implements ActionListener {
         MainMenu.myCloset.getClothingByName(selectedName).changeColor(newColor);
         MainMenu.myCloset.getClothingByName(selectedName).changeTypeAndSize(newType, newSize);
         MainMenu.myCloset.getClothingByName(selectedName).changeName(newName);
+        JOptionPane.showMessageDialog(TabbedPane.tabbedPaneFrame,
+                "Edit Success! Please click on the clothing to see changes");
+        clearTextFields();
+    }
+
+    private void clearTextFields() {
+        EditClothingPanel.editNameTextField.setText(null);
+        EditClothingPanel.editTypeTextField.setText(null);
+        EditClothingPanel.editColorTextField.setText(null);
+        EditClothingPanel.editSizeTextField.setText(null);
+
+        EditClothingPanel.editTextField.setText(null);
     }
 
     private void editInViewModel(String selectedName, Clothing editedClothing) {
@@ -72,30 +85,29 @@ public class EditClothingButtonListener implements ActionListener {
     }
 
     private void removeFromOldTypePane(String selectedName) {
-        int indexOldType;
+
         switch (MainMenu.myCloset.getClothingByName(selectedName).getType()) {
             case "shirt":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.shoesSplitPane.getTypeModel());
-                ViewClothingPanel.shirtSplitPane.getTypeModel().remove(indexOldType);
+                doRemove(selectedName, ViewClothingPanel.shirtSplitPane);
                 break;
             case "pants":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.pantsSplitPane.getTypeModel());
-                ViewClothingPanel.pantsSplitPane.getTypeModel().remove(indexOldType);
+                doRemove(selectedName, ViewClothingPanel.pantsSplitPane);
                 break;
             case "shoes":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.shoesSplitPane.getTypeModel());
-                ViewClothingPanel.shoesSplitPane.getTypeModel().remove(indexOldType);
+                doRemove(selectedName, ViewClothingPanel.shoesSplitPane);
                 break;
             case "socks":
-                indexOldType = getIndexOfClothingInModel(selectedName, ViewClothingPanel.socksSplitPane.getTypeModel());
-                ViewClothingPanel.socksSplitPane.getTypeModel().remove(indexOldType);
+                doRemove(selectedName, ViewClothingPanel.socksSplitPane);
                 break;
             case "accessories":
-                indexOldType =
-                        getIndexOfClothingInModel(selectedName, ViewClothingPanel.accessoriesSplitPane.getTypeModel());
-                ViewClothingPanel.accessoriesSplitPane.getTypeModel().remove(indexOldType);
+                doRemove(selectedName, ViewClothingPanel.accessoriesSplitPane);;
                 break;
         }
+    }
+
+    private void doRemove(String selectedName, ViewSplitPane typeSplitPane) {
+        int indexOldType = getIndexOfClothingInModel(selectedName, typeSplitPane.getTypeModel());
+        typeSplitPane.getTypeModel().remove(indexOldType);
     }
 
     private void editInRemoveModel(String selectedName, Clothing editedClothing) {

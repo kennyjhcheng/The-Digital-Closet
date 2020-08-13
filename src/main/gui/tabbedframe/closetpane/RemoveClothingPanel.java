@@ -82,7 +82,7 @@ public class RemoveClothingPanel extends OptionPanelConstructor {
                 if (c != null) {
                     nameLabel.setText("Name: " + c.getName());
                     typeLabel.setText("Type: " + c.getType());
-                    colorLabel.setText("Color: " + c.getType());
+                    colorLabel.setText("Color: " + c.getColor());
                     sizeLabel.setText("Size: " + c.getSize());
                     removeTextField.setText(c.getName());
                 }
