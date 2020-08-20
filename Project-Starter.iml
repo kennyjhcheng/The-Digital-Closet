@@ -32,7 +32,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jackson-annotations-2.11.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-annotations-2.11.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -41,7 +41,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jackson-core-2.11.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-core-2.11.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -50,7 +50,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jackson-databind-2.11.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-databind-2.11.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -59,12 +59,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jackson-datatype-jsr310-2.11.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/jackson-datatype-jsr310-2.11.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="jackson-annotations-2.11.1" level="project" />
   </component>
 </module>
